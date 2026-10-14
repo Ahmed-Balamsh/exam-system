@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منظومة المصحح الذكي (V23) - أ. أحمد أبو بكر بالعمش</title>
+<title>منظومة المصحح الذكي (V24) - أ. أحمد أبو بكر بالعمش</title>
 <style>
 :root{--primary:#0f766e;--primary-dark:#115e59;--blue:#1e3a8a;--gold:#fbbf24;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#475569;--border:#cbd5e1;--input-bg:#fff;--c-excel:#16a34a;--c-vgood:#0d9488;--c-good:#2563eb;--c-pass:#f59e0b;--c-fail:#ef4444;}
 body.dark-theme{--bg:#0b0f19;--card:#151c2c;--text:#f1f5f9;--muted:#94a3b8;--border:#2a364f;--input-bg:#0f172a;--primary-dark:#2dd4bf;}
@@ -76,13 +76,48 @@ table.tf-boxes-table th{background:#f1f5f9!important;text-align:center;font-weig
 #printable-exam.answer-key-mode .zg-b.is-correct-bubble,#printable-exam.answer-key-mode .zg-b-tf.is-correct-bubble{background-color:#16a34a!important;color:#fff!important;}
 .sheet-page-footer{display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid #000;padding-top:4px;margin-top:auto;font-size:0.8rem;font-weight:bold;color:#000;}
 
-/* الكاميرا والرادار الذكي الحساس للزوايا السوداء */
-.live-viewfinder-wrap{position:relative;width:100%;max-width:420px;margin:6px auto;background:#000;border-radius:12px;overflow:hidden;border:3px solid #22c55e;}
-#cam-video{width:100%;height:auto;min-height:340px;max-height:62vh;display:block;object-fit:cover;background:#000;}
-.zg-live-overlay{position:absolute;left:10%;right:10%;top:12%;height:68%;border:3px solid #22c55e;border-radius:8px;box-shadow:0 0 0 9999px rgba(0,0,0,0.6);pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:8px;transition:all 0.15s;}
-.zg-live-overlay.locking{border-color:#fde047;border-width:5px;background:rgba(34,197,94,0.12);}
-.zg-live-overlay-label{position:absolute;top:-26px;left:-20px;right:-20px;text-align:center;color:#4ade80;font-weight:bold;font-size:0.8rem;text-shadow:0 1px 3px #000;}
-.corner-target{width:18px;height:18px;border:3px solid #fde047;}
+/* ================= كاميرا كبيرة وواضحة مع 4 مربعات استهداف للزوايا السوداء ================= */
+.method-box{border:2px solid var(--border);border-radius:10px;padding:12px;}
+.method-box.ai-box{border-color:#38bdf8;background:rgba(56,189,248,0.07);}
+.method-box.omr-box{border-color:#22c55e;background:rgba(34,197,94,0.07);}
+
+.live-viewfinder-wrap{
+  position:relative;width:100%;max-width:480px;margin:8px auto;
+  background:#000;border-radius:14px;overflow:hidden;border:3px solid #22c55e;
+}
+#cam-video{
+  width:100%;height:auto;min-height:420px;max-height:74vh;
+  display:block;object-fit:cover;background:#000;
+}
+/* الإطار الكبير للبطاقة: يملأ 82% من عرض الكاميرا و 74% من طولها ليكون كبيراً وسهل المحاذاة جداً */
+.zg-live-overlay{
+  position:absolute;left:9%;right:9%;top:13%;height:74%;
+  border:2.5px dashed rgba(255,255,255,0.65);border-radius:6px;
+  box-shadow:0 0 0 9999px rgba(0,0,0,0.62);
+  pointer-events:none;
+}
+.zg-live-overlay-label{
+  position:absolute;top:-32px;left:-10px;right:-10px;text-align:center;
+  color:#fde047;font-weight:bold;font-size:0.86rem;text-shadow:0 2px 4px #000;
+}
+/* مربعات الاستهداف الأربعة في الأركان (حمراء عندما تكون فارغة، وتتحول للأخضر عند دخول النقطة السوداء فيها) */
+.corner-sensor{
+  position:absolute;width:44px;height:44px;
+  border:4px solid #ef4444;background:rgba(239,68,68,0.18);
+  border-radius:6px;transition:all 0.12s;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:0.7rem;font-weight:bold;
+}
+.corner-sensor.locked{
+  border-color:#22c55e !important;
+  background:rgba(34,197,94,0.38) !important;
+  transform:scale(1.06);
+}
+.corner-sensor.tl{top:-4px;left:-4px;}
+.corner-sensor.tr{top:-4px;right:-4px;}
+.corner-sensor.bl{bottom:-4px;left:-4px;}
+.corner-sensor.br{bottom:-4px;right:-4px;}
+
 .toast-saved{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#16a34a;color:#fff;padding:12px 24px;border-radius:30px;font-weight:900;font-size:0.95rem;box-shadow:0 8px 25px rgba(0,0,0,0.5);z-index:9999;border:2px solid #fde047;text-align:center;min-width:280px;}
 
 /* لوحة اللمس الصاروخي */
@@ -137,8 +172,8 @@ table.data-table th{background:rgba(148,163,184,0.15);}
 <div id="floating-toast" class="toast-saved hidden"></div>
 
 <header class="no-print">
-  <h1>🧬 منظومة المصحح الآلي وتحليل النتائج والأرشفة الذكية (الإصدار V23)</h1>
-  <p>قارئ زوايا سوداء حقيقي (Corner Detector) يقص البطاقة بالملي ويلتقطها تلقائياً + مقاوم لظل الجوال + تصحيح وحفظ مباشر</p>
+  <h1>🧬 منظومة المصحح الآلي وتحليل النتائج والأرشفة الذكية (الإصدار V24)</h1>
+  <p>منظار كبير بـ 4 حساسات أركان لا يلتقط إلا عند دخول الزوايا السوداء الـ 4 في أماكنها + ذكاء اصطناعي صافٍ 100%</p>
   <div style="display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px;">
     <div class="creator-ribbon">🌟 فكرة وإعداد وتطوير المنظومة: أ. أحمد أبو بكر بالعمش 🌟</div>
     <button class="theme-toggle-btn" onclick="toggleThemeMode()" id="theme-toggle-btn">☀️ التبديل للثيم الأبيض</button>
@@ -307,7 +342,7 @@ table.data-table th{background:rgba(148,163,184,0.15);}
     </div>
   </div>
 
-  <!-- التبويب 2: قارئ الزوايا السوداء الحقيقي -->
+  <!-- التبويب 2: منظار الزوايا الـ 4 الكبير + الذكاء الاصطناعي الصافي -->
   <div id="tab-scanner" class="hidden">
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
@@ -320,37 +355,39 @@ table.data-table th{background:rgba(148,163,184,0.15);}
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-bottom:10px;">
         <div class="method-box omr-box" style="text-align:center;">
-          <h3 style="margin:0 0 5px;color:#4ade80;font-size:0.95rem;">🎥 1. رادار الزوايا الأربع (يلتقط تلقائياً من نفسه)</h3>
-          <p style="margin:0 0 8px;font-size:0.76rem;color:var(--muted);">يبحث عن المربعات السوداء الـ 4 في زوايا البطاقة؛ بمجرد رؤيتها يلتقطها من نفسه ويقصها بالملي ويصححها ويحفظها دون لمس أي زر!</p>
-          <button class="btn btn-success" style="width:100%;font-size:0.92rem;padding:11px;" onclick="openLiveRadarScanner()">🚀 فتح رادار الزوايا التلقائي</button>
+          <h3 style="margin:0 0 5px;color:#4ade80;font-size:0.95rem;">🎥 1. منظار الزوايا الـ 4 الكبير (يلتقط عند اخضرار الأركان الـ 4 فقط)</h3>
+          <p style="margin:0 0 8px;font-size:0.76rem;color:var(--muted);">كبرت لك المربع؛ ضع الـ 4 نقاط السوداء حقت الورقة داخل الـ 4 مربعات في الأركان؛ عندما تصبح الـ 4 خضراء يلتقط تلقائياً ويقص البطاقة بالملي!</p>
+          <button class="btn btn-success" style="width:100%;font-size:0.92rem;padding:11px;" onclick="openLiveRadarScanner()">🚀 فتح منظار الزوايا الـ 4 الكبير</button>
         </div>
 
         <div class="method-box ai-box" style="text-align:center;">
-          <h3 style="margin:0 0 5px;color:#38bdf8;font-size:0.95rem;">📸 2. تصوير بكاميرا الجوال (قص تلقائي للزوايا)</h3>
-          <p style="margin:0 0 8px;font-size:0.76rem;color:var(--muted);">صوّر البطاقة بكاميرا الجوال؛ سيبحث البرنامج عن الزوايا السوداء الـ 4 ويقص البطاقة بالملي ويصححها ويحفظها فوراً.</p>
-          <label class="btn btn-blue" style="width:100%;font-size:0.92rem;padding:11px;cursor:pointer;">📸 صوّر البطاقة بكاميرا الجوال<input type="file" accept="image/*" capture="environment" style="display:none;" onchange="handleFastAISlot(event)"></label>
+          <h3 style="margin:0 0 5px;color:#38bdf8;font-size:0.95rem;">🤖 2. الذكاء الاصطناعي الصافي 100% (بدون دوائر عشوائية)</h3>
+          <p style="margin:0 0 8px;font-size:0.76rem;color:var(--muted);">صوّر بكاميرا الجوال؛ يعتمد إجابات الذكاء الاصطناعي واسم الطالب معاً مباشرة بدون أي قص خاطئ.</p>
+          <label class="btn btn-blue" style="width:100%;font-size:0.92rem;padding:11px;cursor:pointer;">📸 صوّر بالذكاء الاصطناعي الصافي<input type="file" accept="image/*" capture="environment" style="display:none;" onchange="handlePureAIGrading(event)"></label>
         </div>
 
         <div class="method-box" style="border-color:#fbbf24;background:rgba(251,191,36,0.08);text-align:center;">
-          <h3 style="margin:0 0 5px;color:#fde047;font-size:0.95rem;">⚡ 3. لوحة اللمس الصاروخي (بدون كاميرا نهائياً)</h3>
-          <p style="margin:0 0 8px;font-size:0.76rem;color:var(--muted);">كل الأسئلة جاهزة (صح 20/20)، المس فقط رقم السؤال الذي أخطأ فيه الطالب واضغط حفظ؛ تنهي الفصل في دقيقتين!</p>
+          <h3 style="margin:0 0 5px;color:#fde047;font-size:0.95rem;">⚡ 3. لوحة اللمس الصاروخي (بدون كاميرا)</h3>
+          <p style="margin:0 0 8px;font-size:0.76rem;color:var(--muted);">كل الأسئلة جاهزة (صح 20/20)، المس فقط رقم السؤال الذي أخطأ فيه الطالب واضغط حفظ!</p>
           <button class="btn btn-warning" style="width:100%;font-size:0.92rem;padding:11px;" onclick="openSpeedTouchPad()">👆 فتح لوحة اللمس الصاروخي (20/20)</button>
         </div>
       </div>
 
-      <!-- شاشة الرادار الحساس للزوايا السوداء -->
+      <!-- شاشة الكاميرا الكبيرة مع الـ 4 مربعات الحساسة في الأركان -->
       <div id="live-camera-container" class="hidden">
         <div class="live-viewfinder-wrap">
           <video id="cam-video" autoplay playsinline></video>
           <div class="zg-live-overlay" id="live-overlay-box">
-            <div class="zg-live-overlay-label" id="radar-guide-text">👇 وجّه الكاميرا على البطاقة (يلتقط فور رؤية الزوايا السوداء الـ 4) 👇</div>
-            <div style="display:flex;justify-content:space-between;"><span class="corner-target"></span><span class="corner-target"></span></div>
-            <div style="display:flex;justify-content:space-between;"><span class="corner-target"></span><span class="corner-target"></span></div>
+            <div class="zg-live-overlay-label" id="radar-guide-text">🎯 ضع الـ 4 مربعات السوداء في زوايا البطاقة داخل هذه المربعات الـ 4</div>
+            <div class="corner-sensor tl" id="sens-tl">■</div>
+            <div class="corner-sensor tr" id="sens-tr">■</div>
+            <div class="corner-sensor bl" id="sens-bl">■</div>
+            <div class="corner-sensor br" id="sens-br">■</div>
           </div>
         </div>
         <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
-          <button class="btn btn-success" style="font-size:0.95rem;padding:10px 22px;" onclick="triggerRadarCaptureNow()">📸 اضغط هنا إذا أردت الالتقاط فوراً</button>
-          <button class="btn btn-danger" onclick="stopCamera()">⏹️ إغلاق الرادار</button>
+          <button class="btn btn-success" style="font-size:0.95rem;padding:10px 22px;" onclick="captureExactOverlayNow()">📸 التقط الآن (يقص على حدود هذا المربع بالضبط)</button>
+          <button class="btn btn-danger" onclick="stopCamera()">⏹️ إغلاق الكاميرا</button>
         </div>
       </div>
 
@@ -366,12 +403,12 @@ table.data-table th{background:rgba(148,163,184,0.15);}
         </div>
       </div>
 
-      <!-- معاينة البطاقة بعد قصها من الزوايا السوداء الـ 4 -->
+      <!-- معاينة البطاقة بعد قصها على المربعات الـ 4 بالضبط -->
       <div id="omr-visual-feedback-box" class="card hidden" style="border:2px solid #22c55e;margin-top:10px;text-align:center;">
-        <h3 style="margin:0 0 6px;font-size:0.9rem;color:#4ade80;">🔍 البطاقة بعد قصها تلقائياً من الزوايا السوداء الـ 4 (الدوائر الخضراء = إجابة الطالب):</h3>
-        <canvas id="omr-debug-canvas" style="max-width:330px;width:100%;border-radius:6px;border:2px solid #22c55e;background:#fff;"></canvas>
+        <h3 style="margin:0 0 6px;font-size:0.9rem;color:#4ade80;">🔍 البطاقة الملتقطة (من الزاوية السوداء للزاوية السوداء بالضبط):</h3>
+        <canvas id="omr-debug-canvas" style="max-width:340px;width:100%;border-radius:6px;border:2px solid #22c55e;background:#fff;"></canvas>
         <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
-          <span style="font-size:0.78rem;color:var(--muted);align-self:center;">تحريك دقيق للدوائر إذا لزم:</span>
+          <span style="font-size:0.78rem;color:var(--muted);align-self:center;">إزاحة دقيقة للدوائر إذا لزم:</span>
           <button class="btn btn-secondary" onclick="nudgeManual(-0.015,0)">➡️ يمين</button>
           <button class="btn btn-secondary" onclick="nudgeManual(0.015,0)">⬅️ يسار</button>
           <button class="btn btn-secondary" onclick="nudgeManual(0,-0.015)">⬆️ أعلى</button>
@@ -503,7 +540,7 @@ table.data-table th{background:rgba(148,163,184,0.15);}
   </div>
 </div>
 
-<div class="fixed-creator-footer no-print">🛡️ منظومة المصحح والمحلل الذكي للاختبارات (V23) | <span>بصمة المشروع وتطوير: أ. أحمد أبو بكر بالعمش</span></div>
+<div class="fixed-creator-footer no-print">🛡️ منظومة المصحح والمحلل الذكي للاختبارات (V24) | <span>بصمة المشروع وتطوير: أ. أحمد أبو بكر بالعمش</span></div>
 
 <script>
 localStorage.removeItem('balamash_fast_model');
@@ -833,67 +870,27 @@ function renderSpeedPadButtons(){
 }
 function saveAndResetSpeedPad(){approveAndAddToRoster(true);openSpeedTouchPad();}
 
-// ================= خوارزمية البحث الحقيقي عن الزوايا السوداء الـ 4 (Corner Finder) =================
-function detectFourBlackCorners(canvas){
-  const w=canvas.width,h=canvas.height;
-  const ctx=canvas.getContext('2d');
-  const img=ctx.getImageData(0,0,w,h).data;
-
-  // البحث عن البقع السوداء المربعة في الأرباع الأربعة للصورة
-  // نستخدم عتبة إضاءة متكيفة مع ظل الجوال
-  const gridW=80,gridH=100;
-  const cellW=w/gridW,cellH=h/gridH;
-  const darkMap=[];
-  let sumLum=0;
-  for(let gy=0;gy<gridH;gy++){
-    darkMap[gy]=[];
-    for(let gx=0;gx<gridW;gx++){
-      const px=Math.floor((gx+0.5)*cellW),py=Math.floor((gy+0.5)*cellH);
-      const i=(py*w+px)*4;
-      const lum=0.299*img[i]+0.587*img[i+1]+0.114*img[i+2];
-      darkMap[gy][gx]=lum;
-      sumLum+=lum;
-    }
+// ================= 1. فحص وجود المربع الأسود داخل مربعات الأركان الـ 4 فقط (لا يلتقط من حاله إلا إذا دخلت الأركان الـ 4 في مكانها) =================
+function checkCornerBlackSquare(ctx,x,y,w,h){
+  const data=ctx.getImageData(Math.floor(x),Math.floor(y),Math.floor(w),Math.floor(h)).data;
+  let minLum=255,maxLum=0,darkPixels=0,totalPixels=0;
+  for(let i=0;i<data.length;i+=4){
+    const lum=0.299*data[i]+0.587*data[i+1]+0.114*data[i+2];
+    if(lum<minLum)minLum=lum;
+    if(lum>maxLum)maxLum=lum;
   }
-  const avgLum=sumLum/(gridW*gridH);
-  const thresh=avgLum*0.58; // أي نقطة أغمق بـ 42% من متوسط الإضاءة تعتبر سوداء
-
-  // البحث عن الزاوية العلوية اليسرى واليمنى والسفلية اليسرى واليمنى
-  let tl=null,tr=null,bl=null,br=null;
-  let minTL=999999,minTR=999999,minBL=999999,minBR=999999;
-
-  for(let gy=4;gy<gridH-4;gy++){
-    for(let gx=4;gx<gridW-4;gx++){
-      if(darkMap[gy][gx]<thresh && darkMap[gy+1][gx]<thresh && darkMap[gy][gx+1]<thresh){
-        // نقطة سوداء سميكة (مرشحة لتكون مربع زاوية أو إطار البطاقة)
-        const dTL = gx*1.2 + gy;
-        const dTR = (gridW-gx)*1.2 + gy;
-        const dBL = gx*1.2 + (gridH-gy);
-        const dBR = (gridW-gx)*1.2 + (gridH-gy);
-        if(gx<gridW*0.48 && gy<gridH*0.55 && dTL<minTL){ minTL=dTL; tl={x:gx*cellW,y:gy*cellH}; }
-        if(gx>gridW*0.52 && gy<gridH*0.55 && dTR<minTR){ minTR=dTR; tr={x:(gx+1)*cellW,y:gy*cellH}; }
-        if(gx<gridW*0.48 && gy>gridH*0.45 && dBL<minBL){ minBL=dBL; bl={x:gx*cellW,y:(gy+1)*cellH}; }
-        if(gx>gridW*0.52 && gy>gridH*0.45 && dBR<minBR){ minBR=dBR; br={x:(gx+1)*cellW,y:(gy+1)*cellH}; }
-      }
-    }
+  const thresh=minLum+(maxLum-minLum)*0.38;
+  for(let i=0;i<data.length;i+=4){
+    const lum=0.299*data[i]+0.587*data[i+1]+0.114*data[i+2];
+    if(lum<thresh)darkPixels++;
+    totalPixels++;
   }
-
-  if(tl && tr && bl && br){
-    const leftX=Math.max(0,Math.min(tl.x,bl.x));
-    const rightX=Math.min(w,Math.max(tr.x,br.x));
-    const topY=Math.max(0,Math.min(tl.y,tr.y));
-    const botY=Math.min(h,Math.max(bl.y,br.y));
-    const bw=rightX-leftX, bh=botY-topY;
-    // التحقق من أن الأبعاد تشكل بطاقة منطقية (تناسب أبعاد بطاقة ZipGrade)
-    const aspect=bh/(bw||1);
-    if(bw>w*0.30 && bh>h*0.28 && aspect>0.75 && aspect<1.65){
-      return { found:true, x:leftX, y:topY, w:bw, h:bh };
-    }
-  }
-  return { found:false, x:w*0.12, y:h*0.12, w:w*0.76, h:h*0.70 };
+  // يجب أن يكون هناك تباين واضح (ورقة بيضاء + مربع أسود يملأ بين 8% إلى 55% من مربع الركن)
+  const contrast=maxLum-minLum;
+  const ratio=darkPixels/(totalPixels||1);
+  return (contrast>55 && ratio>0.08 && ratio<0.58);
 }
 
-// ================= الرادار التلقائي الذي يلتقط فور رؤية الزوايا السوداء الـ 4 =================
 async function openLiveRadarScanner(){
   document.getElementById('speed-touch-pad-box').classList.add('hidden');
   try{
@@ -901,30 +898,44 @@ async function openLiveRadarScanner(){
     const video=document.getElementById('cam-video');
     video.srcObject=camStream;
     document.getElementById('live-camera-container').classList.remove('hidden');
-    document.getElementById('scan-status').innerText='🎯 وجّه الكاميرا على البطاقة؛ سيلتقطها الرادار تلقائياً فور رؤية الزوايا السوداء...';
+    document.getElementById('scan-status').innerText='🎯 ضع الـ 4 مربعات السوداء حقت البطاقة داخل المربعات الـ 4 الحمراء حتى تصير خضراء...';
     isGradingBusy=false;
-    let lockHits=0;
+    let allFourLockedCount=0;
     if(autoSnapTimer)clearInterval(autoSnapTimer);
+
     autoSnapTimer=setInterval(()=>{
       if(!video.videoWidth||isGradingBusy||Date.now()<cooldownUntil)return;
-      const testC=document.createElement('canvas');
-      testC.width=320;testC.height=Math.round((video.videoHeight*320)/video.videoWidth);
-      testC.getContext('2d').drawImage(video,0,0,testC.width,testC.height);
-      const det=detectFourBlackCorners(testC);
-      if(det.found){
-        lockHits++;
-        document.getElementById('live-overlay-box').classList.add('locking');
-        document.getElementById('radar-guide-text').innerText='✅ تم رصد زوايا البطاقة! جاري الالتقاط التلقائي...';
-        if(lockHits>=2){
-          lockHits=0;
-          triggerRadarCaptureNow();
+      const vw=video.videoWidth,vh=video.videoHeight;
+      // إحداثيات المستطيل الكبير في الكاميرا: left=9%, width=82%, top=13%, height=74%
+      const ox=vw*0.09, oy=vh*0.13, ow=vw*0.82, oh=vh*0.74;
+      const sw=ow*0.13, sh=oh*0.12; // حجم حساس الركن الواحد
+
+      const tmp=document.createElement('canvas');tmp.width=vw;tmp.height=vh;
+      const tctx=tmp.getContext('2d');tctx.drawImage(video,0,0);
+
+      const hasTL=checkCornerBlackSquare(tctx,ox,oy,sw,sh);
+      const hasTR=checkCornerBlackSquare(tctx,ox+ow-sw,oy,sw,sh);
+      const hasBL=checkCornerBlackSquare(tctx,ox,oy+oh-sh,sw,sh);
+      const hasBR=checkCornerBlackSquare(tctx,ox+ow-sw,oy+oh-sh,sw,sh);
+
+      document.getElementById('sens-tl').classList.toggle('locked',hasTL);
+      document.getElementById('sens-tr').classList.toggle('locked',hasTR);
+      document.getElementById('sens-bl').classList.toggle('locked',hasBL);
+      document.getElementById('sens-br').classList.toggle('locked',hasBR);
+
+      const lockedCount=(hasTL?1:0)+(hasTR?1:0)+(hasBL?1:0)+(hasBR?1:0);
+      document.getElementById('radar-guide-text').innerText=`🎯 الزوايا المطابقة: (${lockedCount} من 4) — اجعل الـ 4 خضراء ليلتقط تلقائياً`;
+
+      if(lockedCount===4){
+        allFourLockedCount++;
+        if(allFourLockedCount>=2){
+          allFourLockedCount=0;
+          captureExactOverlayNow();
         }
       }else{
-        lockHits=0;
-        document.getElementById('live-overlay-box').classList.remove('locking');
-        document.getElementById('radar-guide-text').innerText='👇 ضع البطاقة داخل الإطار (يلتقط تلقائياً من نفسه) 👇';
+        allFourLockedCount=0;
       }
-    },320);
+    },260);
   }catch(e){alert('تعذر فتح الكاميرا.');}
 }
 
@@ -934,54 +945,31 @@ function stopCamera(){
   document.getElementById('live-camera-container').classList.add('hidden');
 }
 
-async function triggerRadarCaptureNow(){
+// يقص بالضبط على حدود المستطيل الكبير الذي حاذيت الزوايا الأربع بداخله (مستحيل يقص الكلام اللي فوق البطاقة!)
+async function captureExactOverlayNow(){
   const video=document.getElementById('cam-video');if(!video.videoWidth||isGradingBusy)return;
   isGradingBusy=true;
-  const fullC=document.createElement('canvas');
-  fullC.width=video.videoWidth;fullC.height=video.videoHeight;
-  fullC.getContext('2d').drawImage(video,0,0);
-  await cropAndGradeFromFullImage(fullC);
-  cooldownUntil=Date.now()+2800;
-  isGradingBusy=false;
-}
+  const vw=video.videoWidth,vh=video.videoHeight;
+  const ox=Math.floor(vw*0.09), oy=Math.floor(vh*0.13), ow=Math.floor(vw*0.82), oh=Math.floor(vh*0.74);
 
-async function handleFastAISlot(ev){
-  const file=ev.target.files[0];if(!file)return;
-  document.getElementById('scan-status').innerText='⚡ جاري البحث عن الزوايا السوداء الـ 4 وقص البطاقة بالملي...';
-  const reader=new FileReader();
-  reader.onload=async e=>{
-    const img=new Image();
-    img.onload=async()=>{
-      const c=document.createElement('canvas');
-      let w=img.width,h=img.height;if(w>1000){h=Math.round((h*1000)/w);w=1000;}
-      c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
-      await cropAndGradeFromFullImage(c);
-    };
-    img.src=e.target.result;
-    ev.target.value='';
-  };
-  reader.readAsDataURL(file);
-}
-
-// قص البطاقة من الزوايا السوداء الـ 4 بدقة ثم تصحيحها
-async function cropAndGradeFromFullImage(fullCanvas){
-  const det=detectFourBlackCorners(fullCanvas);
   const cardC=document.createElement('canvas');
   cardC.width=500;cardC.height=540;
-  cardC.getContext('2d').drawImage(fullCanvas,det.x,det.y,det.w,det.h,0,0,500,540);
+  cardC.getContext('2d').drawImage(video,ox,oy,ow,oh,0,0,500,540);
+
   lastCroppedCardCanvas=cardC;
   manualShiftX=0;manualShiftY=0;
-  await evaluateCroppedCardNow(true);
+  await evaluateCroppedCardNow();
+  cooldownUntil=Date.now()+2800;
+  isGradingBusy=false;
 }
 
 function nudgeManual(dx,dy){
   if(!lastCroppedCardCanvas)return;
   manualShiftX+=dx;manualShiftY+=dy;
-  evaluateCroppedCardNow(false);
+  evaluateCroppedCardNow();
 }
 
-// قراءة الدوائر بمقاومة كاملة لظل الجوال + دعم الذكاء الاصطناعي على صورة البطاقة الصافية
-async function evaluateCroppedCardNow(tryAI=false){
+async function evaluateCroppedCardNow(){
   if(!lastCroppedCardCanvas)return;
   const rw=lastCroppedCardCanvas.width,rh=lastCroppedCardCanvas.height;
   const debugCanvas=document.getElementById('omr-debug-canvas');
@@ -989,19 +977,17 @@ async function evaluateCroppedCardNow(tryAI=false){
   const ctx=debugCanvas.getContext('2d');
   ctx.drawImage(lastCroppedCardCanvas,0,0);
 
-  // قص مستطيل اسم الطالب (من 10% إلى 26% من البطاقة المقصوصة)
+  // قص مستطيل اسم الطالب
   const nameCanvas=document.getElementById('student-name-crop-canvas'),ny=Math.floor(rh*0.10),nh=Math.floor(rh*0.16);
   nameCanvas.width=rw;nameCanvas.height=nh;nameCanvas.getContext('2d').drawImage(lastCroppedCardCanvas,0,ny,rw,nh,0,0,rw,nh);
   document.getElementById('cropped-name-banner').classList.remove('hidden');
 
-  // إحداثيات الدوائر الدقيقة داخل البطاقة المقصوصة من الزاوية السوداء للزاوية السوداء
   const totalQ=examData.mcq.length+examData.tf.length,half=Math.ceil(totalQ/2);
   const topPad=rh*(0.305+manualShiftY),usableH=rh*0.645,rowH=usableH/half;
   const localMcq={},localTf={};
 
   for(let idx=0;idx<totalQ;idx++){
     const isRightCol=idx<half,rowInCol=isRightCol?idx:(idx-half);
-    // العمود الأيمن والأيسر داخل البطاقة المقصوصة
     const colLeftX=(isRightCol?(rw*0.505):(rw*0.045))+(rw*manualShiftX);
     const colW=rw*0.445;
     const cy=topPad+(rowInCol+0.5)*rowH,r=Math.min(colW*0.046,rowH*0.28);
@@ -1009,7 +995,6 @@ async function evaluateCroppedCardNow(tryAI=false){
     if(idx<examData.mcq.length){
       const labels=['أ','ب','ج','د'],xRatios=[0.46,0.335,0.21,0.085];
       const pts=xRatios.map(xr=>colLeftX+colW*xr);
-      // قياس التباين المحلي (نطرح إضاءة الخلفية المحيطة بكل دائرة لإلغاء أثر ظل الجوال نهائياً!)
       const scores=pts.map(cx=>sampleShadowProofDarkness(ctx,cx,cy,r));
       const best=scores.indexOf(Math.max(...scores));
       localMcq[String(idx+1)]=labels[best];
@@ -1035,37 +1020,68 @@ async function evaluateCroppedCardNow(tryAI=false){
     }
   }
   document.getElementById('omr-visual-feedback-box').classList.remove('hidden');
-
-  // عرض وحفظ النتيجة الضوئية فوراً (دايركت)
   processStudentEvaluation({studentName:getNextUngradedStudent(),mcqAnswers:localMcq,tfAnswers:localTf});
   approveAndAddToRoster(true);
-
-  // إذا كان هناك مفتاح ذكاء اصطناعي، نرسل البطاقة الصافية (بدون دوائر مرسومة فوقها) لتأكيد قراءة اسم الطالب والإجابات
-  const apiKey=getActiveApiKey();
-  if(tryAI && apiKey){
-    try{
-      const cleanCardDataUrl=lastCroppedCardCanvas.toDataURL('image/jpeg',0.82);
-      const registeredStudents=getActiveStudentNames(),rosterHint=registeredStudents.length?`قائمة الطلاب: [${registeredStudents.join(' ، ')}].`:'';
-      const prompt=`أمامك صورة مقصوصة وصافية لبطاقة تظليل عربية (ZipGrade):
-1. اقرأ "اسم الطالب" المكتوب بخط اليد في أعلى البطاقة. ${rosterHint}
-2. البطاقة عربية من اليمين لليسار: كل دائرة غير مظللة مكتوب بداخلها حرفها (أ، ب، ج، د). الدائرة التي ظلّلها الطالب بالقلم الرصاص أو الحبر يختفي الحرف الذي بداخلها! انظر للحروف الظاهرة في نفس السطر لتعرف أي حرف اختفى تحت التظليل الغامق:
-   - الترتيب من اليمين لليسار دائماً هو: أ (الأولى يميناً بجوار رقم السؤال)، ثم ب، ثم ج، ثم د (الأخيرة يساراً).
-   - في أسئلة ص1 إلى ص${examData.tf.length}: اليمنى = "صح"، واليسرى = "خطأ".
-أعد JSON فقط:
-{"studentName": "اسم الطالب", "mcqAnswers": {"1": "ب", "2": "ب"}, "tfAnswers": {"1": "صح", "2": "خطأ"}}`;
-      const rawText=await callGeminiSmart(apiKey,[{text:prompt},{inline_data:{mime_type:'image/jpeg',data:cleanCardDataUrl.split(',')[1]}}],true);
-      const jsonMatch=rawText.match(/\{[\s\S]*\}/);
-      const parsed=JSON.parse(jsonMatch?jsonMatch[0]:rawText);
-      if(parsed.studentName){
-        document.getElementById('graded-student-name').value=parsed.studentName;
-        currentStudentResult.name=parsed.studentName;
-        approveAndAddToRoster(true);
-      }
-    }catch(e){}
-  }
 }
 
-// دالة مقاومة الظل: تقيس سواد قلب الدائرة مقارنة ببياض الورقة المحيط بها مباشرة لإلغاء أثر ظل اليد أو الجوال
+// ================= 2. الذكاء الاصطناعي الصافي 100% (يعتمد إجابات الذكاء الاصطناعي واسم الطالب معاً بدون أي قص خاطئ) =================
+async function handlePureAIGrading(ev){
+  const file=ev.target.files[0];if(!file)return;
+  const apiKey=getActiveApiKey();
+  if(!apiKey){
+    switchTab('exams',document.querySelectorAll('.tab-btn')[0]);
+    document.getElementById('secret-vault-modal').classList.remove('hidden');
+    return alert('يرجى وضع مفتاح Gemini API في الخزنة أولاً.');
+  }
+  const status=document.getElementById('scan-status');
+  status.innerText='🚀 جاري إرسال الصورة صافية للذكاء الاصطناعي وقراءة اسم الطالب والإجابات...';
+
+  const reader=new FileReader();
+  reader.onload=async e=>{
+    const img=new Image();
+    img.onload=async()=>{
+      const c=document.createElement('canvas');
+      let w=img.width,h=img.height;if(w>1100){h=Math.round((h*1100)/w);w=1100;}
+      c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
+      const cleanDataUrl=c.toDataURL('image/jpeg',0.82);
+
+      // عرض الصورة الملتقطة في المعاينة بدون دوائر خضراء عشوائية
+      const debugCanvas=document.getElementById('omr-debug-canvas');
+      debugCanvas.width=w;debugCanvas.height=h;
+      debugCanvas.getContext('2d').drawImage(c,0,0);
+      document.getElementById('omr-visual-feedback-box').classList.remove('hidden');
+
+      const registeredStudents=getActiveStudentNames(),rosterHint=registeredStudents.length?`قائمة طلاب الفصل: [${registeredStudents.join(' ، ')}].`:'';
+      const prompt=`أنت مصحح اختبارات خبير. أمامك صورة لبطاقة تظليل عربية (ZipGrade):
+1. اقرأ "اسم الطالب" المكتوب بخط اليد في أعلى البطاقة. ${rosterHint}
+2. البطاقة مقسمة إلى عمودين:
+   - العمود الأيمن فيه الأسئلة من 1 إلى 10.
+   - العمود الأيسر فيه الأسئلة من 11 إلى ${examData.mcq.length} ثم أسئلة الصح والخطأ (ص1 إلى ص${examData.tf.length}).
+3. كيف تعرف الحرف الذي ظلّله الطالب بدقة 100%؟
+   - في كل سطر اختياري توجد 4 دوائر مكتوب بداخلها الحروف العربية (أ) (ب) (ج) (د) مرتبة من اليمين إلى اليسار (أ هي الأولى من اليمين بجوار الرقم، ود هي الأخيرة في اليسار).
+   - الدوائر الفارغة يظهر الحرف مطبوعاً بداخلها بوضوح، أما الدائرة التي ظلّلها الطالب بالقلم الرصاص أو الحبر فتكون سوداء/غامقة ويختفي الحرف الذي بداخلها!
+   - انظر للحروف الثلاثة الظاهرة في السطر لتعرف الحرف الرابع المغطى بالتظليل!
+   - في أسئلة ص1 إلى ص${examData.tf.length}: الدائرة اليمنى مكتوب فيها "صح"، والدائرة اليسرى مكتوب فيها "خطأ". شوف أي واحدة منهما مظللة بالقلم!
+أعد JSON فقط:
+{"studentName": "اسم الطالب", "mcqAnswers": {"1": "ب", "2": "ب"}, "tfAnswers": {"1": "صح", "2": "خطأ"}}`;
+
+      try{
+        const rawText=await callGeminiSmart(apiKey,[{text:prompt},{inline_data:{mime_type:'image/jpeg',data:cleanDataUrl.split(',')[1]}}],true);
+        const jsonMatch=rawText.match(/\{[\s\S]*\}/);
+        const parsed=JSON.parse(jsonMatch?jsonMatch[0]:rawText);
+        // هنا نعتمد إجابات الذكاء الاصطناعي بالكامل مع اسم الطالب!
+        processStudentEvaluation(parsed);
+        approveAndAddToRoster(true);
+      }catch(err){
+        status.innerText='❌ خطأ: '+err.message;
+      }
+    };
+    img.src=e.target.result;
+    ev.target.value='';
+  };
+  reader.readAsDataURL(file);
+}
+
 function sampleShadowProofDarkness(ctx,cx,cy,r){
   const innerR=Math.max(2,Math.floor(r*0.75));
   const outerR=Math.max(4,Math.floor(r*1.6));
@@ -1084,7 +1100,7 @@ function sampleShadowProofDarkness(ctx,cx,cy,r){
   }
   const innerAvg=innerCnt?(innerSum/innerCnt):255;
   const outerAvg=outerCnt?(outerSum/outerCnt):255;
-  return outerAvg - innerAvg; // كلما كانت الدائرة أغمق من الورقة المحيطة بها زادت القيمة حتى تحت الظل!
+  return outerAvg - innerAvg;
 }
 
 window.flipCurrentAnswersRTL=function(){
