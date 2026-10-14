@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منظومة المصحح الذكي (V19) - أ. أحمد أبو بكر بالعمش</title>
+<title>منظومة المصحح الذكي (V20) - أ. أحمد أبو بكر بالعمش</title>
 <style>
 :root{--primary:#0f766e;--primary-dark:#115e59;--blue:#1e3a8a;--gold:#fbbf24;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#475569;--border:#cbd5e1;--input-bg:#fff;--c-excel:#16a34a;--c-vgood:#0d9488;--c-good:#2563eb;--c-pass:#f59e0b;--c-fail:#ef4444;}
 body.dark-theme{--bg:#0b0f19;--card:#151c2c;--text:#f1f5f9;--muted:#94a3b8;--border:#2a364f;--input-bg:#0f172a;--primary-dark:#2dd4bf;}
 *{box-sizing:border-box;font-family:'Segoe UI',Tahoma,Arial,sans-serif;}
 body{margin:0;background:var(--bg);color:var(--text);padding-bottom:65px;}
 header{background:linear-gradient(135deg,#090d16,#115e59,#1e3a8a);color:#fff;padding:10px 14px;text-align:center;border-bottom:3px solid var(--gold);}
-header h1{margin:0;font-size:1.1rem;} header p{margin:4px 0 6px;font-size:0.76rem;opacity:0.9;}
+header h1{margin:0;font-size:1.08rem;}header p{margin:4px 0 6px;font-size:0.75rem;opacity:0.9;}
 .creator-ribbon{display:inline-block;background:rgba(251,191,36,0.2);border:1.5px solid var(--gold);color:#fef08a;padding:3px 12px;border-radius:20px;font-size:0.8rem;font-weight:bold;}
-.theme-toggle-btn{background:#1e293b;color:#fde047;border:1.5px solid var(--gold);padding:3px 10px;border-radius:20px;cursor:pointer;font-weight:bold;font-size:0.76rem;}
+.theme-toggle-btn{background:#1e293b;color:#fde047;border:1.5px solid var(--gold);padding:3px 10px;border-radius:20px;cursor:pointer;font-weight:bold;font-size:0.75rem;}
 .fixed-creator-footer{position:fixed;bottom:0;left:0;right:0;background:#090d16;color:#fff;text-align:center;padding:7px;font-size:0.78rem;font-weight:bold;border-top:2px solid var(--gold);z-index:50;}
 .fixed-creator-footer span{color:var(--gold);}
 .class-bar{background:var(--card);border-bottom:2px solid var(--border);padding:7px 10px;display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;font-size:0.82rem;font-weight:bold;}
-.class-bar select{width:auto;min-width:165px;margin:0;padding:4px 8px;font-weight:bold;border:2px solid #0d9488;background:var(--input-bg);color:var(--text);}
+.class-bar select{width:auto;min-width:160px;margin:0;padding:4px 8px;font-weight:bold;border:2px solid #0d9488;background:var(--input-bg);color:var(--text);}
 .tabs{display:flex;background:var(--card);border-bottom:2px solid var(--border);position:sticky;top:0;z-index:30;overflow-x:auto;}
-.tab-btn{flex:1;min-width:125px;padding:10px 6px;border:none;background:none;font-weight:bold;font-size:0.82rem;color:var(--muted);cursor:pointer;white-space:nowrap;}
+.tab-btn{flex:1;min-width:120px;padding:10px 5px;border:none;background:none;font-weight:bold;font-size:0.82rem;color:var(--muted);cursor:pointer;white-space:nowrap;}
 .tab-btn.active{color:#14b8a6;border-bottom:3px solid #14b8a6;background:rgba(20,184,166,0.12);}
 .container{max-width:1040px;margin:10px auto;padding:0 8px;}
 .card{background:var(--card);border-radius:10px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,0.15);margin-bottom:10px;border:1px solid var(--border);}
@@ -28,8 +28,6 @@ label{display:block;font-weight:600;margin-bottom:3px;font-size:0.78rem;}
 input[type="text"],input[type="password"],input[type="number"],select,textarea{width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;font-size:0.86rem;margin-bottom:6px;background:var(--input-bg);color:var(--text);}
 .btn{background:var(--primary);color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:0.82rem;display:inline-flex;align-items:center;justify-content:center;gap:5px;}
 .btn-blue{background:var(--blue);}.btn-success{background:var(--c-excel);}.btn-warning{background:#d97706;}.btn-danger{background:var(--c-fail);}.btn-secondary{background:#475569;}.btn-purple{background:#7e22ce;}
-
-/* ورقة الاختبار A4 */
 .exam-sheet-page{background:#fff!important;color:#000!important;border:2px solid #000;padding:10px 12px;margin-bottom:16px;display:flex;flex-direction:column;justify-content:space-between;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
 .official-header-grid{display:grid;grid-template-columns:1.15fr 0.95fr 1.35fr;border:2px solid #000;margin-bottom:5px;background:#fff!important;}
 .hdr-right-col{padding:5px 10px;font-size:0.8rem;font-weight:bold;line-height:1.4;border-left:1.5px solid #000;display:flex;flex-direction:column;justify-content:center;color:#000;}
@@ -38,8 +36,8 @@ input[type="text"],input[type="password"],input[type="number"],select,textarea{w
 .hdr-left-col{display:flex;flex-direction:column;justify-content:center;}
 table.meta-mini-table{width:100%;height:100%;border-collapse:collapse;font-size:0.76rem;font-weight:bold;color:#000;}
 table.meta-mini-table td{border:1px solid #000;padding:3px 6px;text-align:right;}
-table.meta-mini-table tr:first-child td{border-top:none;} table.meta-mini-table tr:last-child td{border-bottom:none;}
-table.meta-mini-table td:first-child{border-right:none;background:#f8fafc!important;width:55px;} table.meta-mini-table td:last-child{border-left:none;}
+table.meta-mini-table tr:first-child td{border-top:none;}table.meta-mini-table tr:last-child td{border-bottom:none;}
+table.meta-mini-table td:first-child{border-right:none;background:#f8fafc!important;width:55px;}table.meta-mini-table td:last-child{border-left:none;}
 table.student-bar-table{width:100%;border-collapse:collapse;border:2px solid #000;margin-bottom:5px;font-weight:bold;font-size:0.84rem;color:#000;background:#fff;}
 table.student-bar-table td{border:1.5px solid #000;padding:4px 10px;}
 .q-section-bar{display:flex;justify-content:space-between;align-items:center;border:2px solid #000;background:#f1f5f9!important;color:#000!important;padding:4px 10px;font-weight:bold;font-size:0.84rem;margin-bottom:5px;}
@@ -53,8 +51,6 @@ tr.q-options-row td{border-bottom:2px solid #000;}
 table.tf-boxes-table{width:100%;border-collapse:collapse;border:2px solid #000;margin-bottom:6px;background:#fff;color:#000;}
 table.tf-boxes-table th,table.tf-boxes-table td{border:1.5px solid #000;padding:4.5px 8px;font-size:0.81rem;color:#000;}
 table.tf-boxes-table th{background:#f1f5f9!important;text-align:center;font-weight:bold;}
-
-/* بطاقة ZipGrade في الصفحة الثانية */
 .zipgrade-section-wrap{display:flex;justify-content:center;align-items:center;margin:4px 0;}
 .zipgrade-card{width:320px;border:2.2px solid #000;padding:10px 12px;background:#fff!important;color:#000!important;position:relative;border-radius:4px;}
 .zg-corner{position:absolute;width:12px;height:12px;background:#000!important;display:inline-block;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
@@ -64,7 +60,7 @@ table.tf-boxes-table th{background:#f1f5f9!important;text-align:center;font-weig
 .zg-student-info-box{border:1.5px solid #000;margin:0 6px 5px;background:#fff!important;color:#000;font-size:0.72rem;font-weight:bold;}
 .zg-name-row{padding:4px 6px;border-bottom:1.2px solid #000;display:flex;align-items:center;gap:4px;}
 .zg-meta-row{display:grid;grid-template-columns:1.2fr 1fr;}
-.zg-meta-row>div{padding:3px 6px;} .zg-meta-row>div:first-child{border-left:1.2px solid #000;}
+.zg-meta-row>div{padding:3px 6px;}.zg-meta-row>div:first-child{border-left:1.2px solid #000;}
 .zg-columns{display:grid;grid-template-columns:1fr 1fr;gap:6px;direction:rtl;margin:0 6px;}
 .zg-col{border:1.2px solid #000;padding:2px 4px;background:#fff;}
 .zg-row{display:flex;align-items:center;justify-content:space-between;padding:1.5px 2px;border-bottom:0.5px dashed #cbd5e1;}
@@ -73,24 +69,17 @@ table.tf-boxes-table th{background:#f1f5f9!important;text-align:center;font-weig
 .zg-bubbles{display:flex;gap:3px;justify-content:flex-end;flex:1;}
 .zg-b{width:13.5px;height:13.5px;border:1.3px solid #000;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.52rem;font-weight:bold;color:#000;}
 .zg-b-tf{width:23px;height:13.5px;border:1.3px solid #000;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:bold;color:#000;}
-
 #printable-exam.answer-key-mode td.opt-box-col.is-correct-choice,#printable-exam.answer-key-mode td.tf-ans-cell.is-tf-true{background-color:#22c55e!important;color:#000!important;font-weight:900!important;}
 #printable-exam.answer-key-mode td.tf-ans-cell.is-tf-false{background-color:#bbf7d0!important;color:#991b1b!important;font-weight:900!important;}
 #printable-exam.answer-key-mode .zg-b.is-correct-bubble,#printable-exam.answer-key-mode .zg-b-tf.is-correct-bubble{background-color:#16a34a!important;color:#fff!important;}
 .sheet-page-footer{display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid #000;padding-top:4px;margin-top:auto;font-size:0.8rem;font-weight:bold;color:#000;}
-
-/* الكاميرا: تم تعديل أبعاد المستطيل الأخضر ليطابق مربع ZipGrade تماماً ولا ينزل لأسفل الشاشة */
 .scanner-methods-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:10px;}
 .method-box{border:2px solid var(--border);border-radius:10px;padding:12px;}
 .method-box.ai-box{border-color:#38bdf8;background:rgba(56,189,248,0.07);}
 .method-box.omr-box{border-color:#22c55e;background:rgba(34,197,94,0.07);}
 .live-viewfinder-wrap{position:relative;width:100%;max-width:420px;margin:8px auto;background:#000;border-radius:12px;overflow:hidden;border:3px solid #22c55e;}
 #cam-video{width:100%;height:auto;min-height:360px;max-height:66vh;display:block;object-fit:cover;background:#000;}
-.zg-live-overlay{
-  position:absolute;left:14%;right:14%;top:18%;height:54%;
-  border:3px solid #22c55e;border-radius:6px;box-shadow:0 0 0 9999px rgba(0,0,0,0.62);
-  pointer-events:none;display:flex;flex-direction:column;gap:4px;padding:6px;
-}
+.zg-live-overlay{position:absolute;left:14%;right:14%;top:16%;height:54%;border:3px solid #22c55e;border-radius:6px;box-shadow:0 0 0 9999px rgba(0,0,0,0.62);pointer-events:none;display:flex;flex-direction:column;gap:4px;padding:6px;}
 .zg-live-overlay-label{position:absolute;top:-26px;left:-20px;right:-20px;text-align:center;color:#4ade80;font-weight:bold;font-size:0.78rem;text-shadow:0 1px 3px #000;}
 .zg-live-name-box{height:24%;border:1.5px dashed #fde047;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#fde047;font-size:0.72rem;font-weight:bold;}
 .zg-live-cols-wrap{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:5px;}
@@ -98,8 +87,6 @@ table.tf-boxes-table th{background:#f1f5f9!important;text-align:center;font-weig
 .big-slot{border:2px dashed var(--border);border-radius:10px;padding:10px;text-align:center;background:rgba(148,163,184,0.06);margin-top:8px;}
 .big-slot img{width:100%;max-height:380px;object-fit:contain;border-radius:8px;margin-top:6px;border:2px solid #38bdf8;}
 .toast-saved{position:fixed;top:18px;left:50%;transform:translateX(-50%);background:#16a34a;color:#fff;padding:10px 22px;border-radius:30px;font-weight:900;font-size:0.92rem;box-shadow:0 6px 20px rgba(0,0,0,0.45);z-index:9999;border:2px solid #fde047;}
-
-/* التقارير */
 .report-sheet{background:#fff!important;color:#0f172a!important;border:2px solid #0d9488;border-radius:12px;padding:14px;}
 .report-top-bar{background:#fff;color:#0f172a;border:2px solid #0d9488;border-radius:8px;padding:8px 14px;display:grid;grid-template-columns:1.2fr 1.4fr 1.2fr;align-items:center;margin-bottom:10px;}
 .report-meta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:#f0fdfa;color:#0f172a;border:1px solid #99f6e4;border-radius:6px;padding:7px;margin-bottom:12px;font-size:0.8rem;font-weight:bold;text-align:center;}
@@ -144,7 +131,7 @@ table.data-table th{background:rgba(148,163,184,0.15);}
 <body class="dark-theme">
 
 <header class="no-print">
-  <h1>🧬 منظومة المصحح الآلي وتحليل النتائج والأرشفة الذكية (الإصدار V19)</h1>
+  <h1>🧬 منظومة المصحح الآلي وتحليل النتائج والأرشفة الذكية (الإصدار V20)</h1>
   <p>إطار كاميرا مربع مطابق تماماً لبطاقة ZipGrade + تصحيح فوري وذكاء اصطناعي بالاتجاه العربي + حفظ وأرشفة الفصول</p>
   <div style="display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px;">
     <div class="creator-ribbon">🌟 فكرة وإعداد وتطوير المنظومة: أ. أحمد أبو بكر بالعمش 🌟</div>
@@ -169,7 +156,6 @@ table.data-table th{background:rgba(148,163,184,0.15);}
 </div>
 
 <div class="container">
-
   <div id="classes-manager-modal" class="card no-print hidden" style="border:2px solid #38bdf8;">
     <h2>🏫 إدخال الفصل والشعبة وقائمة أسماء الطلاب</h2>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
@@ -211,12 +197,8 @@ table.data-table th{background:rgba(148,163,184,0.15);}
         <button class="btn btn-secondary" onclick="document.getElementById('import-drawer').classList.toggle('hidden')">📥 استيراد / توليد</button>
       </div>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-        <label style="margin:0;font-size:0.78rem;display:inline-flex;align-items:center;gap:4px;cursor:pointer;">
-          <input type="checkbox" id="show-omr-chk" checked onchange="document.getElementById('zipgrade-page2-wrap').classList.toggle('hidden',!this.checked)"> بطاقة التظليل
-        </label>
-        <label style="margin:0;font-size:0.78rem;display:inline-flex;align-items:center;gap:4px;cursor:pointer;color:#38bdf8;">
-          <input type="checkbox" id="show-code-chk" checked onchange="toggleZipGradeCodeMode(this.checked)"> أكواد الزوايا
-        </label>
+        <label style="margin:0;font-size:0.78rem;display:inline-flex;align-items:center;gap:4px;cursor:pointer;"><input type="checkbox" id="show-omr-chk" checked onchange="document.getElementById('zipgrade-page2-wrap').classList.toggle('hidden',!this.checked)"> بطاقة التظليل</label>
+        <label style="margin:0;font-size:0.78rem;display:inline-flex;align-items:center;gap:4px;cursor:pointer;color:#38bdf8;"><input type="checkbox" id="show-code-chk" checked onchange="toggleZipGradeCodeMode(this.checked)"> أكواد الزوايا</label>
         <button class="btn btn-warning" id="toggle-ans-preview-btn" onclick="toggleAnswerKeyMode()">👁️ نموذج الإجابة</button>
         <button class="btn btn-blue" onclick="printStudentExam()">🖨️ طباعة الورقة</button>
         <button class="btn btn-success" onclick="printSolvedAnswerKey()">🖨️ طباعة الحل</button>
@@ -274,12 +256,7 @@ table.data-table th{background:rgba(148,163,184,0.15);}
           <div class="hdr-right-col" contenteditable="true">المملكة العربية السعودية<br>وزارة التعليم<br><span id="hdr-edu-dept">ادارة تعليم مكة المكرمة</span><br><span id="hdr-school">مدرسة عكرمة بن عمرو بن هشام</span></div>
           <div class="hdr-center-col">
             <div style="font-size:0.72rem;font-weight:bold;margin-bottom:2px;">بسم الله الرحمن الرحيم</div>
-            <svg class="moe-logo-svg" viewBox="0 0 300 135" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="135" fill="#ffffff"/>
-              <g><circle cx="274" cy="24" r="8.5" fill="#2ea55c"/><circle cx="274" cy="45" r="8.5" fill="#2ea55c"/><circle cx="274" cy="66" r="8.5" fill="#2ea55c"/><circle cx="252" cy="17" r="7.8" fill="#28a066"/><circle cx="252" cy="37" r="7.8" fill="#28a066"/><circle cx="252" cy="57" r="7.8" fill="#28a066"/><circle cx="231" cy="14" r="7" fill="#229b6f"/><circle cx="231" cy="33" r="7" fill="#229b6f"/><circle cx="231" cy="52" r="7" fill="#229b6f"/><circle cx="212" cy="18" r="6.2" fill="#1c9678"/><circle cx="212" cy="36" r="6.2" fill="#1c9678"/><circle cx="212" cy="54" r="6.2" fill="#1c9678"/><circle cx="195" cy="24" r="5.5" fill="#179181"/><circle cx="195" cy="41" r="5.5" fill="#179181"/><circle cx="195" cy="59" r="5.5" fill="#179181"/><circle cx="179" cy="31" r="4.9" fill="#158c8a"/><circle cx="179" cy="48" r="4.9" fill="#158c8a"/><circle cx="179" cy="65" r="4.9" fill="#158c8a"/><circle cx="164" cy="39" r="4.4" fill="#168793"/><circle cx="164" cy="55" r="4.4" fill="#168793"/><circle cx="164" cy="71" r="4.4" fill="#168793"/><circle cx="150" cy="46" r="4" fill="#18839b"/><circle cx="150" cy="62" r="4" fill="#18839b"/><circle cx="150" cy="78" r="4" fill="#18839b"/><circle cx="136" cy="39" r="4.4" fill="#1a7fa1"/><circle cx="136" cy="55" r="4.4" fill="#1a7fa1"/><circle cx="136" cy="71" r="4.4" fill="#1a7fa1"/><circle cx="121" cy="31" r="4.9" fill="#1c7ba6"/><circle cx="121" cy="48" r="4.9" fill="#1c7ba6"/><circle cx="121" cy="65" r="4.9" fill="#1c7ba6"/><circle cx="105" cy="24" r="5.5" fill="#1e79aa"/><circle cx="105" cy="41" r="5.5" fill="#1e79aa"/><circle cx="105" cy="59" r="5.5" fill="#1e79aa"/><circle cx="88" cy="18" r="6.2" fill="#1f77ad"/><circle cx="88" cy="36" r="6.2" fill="#1f77ad"/><circle cx="88" cy="54" r="6.2" fill="#1f77ad"/><circle cx="69" cy="14" r="7" fill="#2076b0"/><circle cx="69" cy="33" r="7" fill="#2076b0"/><circle cx="69" cy="52" r="7" fill="#2076b0"/><circle cx="48" cy="17" r="7.8" fill="#2175b2"/><circle cx="48" cy="37" r="7.8" fill="#2175b2"/><circle cx="48" cy="57" r="7.8" fill="#2175b2"/><circle cx="26" cy="24" r="8.5" fill="#2174b4"/><circle cx="26" cy="45" r="8.5" fill="#2174b4"/><circle cx="26" cy="66" r="8.5" fill="#2174b4"/></g>
-              <text x="150" y="106" text-anchor="middle" font-family="Tahoma,Arial" font-weight="bold" font-size="25" fill="#158c8a">وزارة التعليم</text>
-              <text x="150" y="126" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="13.5" letter-spacing="1" fill="#475569">Ministry of Education</text>
-            </svg>
+            <svg class="moe-logo-svg" viewBox="0 0 300 135" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="135" fill="#ffffff"/><g><circle cx="274" cy="24" r="8.5" fill="#2ea55c"/><circle cx="274" cy="45" r="8.5" fill="#2ea55c"/><circle cx="274" cy="66" r="8.5" fill="#2ea55c"/><circle cx="252" cy="17" r="7.8" fill="#28a066"/><circle cx="252" cy="37" r="7.8" fill="#28a066"/><circle cx="252" cy="57" r="7.8" fill="#28a066"/><circle cx="231" cy="14" r="7" fill="#229b6f"/><circle cx="231" cy="33" r="7" fill="#229b6f"/><circle cx="231" cy="52" r="7" fill="#229b6f"/><circle cx="212" cy="18" r="6.2" fill="#1c9678"/><circle cx="212" cy="36" r="6.2" fill="#1c9678"/><circle cx="212" cy="54" r="6.2" fill="#1c9678"/><circle cx="195" cy="24" r="5.5" fill="#179181"/><circle cx="195" cy="41" r="5.5" fill="#179181"/><circle cx="195" cy="59" r="5.5" fill="#179181"/><circle cx="179" cy="31" r="4.9" fill="#158c8a"/><circle cx="179" cy="48" r="4.9" fill="#158c8a"/><circle cx="179" cy="65" r="4.9" fill="#158c8a"/><circle cx="164" cy="39" r="4.4" fill="#168793"/><circle cx="164" cy="55" r="4.4" fill="#168793"/><circle cx="164" cy="71" r="4.4" fill="#168793"/><circle cx="150" cy="46" r="4" fill="#18839b"/><circle cx="150" cy="62" r="4" fill="#18839b"/><circle cx="150" cy="78" r="4" fill="#18839b"/><circle cx="136" cy="39" r="4.4" fill="#1a7fa1"/><circle cx="136" cy="55" r="4.4" fill="#1a7fa1"/><circle cx="136" cy="71" r="4.4" fill="#1a7fa1"/><circle cx="121" cy="31" r="4.9" fill="#1c7ba6"/><circle cx="121" cy="48" r="4.9" fill="#1c7ba6"/><circle cx="121" cy="65" r="4.9" fill="#1c7ba6"/><circle cx="105" cy="24" r="5.5" fill="#1e79aa"/><circle cx="105" cy="41" r="5.5" fill="#1e79aa"/><circle cx="105" cy="59" r="5.5" fill="#1e79aa"/><circle cx="88" cy="18" r="6.2" fill="#1f77ad"/><circle cx="88" cy="36" r="6.2" fill="#1f77ad"/><circle cx="88" cy="54" r="6.2" fill="#1f77ad"/><circle cx="69" cy="14" r="7" fill="#2076b0"/><circle cx="69" cy="33" r="7" fill="#2076b0"/><circle cx="69" cy="52" r="7" fill="#2076b0"/><circle cx="48" cy="17" r="7.8" fill="#2175b2"/><circle cx="48" cy="37" r="7.8" fill="#2175b2"/><circle cx="48" cy="57" r="7.8" fill="#2175b2"/><circle cx="26" cy="24" r="8.5" fill="#2174b4"/><circle cx="26" cy="45" r="8.5" fill="#2174b4"/><circle cx="26" cy="66" r="8.5" fill="#2174b4"/></g><text x="150" y="106" text-anchor="middle" font-family="Tahoma,Arial" font-weight="bold" font-size="25" fill="#158c8a">وزارة التعليم</text><text x="150" y="126" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="13.5" letter-spacing="1" fill="#475569">Ministry of Education</text></svg>
           </div>
           <div class="hdr-left-col">
             <table class="meta-mini-table">
@@ -292,4 +269,785 @@ table.data-table th{background:rgba(148,163,184,0.15);}
         <table class="student-bar-table">
           <tr><td style="width:90px;background:#f8fafc!important;">اسم الطالب</td><td id="student-name-placeholder-cell" style="text-align:center;font-weight:900;"></td><td style="width:90px;background:#f8fafc!important;text-align:center;">درجة الطالب</td><td style="width:95px;text-align:center;font-size:0.95rem;"><span id="student-earned-mark">&nbsp;&nbsp;&nbsp;&nbsp;</span> / <span id="strip-total-score">٢٠</span></td></tr>
         </table>
-        <div class="q-section-bar"><span>السؤال الأول: اختر الإجابة الصحيحة</span><span id="mcq-banner-score">
+        <div class="q-section-bar"><span>السؤال الأول: اختر الإجابة الصحيحة</span><span id="mcq-banner-score">١٤ درجات</span></div>
+        <table class="mcq-boxes-table" id="page1-mcq-table"><tbody id="paper-mcq-page1"></tbody></table>
+        <div class="sheet-page-footer"><span>١ من ٢ &nbsp; يتبع في الصفحة التالية....</span><span></span></div>
+      </div>
+
+      <div class="exam-sheet-page" id="exam-page-2">
+        <div>
+          <div class="q-section-bar" id="page2-mcq-cont-bar"><span>تابع السؤال الأول</span><span></span></div>
+          <table class="mcq-boxes-table" id="page2-mcq-table"><tbody id="paper-mcq-page2"></tbody></table>
+          <div class="q-section-bar" style="margin-top:4px;"><span>السؤال الثاني: ضع علامة صح أو خطأ</span><span id="tf-banner-score">٦ درجات</span></div>
+          <table class="tf-boxes-table"><thead><tr><th style="width:36px;">#</th><th>العبارة</th><th style="width:90px;">الإجابة</th></tr></thead><tbody id="paper-tf-body"></tbody></table>
+          <div class="zipgrade-section-wrap" id="zipgrade-page2-wrap">
+            <div class="zipgrade-card" id="zipgrade-box">
+              <span class="zg-corner tl"></span><span class="zg-corner tr"></span><span class="zg-corner bl"></span><span class="zg-corner br"></span>
+              <div class="zg-title-bar">بطاقة التظليل الآلي (ZipGrade) - صوّر هذا المربع فقط للتصحيح</div>
+              <div class="zg-student-info-box">
+                <div class="zg-name-row"><span>اسم الطالب:</span><span id="zg-student-name-line" style="flex:1;text-align:center;font-weight:900;"></span></div>
+                <div class="zg-meta-row"><div>الفصل: <span id="zg-class-line" contenteditable="true"></span></div><div>الدرجة: <span id="zg-score-line">&nbsp;&nbsp;&nbsp;</span> / <span id="zg-max-score">٢٠</span></div></div>
+              </div>
+              <div class="zg-columns"><div class="zg-col" id="zg-col-right"></div><div class="zg-col" id="zg-col-left"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="sheet-page-footer"><span>٢ من ٢ &nbsp; انتهت الأسئلة</span><span contenteditable="true">معلم المادة: <span id="hdr-teacher-foot">أحمد أبو بكر بالعمش</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- التبويب 2 -->
+  <div id="tab-scanner" class="hidden">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+        <h2 style="margin:0;border:none;">📷 التصحيح السريع للفصل (<span id="scan-cls-label" style="color:#38bdf8;">غير محدد</span>)</h2>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+          <label style="margin:0;font-size:0.8rem;display:inline-flex;align-items:center;gap:4px;cursor:pointer;background:rgba(56,189,248,0.12);padding:5px 10px;border-radius:8px;border:1px solid #38bdf8;"><input type="checkbox" id="scan-code-mode-chk" checked onchange="toggleZipGradeCodeMode(this.checked)"> أكواد الزوايا / بدون كود</label>
+          <button type="button" class="btn btn-warning" style="padding:5px 10px;font-size:0.78rem;" onclick="flipCurrentAnswersRTL()">🔄 عكس الاتجاه (أ↔د / ب↔ج)</button>
+          <button class="btn btn-purple" onclick="archiveCurrentClassSession()">📦 حفظ وأرشفة الفصل</button>
+        </div>
+      </div>
+
+      <div class="scanner-methods-grid">
+        <div class="method-box ai-box">
+          <h3 style="margin:0 0 5px;color:#38bdf8;font-size:0.95rem;">🤖 الطريقة الأولى: صوّر مربع التظليل فقط (يقرأ الاسم والإجابات بالاتجاه العربي الصحيح)</h3>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <label class="btn btn-blue" style="font-size:0.92rem;padding:11px 16px;cursor:pointer;flex:1;min-width:220px;">📸 صوّر مربع التظليل بكاميرا الجوال<input type="file" accept="image/*" capture="environment" style="display:none;" onchange="handleFastAISlot(event,1)"></label>
+          </div>
+        </div>
+        <div class="method-box omr-box">
+          <h3 style="margin:0 0 5px;color:#4ade80;font-size:0.95rem;">⚡ الطريقة الثانية (بدون إنترنت): منظار بطاقة التظليل المربع المباشر</h3>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-success" onclick="openLiveOmrCamera()">🎥 فتح منظار بطاقة التظليل</button>
+            <button class="btn btn-warning" onclick="startQuickTouchGrading()">👆 التصحيح السريع باللمس</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="live-camera-container" class="hidden">
+        <div class="live-viewfinder-wrap">
+          <video id="cam-video" autoplay playsinline></video>
+          <div class="zg-live-overlay">
+            <div class="zg-live-overlay-label">👇 ضع مربع التظليل داخل هذا الإطار الأخضر 👇</div>
+            <div class="zg-live-name-box">مكان اسم الطالب والفصل</div>
+            <div class="zg-live-cols-wrap"><div class="zg-live-col"></div><div class="zg-live-col"></div></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+          <button class="btn btn-success" style="font-size:0.95rem;padding:10px 20px;" onclick="snapAndGradeLiveOmrStrip()">📸 التقط واقرأ البطاقة فوراً</button>
+          <button class="btn btn-blue" onclick="snapFullVideoForAI()">🤖 التقطها للذكاء الاصطناعي</button>
+          <button class="btn btn-danger" onclick="stopCamera()">⏹️ إغلاق</button>
+        </div>
+      </div>
+
+      <div id="omr-visual-feedback-box" class="card hidden" style="border:2px solid #22c55e;margin-top:10px;text-align:center;">
+        <h3 style="margin:0 0 6px;font-size:0.9rem;color:#4ade80;">🔍 معاينة البطاقة المقروءة (الدوائر الخضراء = الإجابة):</h3>
+        <canvas id="omr-debug-canvas" style="max-width:310px;width:100%;border-radius:6px;border:2px solid #22c55e;background:#fff;"></canvas>
+        <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:6px;">
+          <button class="btn btn-secondary" onclick="nudgeOmrCrop(0,-0.015)">⬆️ لأعلى</button>
+          <button class="btn btn-secondary" onclick="nudgeOmrCrop(0,0.015)">⬇️ لأسفل</button>
+          <button class="btn btn-secondary" onclick="nudgeOmrCrop(0.015,0)">➡️ لليمين</button>
+          <button class="btn btn-secondary" onclick="nudgeOmrCrop(-0.015,0)">⬅️ لليسار</button>
+        </div>
+      </div>
+
+      <div class="big-slot hidden" id="slot1-container">
+        <div style="display:flex;justify-content:space-between;align-items:center;"><strong>📄 صورة البطاقة الملتقطة</strong><button class="btn btn-danger" style="padding:3px 9px;font-size:0.75rem;" onclick="clearSlots()">🗑️ مسح</button></div>
+        <img id="slot1-img" alt="صورة 1">
+      </div>
+      <div class="big-slot hidden" id="slot2-container"><img id="slot2-img" alt="صورة 2"></div>
+
+      <div id="ai-action-bar" class="hidden" style="margin-top:10px;text-align:center;">
+        <button class="btn btn-success" style="font-size:0.98rem;padding:11px 24px;width:100%;max-width:480px;" onclick="gradeStudentPagesWithAI()">🚀 تصحيح البطاقة وقراءة اسم الطالب الآن</button>
+      </div>
+      <div id="scan-status" style="margin-top:10px;font-weight:bold;text-align:center;color:#2dd4bf;font-size:0.92rem;"></div>
+    </div>
+
+    <div class="card hidden" id="grading-result-card" style="border:2px solid #14b8a6;">
+      <h2>📊 نتيجة تصحيح بطاقة الطالب</h2>
+      <div id="cropped-name-banner" class="hidden" style="margin-bottom:8px;text-align:center;background:#fff;padding:6px;border-radius:8px;border:2px solid #fde047;">
+        <div style="font-size:0.75rem;color:#0f172a;font-weight:bold;margin-bottom:3px;">✍️ صورة اسم الطالب المقصوصة من البطاقة:</div>
+        <canvas id="student-name-crop-canvas" style="max-width:100%;height:48px;border:1px solid #cbd5e1;"></canvas>
+      </div>
+      <div style="background:rgba(20,184,166,0.12);border:2px solid #14b8a6;border-radius:10px;padding:10px;margin-bottom:10px;">
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+          <div style="flex:2;min-width:220px;">
+            <label style="color:#2dd4bf;">👤 اسم الطالب المقروء (أو اختره من قائمة الفصل):</label>
+            <input type="text" id="graded-student-name" placeholder="اسم الطالب..." style="font-size:1.05rem;font-weight:bold;border:2px solid #14b8a6;margin-bottom:5px;">
+            <select id="quick-student-picker" onchange="if(this.value)document.getElementById('graded-student-name').value=this.value;" style="margin:0;"></select>
+          </div>
+          <div style="flex:1;min-width:130px;background:#090d16;border:2px solid var(--gold);border-radius:10px;padding:8px;text-align:center;">
+            <div style="font-size:0.8rem;color:var(--gold);">الدرجة المستحقة</div>
+            <div style="font-size:1.85rem;font-weight:900;color:#4ade80;" id="graded-total-score">0 / 20</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+        <button class="btn btn-success" style="flex:2;font-size:0.95rem;padding:11px;" onclick="approveAndAddToRoster()">✅ اعتماد وحفظ درجة الطالب في الفصل (<span id="btn-cls-name"></span>)</button>
+        <button class="btn btn-purple" style="flex:1;" onclick="archiveCurrentClassSession()">📦 حفظ وأرشفة الفصل</button>
+      </div>
+      <table class="data-table"><thead><tr><th>#</th><th>القسم</th><th>السؤال</th><th>إجابة الطالب</th><th>الصحيحة</th><th>الدرجة (المس للتعديل)</th></tr></thead><tbody id="graded-details-body"></tbody></table>
+    </div>
+  </div>
+
+  <!-- التبويب 3 -->
+  <div id="tab-analytics" class="hidden">
+    <div class="card no-print" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+      <h2 style="margin:0;border:none;">📊 استمارة تحليل النتائج والخطة العلاجية</h2>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button class="btn btn-purple" onclick="archiveCurrentClassSession()">📦 أرشفة الفصل</button>
+        <button class="btn btn-danger" onclick="clearAllRoster()">🗑️ تصفير</button>
+        <button class="btn btn-blue" onclick="printElement('official-analytics-sheet')">🖨️ طباعة التحليل</button>
+        <button class="btn btn-success" onclick="printElement('remedial-plan-sheet')">🖨️ طباعة الخطة العلاجية</button>
+      </div>
+    </div>
+    <div class="report-sheet" id="official-analytics-sheet">
+      <div class="report-top-bar">
+        <div contenteditable="true" style="font-size:0.82rem;line-height:1.45;font-weight:bold;">المملكة العربية السعودية<br><span id="rep-edu-dept">ادارة تعليم مكة المكرمة</span><br><span id="rep-school" style="color:#115e59;">مدرسة عكرمة بن عمرو بن هشام</span></div>
+        <div style="text-align:center;"><h2 style="color:#115e59;border:none;margin:2px 0 0;font-size:1.05rem;" contenteditable="true">تحليل نتائج اختبار مادة [<span id="rep-subject">الأحياء 2</span>]</h2></div>
+        <div style="text-align:left;font-size:0.82rem;font-weight:bold;" contenteditable="true">النسخة المعتمدة<br>التحليل الإحصائي</div>
+      </div>
+      <div class="report-meta-strip">
+        <div>المرحلة / الصف: <span contenteditable="true" id="rep-class" style="color:var(--blue);"></span></div>
+        <div>الفصل الدراسي: <span contenteditable="true" style="color:var(--blue);">الأول</span></div>
+        <div>نوع الاختبار: <span contenteditable="true" id="rep-exam-type" style="color:var(--blue);">اختبار الفترة الاولى</span></div>
+        <div>درجة القياس: <span id="rep-max-mark" style="color:var(--blue);">20</span></div>
+      </div>
+      <div class="report-tables-row">
+        <div class="styled-box">
+          <div class="styled-box-header">الإحصائيات التفصيلية</div>
+          <table class="stat-table"><tbody>
+            <tr><th>عدد الطلاب</th><td id="st-total-students" style="font-weight:bold;color:var(--blue);">0</td></tr>
+            <tr><th>أعلى درجة</th><td id="st-max-score" style="font-weight:bold;color:var(--c-excel);">0</td></tr>
+            <tr><th>أقل درجة</th><td id="st-min-score" style="font-weight:bold;color:var(--c-fail);">0</td></tr>
+            <tr><th>متوسط الدرجات</th><td id="st-avg-score" style="font-weight:bold;">0</td></tr>
+            <tr><th>نسبة النجاح</th><td id="st-pass-rate" style="font-weight:bold;color:var(--primary);">0%</td></tr>
+            <tr><th>مجموع الدرجات</th><td id="st-sum-scores" style="font-weight:bold;">0</td></tr>
+          </tbody></table>
+        </div>
+        <div class="styled-box">
+          <div class="styled-box-header">توزيع المستويات</div>
+          <table class="stat-table"><thead><tr><th>المستوى</th><th>النطاق</th><th>العدد</th><th>النسبة</th></tr></thead><tbody id="st-levels-tbody"></tbody></table>
+        </div>
+      </div>
+      <div class="styled-box" style="margin-bottom:12px;"><div class="styled-box-header">رسم بياني (أعداد الطلاب)</div><div class="bars-container" id="chart-counts-bars"></div></div>
+      <div class="styled-box"><div class="styled-box-header">رسم بياني (نسب الطلاب)</div><div class="donuts-grid" id="chart-donuts-container"></div></div>
+      <div class="report-signatures">
+        <div contenteditable="true">معلم المادة:<br><span id="rep-teacher-sig" style="color:#115e59;">أحمد أبو بكر بالعمش</span></div>
+        <div contenteditable="true">مدير المدرسة:<br><span id="rep-principal-sig" style="color:#115e59;">فهد الشريف</span></div>
+      </div>
+    </div>
+
+    <div class="remedial-sheet" id="remedial-plan-sheet">
+      <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #f59e0b;padding-bottom:8px;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+        <h2 style="margin:0;border:none;color:#b45309;font-size:1.02rem;">🛠️ الخطة العلاجية للفصل (<span id="rem-cls-title"></span>)</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-bottom:12px;">
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:8px;color:#0f172a;"><strong style="color:#b91c1c;font-size:0.82rem;">🚨 علاجية مكثفة (&lt;50%):</strong><div id="rem-fail-students" style="margin-top:4px;font-size:0.8rem;">لا يوجد</div></div>
+        <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px;color:#0f172a;"><strong style="color:#b45309;font-size:0.82rem;">⚠️ متابعة (50%-69%):</strong><div id="rem-pass-students" style="margin-top:4px;font-size:0.8rem;">لا يوجد</div></div>
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px;color:#0f172a;"><strong style="color:#15803d;font-size:0.82rem;">🌟 إثرائية:</strong><div id="rem-excel-students" style="margin-top:4px;font-size:0.8rem;">لا يوجد</div></div>
+      </div>
+      <table class="data-table" style="color:#0f172a;"><thead><tr style="background:#f1f5f9;"><th>السؤال</th><th>المفهوم / المهارة</th><th>نسبة الإتقان</th><th>الأولوية</th><th>الإجراء العلاجي</th></tr></thead><tbody id="remedial-skills-tbody"></tbody></table>
+      <div class="report-signatures">
+        <div contenteditable="true">معلم المادة: <span id="rem-teacher-sig">أحمد أبو بكر بالعمش</span></div>
+        <div contenteditable="true">مدير المدرسة: <span id="rem-principal-sig">فهد الشريف</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- التبويب 4 -->
+  <div id="tab-noor" class="hidden">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <h2 style="margin:0;border:none;">📋 كشف درجات الفصل (<span id="noor-cls-title" style="color:#38bdf8;"></span>)</h2>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="btn btn-purple" onclick="archiveCurrentClassSession()">📦 أرشفة الكشف</button>
+          <button class="btn btn-secondary" onclick="addManualStudentRow()">➕ إضافة طالب</button>
+        </div>
+      </div>
+      <table class="data-table"><thead><tr><th>م</th><th>اسم الطالب</th><th>الدرجة</th><th>المستوى</th><th>حذف</th></tr></thead><tbody id="roster-tbody"></tbody></table>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn" onclick="downloadExcelCSV()">📥 تصدير Excel</button>
+        <button class="btn btn-danger" onclick="clearAllRoster()">🗑️ تفريغ</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>⚡ الرصد الآلي بنظام نور</h2>
+      <button class="btn btn-success" onclick="generateNoorAutoFiller()">⚡ نسخ كود الرصد</button>
+      <textarea id="noor-code-area" rows="4" readonly style="margin-top:8px;font-family:monospace;direction:ltr;text-align:left;"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="fixed-creator-footer no-print">🛡️ منظومة المصحح والمحلل الذكي للاختبارات (V20) | <span>بصمة المشروع وتطوير: أ. أحمد أبو بكر بالعمش</span></div>
+
+<script>
+localStorage.removeItem('balamash_fast_model');
+window.playScanBeep=function(){};
+
+function switchTab(tabId,btn){
+  ['exams','scanner','analytics','noor'].forEach(t=>document.getElementById('tab-'+t).classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+tabId).classList.remove('hidden');
+  if(btn)btn.classList.add('active');
+  if(tabId==='analytics')renderAnalyticsAndRemedial();
+}
+
+function encodeKey(raw){return btoa(unescape(encodeURIComponent(raw.split('').reverse().join(''))));}
+function decodeKey(enc){try{return decodeURIComponent(escape(atob(enc))).split('').reverse().join('');}catch(e){return '';}}
+function getActiveApiKey(){
+  const enc=localStorage.getItem('balamash_vault_v12')||localStorage.getItem('balamash_vault_v9')||localStorage.getItem('balamash_vault_v5');
+  return enc?decodeKey(enc):(localStorage.getItem('gemini_api_key')||'');
+}
+function updateVaultBadge(){document.getElementById('vault-status-text').innerText=getActiveApiKey()?'مؤمّن ✅':'إعداد';}
+function saveKeyAndCloseVault(){
+  const val=document.getElementById('vault-key-input').value.trim();
+  if(!val)return alert('الصق مفتاح Gemini API أولاً.');
+  localStorage.setItem('balamash_vault_v12',encodeKey(val));
+  localStorage.removeItem('balamash_fast_model_v20');
+  document.getElementById('vault-key-input').value='';
+  updateVaultBadge();testGeminiKeyNow();
+}
+function clearVaultKey(){
+  ['balamash_vault_v12','balamash_vault_v9','balamash_vault_v5','gemini_api_key','balamash_fast_model_v20'].forEach(k=>localStorage.removeItem(k));
+  updateVaultBadge();document.getElementById('key-test-result').innerText='🗑️ تم مسح المفتاح.';
+}
+
+async function getAvailableGeminiModels(apiKey){
+  const cached=localStorage.getItem('balamash_fast_model_v20');
+  if(cached&&!cached.includes('1.5'))return [cached,'gemini-2.5-flash','gemini-2.0-flash'];
+  try{
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+    const data=await res.json();
+    if(data&&Array.isArray(data.models)){
+      const valid=data.models.filter(m=>m.supportedGenerationMethods&&m.supportedGenerationMethods.includes('generateContent')).map(m=>m.name.replace('models/','')).filter(n=>n.includes('gemini')&&!n.includes('1.5')&&!n.includes('vision'));
+      if(valid.length){localStorage.setItem('balamash_fast_model_v20',valid[0]);return valid;}
+    }
+  }catch(e){}
+  return ['gemini-2.5-flash','gemini-2.0-flash'];
+}
+
+async function callGeminiSmart(apiKey,parts,expectJson=true){
+  const models=await getAvailableGeminiModels(apiKey);
+  let realErr='';
+  for(const modelName of models){
+    try{
+      const bodyObj={contents:[{parts}]};
+      if(expectJson)bodyObj.generationConfig={responseMimeType:"application/json"};
+      const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(bodyObj)});
+      const data=await res.json();
+      if(!data.error&&data.candidates&&data.candidates[0]){
+        localStorage.setItem('balamash_fast_model_v20',modelName);
+        return data.candidates[0].content.parts[0].text;
+      }
+      if(data.error&&data.error.message&&!data.error.message.includes('not found'))realErr=data.error.message;
+    }catch(err){if(!realErr)realErr=err.message;}
+  }
+  localStorage.removeItem('balamash_fast_model_v20');
+  throw new Error(realErr||'تأكد من الإنترنت وصلاحية المفتاح.');
+}
+
+async function testGeminiKeyNow(){
+  const inpVal=document.getElementById('vault-key-input').value.trim();
+  if(inpVal){localStorage.setItem('balamash_vault_v12',encodeKey(inpVal));document.getElementById('vault-key-input').value='';updateVaultBadge();}
+  const apiKey=getActiveApiKey(),resBox=document.getElementById('key-test-result');
+  if(!apiKey){resBox.style.color='#ef4444';resBox.innerText='❌ الصق المفتاح أولاً.';return;}
+  resBox.style.color='#38bdf8';resBox.innerText='⏳ جاري الفحص...';
+  try{await callGeminiSmart(apiKey,[{text:'قل: جاهز'}],false);resBox.style.color='#4ade80';resBox.innerText='✅ المفتاح شغال 100%!';}
+  catch(e){resBox.style.color='#ef4444';resBox.innerText='❌ '+e.message;}
+}
+
+function toIndicDigits(num){return String(num).replace(/\d/g,d=>['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'][d]);}
+function toggleThemeMode(){
+  const isDark=document.body.classList.toggle('dark-theme');
+  localStorage.setItem('balamash_theme_v12',isDark?'dark':'light');
+  document.getElementById('theme-toggle-btn').innerHTML=isDark?'☀️ التبديل للثيم الأبيض':'🌙 التبديل للثيم الأسود';
+}
+function toggleZipGradeCodeMode(withCode){
+  document.getElementById('show-code-chk').checked=withCode;
+  document.getElementById('scan-code-mode-chk').checked=withCode;
+  document.getElementById('zipgrade-box').classList.toggle('no-code-mode',!withCode);
+}
+
+let isAnswerKeyPreview=false;
+function toggleAnswerKeyMode(forceState){
+  isAnswerKeyPreview=(typeof forceState==='boolean')?forceState:!isAnswerKeyPreview;
+  document.getElementById('printable-exam').classList.toggle('answer-key-mode',isAnswerKeyPreview);
+  document.getElementById('toggle-ans-preview-btn').innerHTML=isAnswerKeyPreview?'🙈 إخفاء الحل':'👁️ نموذج الإجابة';
+  const totalQ=examData.mcq.length+examData.tf.length;
+  document.getElementById('student-name-placeholder-cell').innerHTML=isAnswerKeyPreview?'<span style="color:#15803d;">★ نموذج الإجابة ★</span>':'';
+  document.getElementById('zg-student-name-line').innerHTML=isAnswerKeyPreview?'<span style="color:#15803d;">★ نموذج الإجابة ★</span>':'';
+  document.getElementById('student-earned-mark').innerHTML=isAnswerKeyPreview?`<strong style="color:#15803d;">${toIndicDigits(totalQ)}</strong>`:'&nbsp;&nbsp;&nbsp;&nbsp;';
+  document.getElementById('zg-score-line').innerHTML=isAnswerKeyPreview?`<strong style="color:#15803d;">${toIndicDigits(totalQ)}</strong>`:'&nbsp;&nbsp;&nbsp;';
+  renderExamAndKey();
+}
+function printStudentExam(){if(isAnswerKeyPreview)toggleAnswerKeyMode(false);printElement('printable-exam');}
+function printSolvedAnswerKey(){const prev=isAnswerKeyPreview;if(!prev)toggleAnswerKeyMode(true);printElement('printable-exam');setTimeout(()=>{if(!prev)toggleAnswerKeyMode(false);},900);}
+
+const defaultBiologyExam={
+  title:"الأحياء 2 - اختبار الفترة الأولى",
+  mcq:[
+    {q:"تُصنف شوكيات الجلد في السلم التصنيفي للحيوانات على أنها:",a:"بدائية الفم",b:"ثانوية الفم",c:"عديمة التجويف الجسمي",d:"ذات تناظر جانبي في الطور البالغ",key:"ب"},
+    {q:"أي التراكيب التالية يساعد شوكيات الجلد على الإمساك بالغذاء وإزالة المواد الغريبة عن الجلد؟",a:"المصفاة",b:"اللواقط القدمية",c:"الحويصلات العضلية",d:"الشجرة التنفسية",key:"ب"},
+    {q:"الجزء الذي يدخل منه الماء إلى الجهاز الوعائي المائي في شوكيات الجلد يسمى:",a:"المصفاة",b:"القناة الحجرية",c:"القناة الحلقية",d:"الحويصلة العضلية",key:"أ"},
+    {q:"حيوان من شوكيات الجلد يمتلك تركيباً يسمى \"مصباح أرسطو\" لكشط الطحالب:",a:"نجم البحر",b:"خيار البحر",c:"قنفذ البحر",d:"زنابق البحر",key:"ج"},
+    {q:"عندما يتعرض خيار البحر للخطر، فإنه يدافع عن نفسه عن طريق:",a:"قذف الأشواك السامة",b:"الهروب السريع بالأذرع",c:"إخراج جزء من أعضائه الداخلية",d:"الاختباء داخل قوقعة",key:"ج"},
+    {q:"أي الصفات التالية تميز الكيسيات (القميصيات) البالغة؟",a:"متحركة ونشطة جداً",b:"لها ذيل خلف شرجي طويل",c:"غير متحركة (جالسة) ولها شكل الكيس",d:"تحتفظ بالحبل الظهري طوال حياتها",key:"ج"},
+    {q:"ما التركيب الذي يحل محل الحبل الظهري في معظم الفقاريات خلال النمو الجنيني؟",a:"الحبل العصبي",b:"العمود الفقري",c:"العرف العصبي",d:"الجيوب البلعومية",key:"ب"},
+    {q:"أي من القشور التالية تتكون من مواد قاسية وثقيلة وتشبه الأسنان وتوجد في سمك القرش؟",a:"القشور المشطية",b:"القشور القرصية",c:"القشور الصفائحية",d:"القشور المعينية",key:"ج"},
+    {q:"ما وظيفة مثانة العوم في الأسماك العظمية؟",a:"استشعار الاهتزازات في الماء",b:"ضخ الدم إلى الخياشيم",c:"التحكم في عمق الغوص",d:"توجيه الأسماك أثناء السباحة",key:"ج"},
+    {q:"أي جزء من دماغ السمكة مسؤول عن تنسيق الحركة والتحكم في الاتزان؟",a:"المخ",b:"المخيخ",c:"النخاع المستطيل",d:"البصيلة الشمية",key:"ب"},
+    {q:"كم عدد حجرات القلب في البرمائيات؟",a:"حجرتان",b:"ثلاث حجرات",c:"أربع حجرات",d:"خمس حجرات",key:"ب"},
+    {q:"ما المادة التي تنتجها البرمائيات التي تعيش على اليابسة كفضلات أيضية وتخزن في المثانة البولية؟",a:"الأمونيا",b:"اليوريا (البولينا)",c:"حمض البوليك",d:"الأملاح",key:"ب"},
+    {q:"ما اسم الغشاء الشفاف الذي يتحرك فوق عين الضفدع لحمايتها تحت الماء ومن الجفاف على اليابسة؟",a:"غشاء الطبلة",b:"الغشاء الرامش",c:"غشاء الجفن",d:"الغشاء الجانبي",key:"ب"},
+    {q:"أي الرتب التالية تنتمي إليها الضفادع والعلاجيم؟",a:"رتبة الذيليات",b:"رتبة عديمة الأرجل",c:"رتبة عديمة الذيل",d:"رتبة الحرشفيات",key:"ج"}
+  ],
+  tf:[
+    {q:"جميع شوكيات الجلد لها تناظر شعاعي في مرحلة البلوغ، بينما يرقاتها ذات تناظر جانبي.",key:"صح"},
+    {q:"يُعد نجم البحر من الحيوانات التي يمكنها تجديد الأجزاء المفقودة من جسمها.",key:"صح"},
+    {q:"تستخدم الأسماك جهاز الخط الجانبي لاكتشاف الحركة والاهتزازات في الماء.",key:"صح"},
+    {q:"الدورة الدموية في البرمائيات هي دورة دموية مزدوجة.",key:"صح"},
+    {q:"يتم تبادل الغازات في معظم البرمائيات عبر الجلد والرئات أو بطانة الفم.",key:"صح"},
+    {q:"البرمائيات مخلوقات ثابتة درجة الحرارة تستطيع تنظيم حرارة أجسامها داخلياً.",key:"خطأ"}
+  ]
+};
+
+let examBank=JSON.parse(localStorage.getItem('ahya_exam_bank_v9')||'null')||[defaultBiologyExam];
+let currentExamIndex=0,examData=JSON.parse(JSON.stringify(examBank[0]));
+let classesDB=JSON.parse(localStorage.getItem('ahya_classes_db_v16')||'{}');
+let activeClassName=localStorage.getItem('ahya_active_cls_v16')||'';
+if(activeClassName&&!classesDB[activeClassName])activeClassName='';
+let archivedSessions=JSON.parse(localStorage.getItem('ahya_archive_v16')||'[]');
+let slotImages={1:null,2:null},camStream=null,currentStudentResult=null,lastOmrVideoFrame=null;
+let omrCropBox={x:0.14,y:0.16,w:0.72,h:0.54};
+
+function ensureClassObject(){return (!activeClassName||!classesDB[activeClassName])?{studentNames:[],gradedRoster:[]}:classesDB[activeClassName];}
+function getActiveRoster(){return ensureClassObject().gradedRoster;}
+function getActiveStudentNames(){return ensureClassObject().studentNames||[];}
+function saveClassesDB(){localStorage.setItem('ahya_classes_db_v16',JSON.stringify(classesDB));localStorage.setItem('ahya_active_cls_v16',activeClassName);}
+
+function renderClassBar(){
+  const sel=document.getElementById('active-class-select'),keys=Object.keys(classesDB);
+  sel.innerHTML=`<option value="" ${!activeClassName?'selected':''}>-- اختر أو أدخل الفصل والشعبة --</option>`;
+  keys.forEach(cName=>{sel.innerHTML+=`<option value="${cName}" ${cName===activeClassName?'selected':''}>${cName} (${classesDB[cName].gradedRoster.length} طالب)</option>`;});
+  const curRoster=getActiveRoster(),curList=getActiveStudentNames(),dispName=activeClassName||'';
+  document.getElementById('class-summary-pill').innerText=activeClassName?`المصححون: ${curRoster.length}`:'لم يُختر فصل';
+  document.getElementById('modal-cls-name').innerText=dispName||'أضف فصلاً';
+  document.getElementById('class-student-list-textarea').value=curList.join('\n');
+  document.getElementById('scan-cls-label').innerText=dispName||'غير محدد';
+  document.getElementById('btn-cls-name').innerText=dispName||'الفصل';
+  document.getElementById('rem-cls-title').innerText=dispName;
+  document.getElementById('noor-cls-title').innerText=dispName;
+  document.getElementById('hdr-class').innerText=dispName;
+  document.getElementById('zg-class-line').innerText=dispName;
+  document.getElementById('rep-class').innerText=dispName;
+  populateQuickStudentPicker();renderArchiveTable();
+}
+
+function populateQuickStudentPicker(){
+  const picker=document.getElementById('quick-student-picker');if(!picker)return;
+  const names=getActiveStudentNames(),gradedNames=getActiveRoster().map(r=>r.name);
+  picker.innerHTML=`<option value="">-- اختر اسماً من قائمة الفصل (${names.length}) --</option>`;
+  names.forEach(n=>{picker.innerHTML+=`<option value="${n}">${gradedNames.includes(n)?'✔️ ':''}${n}</option>`;});
+}
+
+function switchActiveClass(cName){activeClassName=cName;saveClassesDB();renderClassBar();renderRoster();renderAnalyticsAndRemedial();}
+function createNewClass(){
+  const inp=document.getElementById('new-class-name-inp'),name=inp.value.trim();
+  if(!name)return alert('اكتب اسم الفصل أولاً.');
+  if(!classesDB[name])classesDB[name]={studentNames:[],gradedRoster:[]};
+  activeClassName=name;inp.value='';saveClassesDB();renderClassBar();renderRoster();renderAnalyticsAndRemedial();
+}
+function deleteCurrentClass(){
+  if(!activeClassName)return;
+  if(confirm(`حذف الفصل "${activeClassName}"؟`)){delete classesDB[activeClassName];activeClassName=Object.keys(classesDB)[0]||'';saveClassesDB();renderClassBar();renderRoster();renderAnalyticsAndRemedial();}
+}
+function saveClassStudentList(){
+  if(!activeClassName){
+    const newC=document.getElementById('new-class-name-inp').value.trim();
+    if(!newC)return alert('أدخل اسم الفصل في الحقل العلوي أولاً.');
+    classesDB[newC]={studentNames:[],gradedRoster:[]};activeClassName=newC;
+  }
+  classesDB[activeClassName].studentNames=document.getElementById('class-student-list-textarea').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  saveClassesDB();renderClassBar();alert('✅ تم حفظ الفصل وقائمة الطلاب!');
+}
+
+function archiveCurrentClassSession(){
+  const roster=getActiveRoster();if(!roster.length)return alert('لا توجد أوراق مصححة لأرشفتها.');
+  const clsTitle=activeClassName||prompt('أدخل اسم الفصل لحفظه:','2 / 4');if(!clsTitle)return;
+  if(!activeClassName){activeClassName=clsTitle;classesDB[activeClassName]={studentNames:[],gradedRoster:roster};saveClassesDB();}
+  const avg=(roster.reduce((a,b)=>a+b.score,0)/roster.length).toFixed(1);
+  archivedSessions.unshift({id:Date.now(),date:new Date().toLocaleString('ar-SA'),className:activeClassName,examTitle:examData.title||'اختبار الأحياء',studentCount:roster.length,avgScore:avg,examSnapshot:JSON.parse(JSON.stringify(examData)),rosterSnapshot:JSON.parse(JSON.stringify(roster)),studentNamesSnapshot:JSON.parse(JSON.stringify(getActiveStudentNames()))});
+  localStorage.setItem('ahya_archive_v16',JSON.stringify(archivedSessions));renderArchiveTable();document.getElementById('archive-modal').classList.remove('hidden');
+  alert(`📦 تم حفظ وأرشفة فصل "${activeClassName}" بنجاح!`);
+}
+function renderArchiveTable(){
+  document.getElementById('archive-count-badge').innerText=archivedSessions.length;
+  const tbody=document.getElementById('archive-list-tbody');if(!tbody)return;
+  if(!archivedSessions.length){tbody.innerHTML='<tr><td colspan="6">لا توجد فصول مؤرشفة بعد.</td></tr>';return;}
+  tbody.innerHTML=archivedSessions.map((item,idx)=>`<tr><td>${item.date}</td><td><strong>${item.className}</strong></td><td>${item.examTitle}</td><td>${item.studentCount}</td><td><strong>${item.avgScore}</strong></td><td><button class="btn btn-success" style="padding:3px 7px;" onclick="restoreArchivedSession(${idx})">📂 استرجاع</button> <button class="btn btn-danger" style="padding:3px 7px;" onclick="deleteArchivedSession(${idx})">🗑️</button></td></tr>`).join('');
+}
+function restoreArchivedSession(idx){
+  const item=archivedSessions[idx];if(!item)return;
+  activeClassName=item.className;classesDB[activeClassName]={studentNames:item.studentNamesSnapshot||[],gradedRoster:item.rosterSnapshot||[]};
+  if(item.examSnapshot)examData=item.examSnapshot;
+  saveClassesDB();renderClassBar();renderExamAndKey();renderRoster();renderAnalyticsAndRemedial();document.getElementById('archive-modal').classList.add('hidden');
+}
+function deleteArchivedSession(idx){archivedSessions.splice(idx,1);localStorage.setItem('ahya_archive_v16',JSON.stringify(archivedSessions));renderArchiveTable();}
+function exportFullArchiveJSON(){
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({classesDB,archivedSessions,examBank},null,2)],{type:'application/json'}));a.download=`أرشيف_المصحح.json`;a.click();
+}
+
+function compressImageDataUrl(dataUrl,maxWidth=1150,quality=0.78){
+  return new Promise(resolve=>{
+    const img=new Image();img.onload=()=>{
+      let w=img.width,h=img.height;if(w>maxWidth){h=Math.round((h*maxWidth)/w);w=maxWidth;}
+      const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);resolve(canvas.toDataURL('image/jpeg',quality));
+    };img.src=dataUrl;
+  });
+}
+
+function loadSchoolProfile(){
+  const saved=JSON.parse(localStorage.getItem('school_profile_v9')||'null');
+  if(saved){
+    document.getElementById('cfg-teacher').value=saved.teacher||'أحمد أبو بكر بالعمش';
+    document.getElementById('cfg-principal').value=saved.principal||'فهد الشريف';
+    document.getElementById('cfg-school').value=saved.school||'مدرسة عكرمة بن عمرو بن هشام';
+    document.getElementById('cfg-edu-dept').value=saved.eduDept||'ادارة تعليم مكة المكرمة';
+    document.getElementById('cfg-subject').value=saved.subject||'الأحياء 2';
+    document.getElementById('cfg-exam-type').value=saved.examType||'اختبار الفترة الاولى';
+    document.getElementById('cfg-time').value=saved.time||'٣٠ دقيقة';
+  }
+  applySchoolProfileToDOM();
+}
+function saveSchoolProfile(){
+  localStorage.setItem('school_profile_v9',JSON.stringify({teacher:document.getElementById('cfg-teacher').value,principal:document.getElementById('cfg-principal').value,school:document.getElementById('cfg-school').value,eduDept:document.getElementById('cfg-edu-dept').value,subject:document.getElementById('cfg-subject').value,examType:document.getElementById('cfg-exam-type').value,time:document.getElementById('cfg-time').value}));
+  applySchoolProfileToDOM();
+}
+function applySchoolProfileToDOM(){
+  const t=document.getElementById('cfg-teacher').value,p=document.getElementById('cfg-principal').value,s=document.getElementById('cfg-school').value,d=document.getElementById('cfg-edu-dept').value,sub=document.getElementById('cfg-subject').value,ex=document.getElementById('cfg-exam-type').value,tm=document.getElementById('cfg-time').value;
+  document.getElementById('hdr-edu-dept').innerText=d;document.getElementById('hdr-school').innerText=s;document.getElementById('hdr-subject').innerText=sub;document.getElementById('hdr-exam-type').innerText=ex;document.getElementById('hdr-time').innerText=tm;document.getElementById('hdr-teacher-foot').innerText=t;
+  document.getElementById('rep-edu-dept').innerText=d;document.getElementById('rep-school').innerText=s;document.getElementById('rep-subject').innerText=sub;document.getElementById('rep-exam-type').innerText=ex;document.getElementById('rep-teacher-sig').innerText=t;document.getElementById('rep-principal-sig').innerText=p;document.getElementById('rem-teacher-sig').innerText=t;document.getElementById('rem-principal-sig').innerText=p;
+}
+
+function renderExamBankDropdown(){document.getElementById('exam-bank-select').innerHTML=examBank.map((ex,idx)=>`<option value="${idx}" ${idx===currentExamIndex?'selected':''}>${ex.title||('اختبار '+(idx+1))}</option>`).join('');}
+function loadSelectedExam(){currentExamIndex=parseInt(document.getElementById('exam-bank-select').value)||0;examData=JSON.parse(JSON.stringify(examBank[currentExamIndex]));renderExamAndKey();renderAnalyticsAndRemedial();}
+function saveCurrentExamToBank(){
+  const name=prompt('اسم الاختبار للحفظ:',examData.title||'اختبار جديد');if(!name)return;
+  examData.title=name;examBank.push(JSON.parse(JSON.stringify(examData)));currentExamIndex=examBank.length-1;localStorage.setItem('ahya_exam_bank_v9',JSON.stringify(examBank));renderExamBankDropdown();
+}
+function syncCurrentExam(){examBank[currentExamIndex]=JSON.parse(JSON.stringify(examData));localStorage.setItem('ahya_exam_bank_v9',JSON.stringify(examBank));}
+
+function buildMcqRowHTML(item,idx){
+  const qNumIndic=toIndicDigits(idx+1);
+  return `<tr class="q-stem-row"><td class="q-num-col" rowspan="2">${qNumIndic}-</td><td class="q-stem-col" colspan="4" contenteditable="true" onblur="examData.mcq[${idx}].q=this.innerText;syncCurrentExam();">${item.q}</td></tr><tr class="q-options-row"><td class="opt-box-col ${item.key==='أ'?'is-correct-choice':''}">(أ) <span contenteditable="true" onblur="examData.mcq[${idx}].a=this.innerText;syncCurrentExam();">${item.a}</span></td><td class="opt-box-col ${item.key==='ب'?'is-correct-choice':''}">(ب) <span contenteditable="true" onblur="examData.mcq[${idx}].b=this.innerText;syncCurrentExam();">${item.b}</span></td><td class="opt-box-col ${item.key==='ج'?'is-correct-choice':''}">(ج) <span contenteditable="true" onblur="examData.mcq[${idx}].c=this.innerText;syncCurrentExam();">${item.c}</span></td><td class="opt-box-col ${item.key==='د'?'is-correct-choice':''}">(د) <span contenteditable="true" onblur="examData.mcq[${idx}].d=this.innerText;syncCurrentExam();">${item.d}</span></td></tr>`;
+}
+
+function renderExamAndKey(){
+  const page1Mcq=document.getElementById('paper-mcq-page1'),page2Mcq=document.getElementById('paper-mcq-page2'),tfBody=document.getElementById('paper-tf-body'),keyEditor=document.getElementById('quick-key-editor'),zgColRight=document.getElementById('zg-col-right'),zgColLeft=document.getElementById('zg-col-left');
+  page1Mcq.innerHTML='';page2Mcq.innerHTML='';tfBody.innerHTML='';keyEditor.innerHTML='';zgColRight.innerHTML='';zgColLeft.innerHTML='';
+  const totalQ=examData.mcq.length+examData.tf.length;
+  document.getElementById('mcq-banner-score').innerText=`${toIndicDigits(examData.mcq.length)} درجات`;
+  document.getElementById('tf-banner-score').innerText=`${toIndicDigits(examData.tf.length)} درجات`;
+  document.getElementById('total-q-label').innerText=totalQ;
+  document.getElementById('strip-total-score').innerText=toIndicDigits(totalQ);
+  document.getElementById('zg-max-score').innerText=toIndicDigits(totalQ);
+  document.getElementById('rep-max-mark').innerText=totalQ;
+
+  const zgRowsHTML=[];
+  examData.mcq.forEach((item,idx)=>{
+    const qNum=idx+1;
+    if(idx<12)page1Mcq.innerHTML+=buildMcqRowHTML(item,idx);else page2Mcq.innerHTML+=buildMcqRowHTML(item,idx);
+    zgRowsHTML.push(`<div class="zg-row"><span class="zg-qnum">${qNum}</span><div class="zg-bubbles"><span class="zg-b ${item.key==='أ'?'is-correct-bubble':''}">أ</span><span class="zg-b ${item.key==='ب'?'is-correct-bubble':''}">ب</span><span class="zg-b ${item.key==='ج'?'is-correct-bubble':''}">ج</span><span class="zg-b ${item.key==='د'?'is-correct-bubble':''}">د</span></div></div>`);
+    keyEditor.innerHTML+=`<div style="background:rgba(148,163,184,0.1);border:1px solid var(--border);padding:3px 6px;border-radius:5px;display:flex;justify-content:space-between;align-items:center;"><span style="font-size:0.75rem;font-weight:bold;">س1(${qNum}):</span><select style="width:50px;margin:0;padding:1px;" onchange="examData.mcq[${idx}].key=this.value;syncCurrentExam();renderExamAndKey();"><option value="أ" ${item.key==='أ'?'selected':''}>أ</option><option value="ب" ${item.key==='ب'?'selected':''}>ب</option><option value="ج" ${item.key==='ج'?'selected':''}>ج</option><option value="د" ${item.key==='د'?'selected':''}>د</option></select></div>`;
+  });
+  const hasPage2Mcq=examData.mcq.length>12;
+  document.getElementById('page2-mcq-cont-bar').classList.toggle('hidden',!hasPage2Mcq);
+  document.getElementById('page2-mcq-table').classList.toggle('hidden',!hasPage2Mcq);
+
+  examData.tf.forEach((item,idx)=>{
+    const tfNum=idx+1,isTrue=item.key==='صح',ansDisplay=isAnswerKeyPreview?(isTrue?'( صـح ✓ )':'( خطأ ✗ )'):'( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )';
+    tfBody.innerHTML+=`<tr><td style="text-align:center;font-weight:bold;background:#f8fafc!important;">${toIndicDigits(tfNum)}</td><td contenteditable="true" style="font-weight:600;" onblur="examData.tf[${idx}].q=this.innerText;syncCurrentExam();">${item.q}</td><td class="tf-ans-cell ${isTrue?'is-tf-true':'is-tf-false'}" style="text-align:center;font-weight:bold;">${ansDisplay}</td></tr>`;
+    zgRowsHTML.push(`<div class="zg-row"><span class="zg-qnum">ص${tfNum}</span><div class="zg-bubbles"><span class="zg-b-tf ${item.key==='صح'?'is-correct-bubble':''}">صح</span><span class="zg-b-tf ${item.key==='خطأ'?'is-correct-bubble':''}">خطأ</span></div></div>`);
+    keyEditor.innerHTML+=`<div style="background:rgba(22,163,74,0.1);border:1px solid var(--border);padding:3px 6px;border-radius:5px;display:flex;justify-content:space-between;align-items:center;"><span style="font-size:0.75rem;font-weight:bold;">ص/خ(${tfNum}):</span><select style="width:56px;margin:0;padding:1px;" onchange="examData.tf[${idx}].key=this.value;syncCurrentExam();renderExamAndKey();"><option value="صح" ${item.key==='صح'?'selected':''}>صح</option><option value="خطأ" ${item.key==='خطأ'?'selected':''}>خطأ</option></select></div>`;
+  });
+  const half=Math.ceil(zgRowsHTML.length/2);
+  zgColRight.innerHTML=zgRowsHTML.slice(0,half).join('');
+  zgColLeft.innerHTML=zgRowsHTML.slice(half).join('');
+}
+
+function printElement(elId){document.querySelectorAll('.print-target').forEach(e=>e.classList.remove('print-target'));document.getElementById(elId).classList.add('print-target');window.print();}
+
+async function handleFastAISlot(ev,slotNum){
+  const file=ev.target.files[0];if(!file)return;
+  document.getElementById('scan-status').innerText='⚡ جاري ضغط الصورة وتصحيحها...';
+  const reader=new FileReader();
+  reader.onload=async e=>{
+    const compressed=await compressImageDataUrl(e.target.result,1150,0.78);
+    slotImages[slotNum]=compressed;
+    document.getElementById(`slot${slotNum}-img`).src=compressed;
+    document.getElementById(`slot${slotNum}-container`).classList.remove('hidden');
+    document.getElementById('ai-action-bar').classList.remove('hidden');
+    if(slotNum===1&&getActiveApiKey())await gradeStudentPagesWithAI();
+    else document.getElementById('scan-status').innerText='✅ الصورة جاهزة! اضغط الزر الأخضر للتصحيح.';
+  };
+  reader.readAsDataURL(file);
+}
+
+async function openLiveOmrCamera(){
+  try{
+    camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1920},height:{ideal:1080}}});
+    document.getElementById('cam-video').srcObject=camStream;
+    document.getElementById('live-camera-container').classList.remove('hidden');
+    document.getElementById('scan-status').innerText='🎯 ضع مربع التظليل داخل الإطار الأخضر المربع ثم اضغط التقاط.';
+  }catch(e){alert('تعذر فتح الكاميرا.');}
+}
+function stopCamera(){if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}document.getElementById('live-camera-container').classList.add('hidden');}
+
+function snapFullVideoForAI(){
+  const video=document.getElementById('cam-video');if(!video.videoWidth)return;
+  const canvas=document.createElement('canvas');canvas.width=1100;canvas.height=Math.round((video.videoHeight*1100)/video.videoWidth);
+  canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);
+  slotImages[1]=canvas.toDataURL('image/jpeg',0.78);
+  document.getElementById('slot1-img').src=slotImages[1];
+  document.getElementById('slot1-container').classList.remove('hidden');
+  document.getElementById('ai-action-bar').classList.remove('hidden');
+  stopCamera();gradeStudentPagesWithAI();
+}
+
+function snapAndGradeLiveOmrStrip(){
+  const video=document.getElementById('cam-video');if(!video.videoWidth)return;
+  const canvas=document.createElement('canvas');canvas.width=video.videoWidth;canvas.height=video.videoHeight;
+  canvas.getContext('2d').drawImage(video,0,0);
+  lastOmrVideoFrame=canvas;omrCropBox={x:0.14,y:0.16,w:0.72,h:0.54};
+  stopCamera();processZipGradeOmrFrame();
+}
+function nudgeOmrCrop(dx,dy){
+  if(!lastOmrVideoFrame)return;
+  omrCropBox.x=Math.max(0.01,Math.min(0.45,omrCropBox.x+dx));
+  omrCropBox.y=Math.max(0.01,Math.min(0.55,omrCropBox.y+dy));
+  processZipGradeOmrFrame();
+}
+
+function processZipGradeOmrFrame(){
+  if(!lastOmrVideoFrame)return;
+  const srcW=lastOmrVideoFrame.width,srcH=lastOmrVideoFrame.height;
+  const rx=Math.floor(srcW*omrCropBox.x),ry=Math.floor(srcH*omrCropBox.y),rw=Math.floor(srcW*omrCropBox.w),rh=Math.floor(srcH*omrCropBox.h);
+  const debugCanvas=document.getElementById('omr-debug-canvas');debugCanvas.width=rw;debugCanvas.height=rh;
+  const ctx=debugCanvas.getContext('2d');ctx.drawImage(lastOmrVideoFrame,rx,ry,rw,rh,0,0,rw,rh);
+
+  const nameCanvas=document.getElementById('student-name-crop-canvas'),ny=Math.floor(rh*0.08),nh=Math.floor(rh*0.18);
+  nameCanvas.width=rw;nameCanvas.height=nh;nameCanvas.getContext('2d').drawImage(debugCanvas,0,ny,rw,nh,0,0,rw,nh);
+  document.getElementById('cropped-name-banner').classList.remove('hidden');
+
+  const totalQ=examData.mcq.length+examData.tf.length,half=Math.ceil(totalQ/2);
+  const topPad=rh*0.29,usableH=rh*0.67,rowH=usableH/half,mcqAnswers={},tfAnswers={};
+
+  for(let idx=0;idx<totalQ;idx++){
+    const isRightCol=idx<half,rowInCol=isRightCol?idx:(idx-half);
+    const colLeftX=isRightCol?(rw*0.51):(rw*0.055),colW=rw*0.435;
+    const cy=topPad+(rowInCol+0.5)*rowH,r=Math.min(colW*0.044,rowH*0.28);
+    if(idx<examData.mcq.length){
+      const labels=['أ','ب','ج','د'],xRatios=[0.45,0.33,0.21,0.09];
+      const pts=xRatios.map(xr=>colLeftX+colW*xr),darks=pts.map(cx=>sampleCircleDarkness(ctx,cx,cy,r));
+      const best=darks.indexOf(Math.max(...darks));mcqAnswers[String(idx+1)]=labels[best];
+      pts.forEach((cx,b)=>{ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.lineWidth=(b===best)?2.5:1;ctx.strokeStyle=(b===best)?'#22c55e':'rgba(239,68,68,0.45)';ctx.stroke();});
+    }else{
+      const tfNum=(idx-examData.mcq.length)+1,cxT=colLeftX+colW*0.31,cxF=colLeftX+colW*0.12;
+      const pickT=sampleCircleDarkness(ctx,cxT,cy,r*1.15)>=sampleCircleDarkness(ctx,cxF,cy,r*1.15);
+      tfAnswers[String(tfNum)]=pickT?'صح':'خطأ';
+      [cxT,cxF].forEach((cx,b)=>{const active=(b===0&&pickT)||(b===1&&!pickT);ctx.beginPath();ctx.arc(cx,cy,r*1.15,0,Math.PI*2);ctx.lineWidth=active?2.5:1;ctx.strokeStyle=active?'#22c55e':'rgba(239,68,68,0.45)';ctx.stroke();});
+    }
+  }
+  document.getElementById('omr-visual-feedback-box').classList.remove('hidden');
+  processStudentEvaluation({studentName:'',mcqAnswers,tfAnswers});
+  document.getElementById('scan-status').innerText='✅ تمت قراءة البطاقة بنجاح!';
+}
+
+function sampleCircleDarkness(ctx,cx,cy,r){
+  const x=Math.max(0,Math.floor(cx-r)),y=Math.max(0,Math.floor(cy-r)),w=Math.max(1,Math.floor(r*2)),h=Math.max(1,Math.floor(r*2));
+  const data=ctx.getImageData(x,y,w,h).data;let sum=0,count=0;
+  for(let i=0;i<data.length;i+=4){sum+=(255-(0.299*data[i]+0.587*data[i+1]+0.114*data[i+2]));count++;}
+  return count?(sum/count):0;
+}
+
+function clearSlots(){
+  slotImages={1:null,2:null};lastOmrVideoFrame=null;
+  ['slot1-container','slot2-container','ai-action-bar','omr-visual-feedback-box','grading-result-card','cropped-name-banner'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+  document.getElementById('scan-status').innerText='';
+}
+
+function startQuickTouchGrading(){
+  const mcqAnswers={},tfAnswers={};
+  examData.mcq.forEach((m,i)=>mcqAnswers[String(i+1)]=m.key);
+  examData.tf.forEach((t,i)=>tfAnswers[String(i+1)]=t.key);
+  processStudentEvaluation({studentName:'',mcqAnswers,tfAnswers});
+  document.getElementById('scan-status').innerText='👆 المس فقط السؤال الذي أخطأ فيه الطالب لخصم درجته فوراً!';
+}
+
+window.flipCurrentAnswersRTL=function(){
+  if(!currentStudentResult)return alert('صوّر البطاقة أولاً.');
+  const mirrorMcq={'أ':'د','ب':'ج','ج':'ب','د':'أ'},mirrorTf={'صح':'خطأ','خطأ':'صح'};
+  currentStudentResult.rows.forEach(r=>{
+    if(r.section==='اختياري'&&mirrorMcq[r.studentAns]){r.studentAns=mirrorMcq[r.studentAns];r.isCorrect=(r.studentAns===r.correctAns);}
+    else if(r.section==='صح/خطأ'&&mirrorTf[r.studentAns]){r.studentAns=mirrorTf[r.studentAns];r.isCorrect=(r.studentAns===r.correctAns);}
+  });
+  renderGradedTable();
+};
+
+async function gradeStudentPagesWithAI(){
+  const apiKey=getActiveApiKey();
+  if(!apiKey){switchTab('exams',document.querySelectorAll('.tab-btn')[0]);document.getElementById('secret-vault-modal').classList.remove('hidden');return alert('ضع مفتاح Gemini API أولاً.');}
+  if(!slotImages[1])return alert('صوّر مربع التظليل أولاً.');
+  const status=document.getElementById('scan-status');
+  status.innerText='🚀 جاري قراءة اسم الطالب والدوائر بالاتجاه العربي (من اليمين لليسار)...';
+  const registeredStudents=getActiveStudentNames(),rosterHint=registeredStudents.length?`قائمة طلاب الفصل: [${registeredStudents.join(' ، ')}].`:'';
+  const prompt=`اقرأ بطاقة التظليل العربية (ZipGrade) المرفقة بدقة:
+1. اقرأ "اسم الطالب" المكتوب بخط اليد في أعلى البطاقة. ${rosterHint}
+2. هام جداً: البطاقة عربية من اليمين لليسار! في كل سؤال رقم السؤال على اليمين وبجانبه 4 دوائر مكتوب بداخلها (أ) (ب) (ج) (د) من اليمين إلى اليسار:
+   - الدائرة الأولى من اليمين (الأقرب لرقم السؤال) = "أ"
+   - الدائرة الثانية من اليمين = "ب"
+   - الدائرة الثالثة من اليمين = "ج"
+   - الدائرة الرابعة (في أقصى اليسار) = "د"
+3. في أسئلة الصح والخطأ (ص1 إلى ص${examData.tf.length}): اليمنى = "صح"، واليسرى = "خطأ".
+أعد JSON فقط:
+{"studentName": "اسم الطالب", "mcqAnswers": {"1": "ب", "2": "ب"}, "tfAnswers": {"1": "صح", "2": "خطأ"}}`;
+  try{
+    const rawText=await callGeminiSmart(apiKey,[{text:prompt},{inline_data:{mime_type:'image/jpeg',data:slotImages[1].split(',')[1]}}],true);
+    const jsonMatch=rawText.match(/\{[\s\S]*\}/);
+    const parsed=JSON.parse(jsonMatch?jsonMatch[0]:rawText);
+    processStudentEvaluation(parsed);
+    status.innerText=`✅ تم التصحيح بنجاح! الطالب: (${parsed.studentName||'تم رصد الدرجة'})`;
+    document.getElementById('grading-result-card').scrollIntoView({behavior:'smooth'});
+  }catch(err){status.innerText='❌ خطأ: '+err.message;}
+}
+
+function cleanMcq(val){
+  if(!val)return 'فارغ';const s=String(val).trim();
+  if(s.includes('أ')||s.includes('ا')||s.toUpperCase()==='A')return 'أ';
+  if(s.includes('ب')||s.toUpperCase()==='B')return 'ب';
+  if(s.includes('ج')||s.toUpperCase()==='C')return 'ج';
+  if(s.includes('د')||s.toUpperCase()==='D')return 'د';
+  return s;
+}
+function cleanTf(val){
+  if(!val)return 'فارغ';const s=String(val).trim();
+  if(s.includes('صح')||s==='ص'||s.includes('✓')||s.includes('✔')||s.toLowerCase()==='true')return 'صح';
+  if(s.includes('خطأ')||s.includes('خطا')||s==='خ'||s.includes('✗')||s.includes('✘')||s.toUpperCase()==='X'||s.toLowerCase()==='false')return 'خطأ';
+  return s;
+}
+
+function processStudentEvaluation(parsed){
+  const rows=[];
+  examData.mcq.forEach((item,idx)=>{const num=idx+1,stAns=cleanMcq(parsed.mcqAnswers?parsed.mcqAnswers[String(num)]:'فارغ');rows.push({id:`mcq_${num}`,label:`س1 (${num})`,section:'اختياري',shortQ:item.q,studentAns:stAns,correctAns:item.key,isCorrect:stAns===item.key});});
+  examData.tf.forEach((item,idx)=>{const num=idx+1,stAns=cleanTf(parsed.tfAnswers?parsed.tfAnswers[String(num)]:'فارغ');rows.push({id:`tf_${num}`,label:`ص/خ (${num})`,section:'صح/خطأ',shortQ:item.q,studentAns:stAns,correctAns:item.key,isCorrect:stAns===item.key});});
+  currentStudentResult={name:parsed.studentName||'',rows};
+  document.getElementById('graded-student-name').value=currentStudentResult.name;
+  populateQuickStudentPicker();renderGradedTable();
+  document.getElementById('grading-result-card').classList.remove('hidden');
+}
+
+function renderGradedTable(){
+  let score=0;
+  document.getElementById('graded-details-body').innerHTML=currentStudentResult.rows.map((r,idx)=>{
+    if(r.isCorrect)score++;
+    return `<tr class="${r.isCorrect?'row-correct':'row-wrong'}" style="cursor:pointer;" onclick="currentStudentResult.rows[${idx}].isCorrect=!currentStudentResult.rows[${idx}].isCorrect;renderGradedTable();"><td>${r.label}</td><td>${r.section}</td><td style="text-align:right;">${r.shortQ.slice(0,42)}...</td><td>${r.studentAns}</td><td>${r.correctAns}</td><td>${r.isCorrect?'✔️ 1':'❌ 0'}</td></tr>`;
+  }).join('');
+  currentStudentResult.score=score;
+  document.getElementById('graded-total-score').innerText=`${score} / ${currentStudentResult.rows.length}`;
+}
+
+function approveAndAddToRoster(){
+  if(!currentStudentResult)return;
+  if(!activeClassName){
+    const cName=prompt('أدخل اسم الفصل والشعبة لحفظ الدرجات:','2 / 4');if(!cName)return;
+    activeClassName=cName.trim();if(!classesDB[activeClassName])classesDB[activeClassName]={studentNames:[],gradedRoster:[]};
+  }
+  const finalName=document.getElementById('graded-student-name').value.trim()||'طالب '+(getActiveRoster().length+1);
+  const itemMap={};currentStudentResult.rows.forEach(r=>{itemMap[r.id]=r.isCorrect?1:0;});
+  const roster=getActiveRoster(),existingIdx=roster.findIndex(s=>s.name===finalName);
+  const record={name:finalName,score:currentStudentResult.score,maxScore:currentStudentResult.rows.length,items:itemMap};
+  if(existingIdx>=0)roster[existingIdx]=record;else roster.push(record);
+  saveClassesDB();renderClassBar();renderRoster();renderAnalyticsAndRemedial();
+  alert(`✅ تم حفظ درجة الطالب "${finalName}" (${currentStudentResult.score}) في فصل "${activeClassName}"!`);
+}
+
+function addManualStudentRow(){
+  if(!activeClassName){const cName=prompt('أدخل اسم الفصل أولاً:');if(!cName)return;activeClassName=cName.trim();if(!classesDB[activeClassName])classesDB[activeClassName]={studentNames:[],gradedRoster:[]};}
+  const name=prompt('اسم الطالب:');if(!name)return;
+  const maxScore=examData.mcq.length+examData.tf.length,score=parseFloat(prompt(`الدرجة (من ${maxScore}):`,maxScore));if(isNaN(score))return;
+  getActiveRoster().push({name:name.trim(),score,maxScore,items:{}});saveClassesDB();renderClassBar();renderRoster();renderAnalyticsAndRemedial();
+}
+
+function classifyScore(score,maxScore){const r=score/maxScore;return r>=0.9?'ممتاز':r>=0.8?'جيد جداً':r>=0.7?'جيد':r>=0.5?'مقبول':'راسب';}
+function getRangeText(k,m){if(k==='excel')return `${Math.ceil(m*0.9)} - ${m}`;if(k==='vgood')return `${Math.ceil(m*0.8)} - ${Math.ceil(m*0.9)-1}`;if(k==='good')return `${Math.ceil(m*0.7)} - ${Math.ceil(m*0.8)-1}`;if(k==='pass')return `${Math.ceil(m*0.5)} - ${Math.ceil(m*0.7)-1}`;return `0 - ${Math.ceil(m*0.5)-1}`;}
+
+function renderAnalyticsAndRemedial(){
+  const roster=getActiveRoster(),maxScore=examData.mcq.length+examData.tf.length,n=roster.length;
+  document.getElementById('rep-max-mark').innerText=maxScore;document.getElementById('st-total-students').innerText=n;
+  const levelsMeta=[{key:'excel',label:'ممتاز',color:'#16a34a'},{key:'vgood',label:'جيد جداً',color:'#0d9488'},{key:'good',label:'جيد',color:'#2563eb'},{key:'pass',label:'مقبول',color:'#f59e0b'},{key:'fail',label:'راسب',color:'#ef4444'}];
+  if(n===0){
+    ['st-max-score','st-min-score','st-avg-score','st-sum-scores'].forEach(id=>document.getElementById(id).innerText='0');
+    document.getElementById('st-pass-rate').innerText='0%';
+    document.getElementById('st-levels-tbody').innerHTML='<tr><td colspan="4">لم يتم تصحيح أوراق بعد.</td></tr>';return;
+  }
+  const scores=roster.map(r=>r.score),sum=scores.reduce((a,b)=>a+b,0);
+  const counts={excel:0,vgood:0,good:0,pass:0,fail:0},failNames=[],passNames=[],excelNames=[];
+  roster.forEach(st=>{
+    const cat=classifyScore(st.score,maxScore);
+    if(cat==='ممتاز'){counts.excel++;excelNames.push(`${st.name} (${st.score})`);}
+    else if(cat==='جيد جداً'){counts.vgood++;excelNames.push(`${st.name} (${st.score})`);}
+    else if(cat==='جيد')counts.good++;
+    else if(cat==='مقبول'){counts.pass++;passNames.push(`${st.name} (${st.score})`);}
+    else{counts.fail++;failNames.push(`${st.name} (${st.score})`);}
+  });
+  document.getElementById('st-max-score').innerText=Math.max(...scores);
+  document.getElementById('st-min-score').innerText=Math.min(...scores);
+  document.getElementById('st-avg-score').innerText=(sum/n).toFixed(1);
+  document.getElementById('st-pass-rate').innerText=`${(((n-counts.fail)/n)*100).toFixed(1)}%`;
+  document.getElementById('st-sum-scores').innerText=sum;
+
+  const levelsTbody=document.getElementById('st-levels-tbody'),barsBox=document.getElementById('chart-counts-bars'),donutsBox=document.getElementById('chart-donuts-container');
+  levelsTbody.innerHTML='';barsBox.innerHTML='';donutsBox.innerHTML='';
+  const circ=2*Math.PI*38;
+  levelsMeta.forEach(lv=>{
+    const c=counts[lv.key],pct=Math.round((c/n)*100);
+    levelsTbody.innerHTML+=`<tr><td><span class="lvl-badge" style="background:${lv.color};">${lv.label}</span></td><td style="font-weight:bold;direction:ltr;">${getRangeText(lv.key,maxScore)}</td><td style="font-weight:bold;">${c}</td><td>${pct}%</td></tr>`;
+    barsBox.innerHTML+=`<div class="bar-row"><span style="color:${lv.color};">${lv.label}</span><div class="bar-track"><div class="bar-prog" style="width:${pct}%;background:${lv.color};"></div></div><span style="color:#0f172a;">${c}</span></div>`;
+    donutsBox.innerHTML+=`<div class="donut-item"><svg class="donut-svg" viewBox="0 0 100 100"><circle class="donut-bg" cx="50" cy="50" r="38"></circle><circle class="donut-fg" cx="50" cy="50" r="38" stroke="${lv.color}" stroke-dasharray="${(pct/100)*circ} ${circ}"></circle></svg><div class="donut-center-text"><div>${lv.label}</div><div style="color:${lv.color};font-size:0.88rem;">${pct}%</div></div></div>`;
+  });
+  document.getElementById('rem-fail-students').innerHTML=failNames.length?failNames.join(' ، '):'لا يوجد';
+  document.getElementById('rem-pass-students').innerHTML=passNames.length?passNames.join(' ، '):'لا يوجد';
+  document.getElementById('rem-excel-students').innerHTML=excelNames.length?excelNames.join(' ، '):'لا يوجد';
+}
+
+function renderRoster(){
+  const roster=getActiveRoster(),maxScore=examData.mcq.length+examData.tf.length;
+  document.getElementById('roster-count').innerText=roster.length;
+  document.getElementById('roster-tbody').innerHTML=roster.map((st,i)=>`<tr><td>${i+1}</td><td>${st.name}</td><td><strong>${st.score}</strong></td><td>${classifyScore(st.score,st.maxScore||maxScore)}</td><td><button class="btn btn-danger" style="padding:3px 7px;" onclick="getActiveRoster().splice(${i},1);saveClassesDB();renderClassBar();renderRoster();renderAnalyticsAndRemedial();">حذف</button></td></tr>`).join('');
+}
+
+function clearAllRoster(){if(!activeClassName)return;if(confirm(`تفريغ درجات فصل "${activeClassName}"؟`)){classesDB[activeClassName].gradedRoster=[];saveClassesDB();renderClassBar();renderRoster();renderAnalyticsAndRemedial();}}
+function downloadExcelCSV(){
+  const roster=getActiveRoster();if(!roster.length)return alert('الكشف فارغ.');
+  let csv='\uFEFFم,اسم الطالب,الدرجة,المستوى\n';const maxScore=examData.mcq.length+examData.tf.length;
+  roster.forEach((st,i)=>{csv+=`${i+1},"${st.name}",${st.score},"${classifyScore(st.score,st.maxScore||maxScore)}"\n`;});
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));a.download=`كشف_${activeClassName}.csv`;a.click();
+}
+function generateNoorAutoFiller(){
+  const roster=getActiveRoster();if(!roster.length)return alert('الكشف فارغ.');
+  const studentsJSON=JSON.stringify(roster.map(r=>({name:r.name,score:r.score})));
+  const code=`(function(){const list=${studentsJSON};let filled=0;document.querySelectorAll('table tr').forEach(tr=>{const text=(tr.innerText||'').trim();list.forEach(st=>{const firstTwo=st.name.trim().split(/\\s+/).slice(0,2).join(' ');if(firstTwo&&text.includes(firstTwo)){const inp=tr.querySelector('input[type="text"],input[type="number"]');if(inp){inp.value=st.score;inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('change',{bubbles:true}));tr.style.backgroundColor='#dcfce7';filled++;}}});});alert('✅ تم رصد ('+filled+') طالب في نظام نور!');})();`;
+  document.getElementById('noor-code-area').value=code;navigator.clipboard.writeText(code);alert('✅ تم نسخ كود الرصد!');
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const savedTheme=localStorage.getItem('balamash_theme_v12')||'dark';
+  document.body.classList.toggle('dark-theme',savedTheme==='dark');
+  updateVaultBadge();loadSchoolProfile();renderClassBar();renderExamBankDropdown();renderExamAndKey();renderRoster();renderAnalyticsAndRemedial();
+});
+</script>
+</body>
+</html>
