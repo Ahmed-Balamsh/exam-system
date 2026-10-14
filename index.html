@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>منظومة المصحح والمحلل الذكي (V8) - أ. أحمد أبو بكر بالعمش</title>
+  <title>منظومة المصحح والمحلل الذكي الشاملة - أ. أحمد أبو بكر بالعمش</title>
   <style>
     :root {
       --primary: #0f766e;
@@ -23,7 +23,6 @@
       --c-fail: #ef4444;
     }
 
-    /* الثيم الأسود المريح للعين (Dark Theme) */
     body.dark-theme {
       --bg: #0b0f19;
       --card: #151c2c;
@@ -44,30 +43,25 @@
       background: linear-gradient(135deg, #090d16, #115e59, #1e3a8a);
       color: #fff; padding: 14px 16px; text-align: center;
       box-shadow: 0 2px 12px rgba(0,0,0,0.35); border-bottom: 3px solid var(--gold);
-      position: relative;
     }
-    header h1 { margin: 0; font-size: 1.18rem; }
-    header p { margin: 4px 0 8px; font-size: 0.8rem; opacity: 0.9; }
-    .header-top- row {
-      display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;
-    }
+    header h1 { margin: 0; font-size: 1.15rem; }
+    header p { margin: 4px 0 8px; font-size: 0.78rem; opacity: 0.9; }
     .creator-ribbon {
       display: inline-block;
       background: rgba(251, 191, 36, 0.2); border: 1.5px solid var(--gold);
       color: #fef08a; padding: 5px 16px; border-radius: 20px;
-      font-size: 0.85rem; font-weight: bold;
+      font-size: 0.84rem; font-weight: bold;
     }
     .theme-toggle-btn {
       background: #1e293b; color: #fde047; border: 1.5px solid var(--gold);
       padding: 5px 14px; border-radius: 20px; cursor: pointer;
-      font-weight: bold; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px;
+      font-weight: bold; font-size: 0.8rem;
     }
-    .theme-toggle-btn:hover { background: #334155; }
 
     .fixed-creator-footer {
       position: fixed; bottom: 0; left: 0; right: 0;
       background: #090d16; color: #ffffff; text-align: center;
-      padding: 8px 12px; font-size: 0.82rem; font-weight: bold;
+      padding: 8px 12px; font-size: 0.8rem; font-weight: bold;
       border-top: 2px solid var(--gold); z-index: 50;
     }
     .fixed-creator-footer span { color: var(--gold); }
@@ -75,10 +69,10 @@
     .class-bar {
       background: var(--card); border-bottom: 2px solid var(--border); padding: 8px 14px;
       display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;
-      font-size: 0.86rem; font-weight: bold; color: var(--text);
+      font-size: 0.85rem; font-weight: bold; color: var(--text);
     }
     .class-bar select {
-      width: auto; min-width: 180px; margin: 0; padding: 5px 10px;
+      width: auto; min-width: 170px; margin: 0; padding: 5px 10px;
       font-weight: bold; border: 2px solid #0d9488; background: var(--input-bg); color: var(--text);
     }
 
@@ -87,12 +81,13 @@
       position: sticky; top: 0; z-index: 30; overflow-x: auto;
     }
     .tab-btn {
-      flex: 1; min-width: 140px; padding: 11px 8px; border: none; background: none;
-      font-weight: bold; font-size: 0.86rem; color: var(--muted); cursor: pointer; white-space: nowrap;
+      flex: 1; min-width: 135px; padding: 11px 8px; border: none; background: none;
+      font-weight: bold; font-size: 0.85rem; color: var(--muted); cursor: pointer; white-space: nowrap;
     }
     .tab-btn.active {
-      color: #14b8a6; border-bottom: 3px solid #14b8a6; background: rgba(20, 184, 166, 0.1);
+      color: #14b8a6; border-bottom: 3px solid #14b8a6; background: rgba(20, 184, 166, 0.12);
     }
+
     .container { max-width: 1040px; margin: 12px auto; padding: 0 10px; }
     .card {
       background: var(--card); border-radius: 10px; padding: 14px;
@@ -109,7 +104,7 @@
     .btn {
       background: var(--primary); color: #fff; border: none; padding: 7px 12px;
       border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.82rem;
-      display: inline-flex; align-items: center; gap: 5px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 5px;
     }
     .btn:hover { opacity: 0.92; }
     .btn-blue { background: var(--blue); }
@@ -118,7 +113,7 @@
     .btn-danger { background: var(--c-fail); }
     .btn-secondary { background: #475569; }
 
-    /* ================= ورقة الاختبار ونموذج الإجابة (دائماً بخلفية بيضاء للطباعة) ================= */
+    /* ================= تنسيق ورقة الأسئلة ونموذج الإجابة (صفحتين) ================= */
     .exam-sheet-page {
       background: #ffffff !important; color: #000000 !important;
       border: 2px solid #000; padding: 12px 14px; margin-bottom: 18px; border-radius: 2px;
@@ -150,10 +145,42 @@
     table.meta-mini-table td:last-child { border-left: none; }
 
     table.student-bar-table {
-      width: 100%; border-collapse: collapse; border: 2px solid #000; margin-bottom: 8px;
+      width: 100%; border-collapse: collapse; border: 2px solid #000; margin-bottom: 6px;
       font-weight: bold; font-size: 0.84rem; color: #000; background: #fff;
     }
     table.student-bar-table td { border: 1.5px solid #000; padding: 5px 10px; }
+
+    /* شريط التظليل المزود بعلامات الزوايا السوداء الأربع المضمونة في الطباعة */
+    .micro-omr-wrapper {
+      border: 2px solid #000; padding: 10px 12px; margin-bottom: 6px; background: #fff; color: #000;
+      position: relative;
+    }
+    /* استخدام border بدلاً من background لضمان طباعتها بالأسود الداكن في كل الطابعات */
+    .fiducial-mark {
+      position: absolute; width: 0; height: 0;
+      border: 5.5px solid #000000 !important;
+      -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+    }
+    .fiducial-mark.tl { top: 2px; left: 2px; }
+    .fiducial-mark.tr { top: 2px; right: 2px; }
+    .fiducial-mark.bl { bottom: 2px; left: 2px; }
+    .fiducial-mark.br { bottom: 2px; right: 2px; }
+
+    .micro-omr-title {
+      font-size: 0.64rem; font-weight: bold; text-align: center; margin-bottom: 3px; color: #000;
+    }
+    table.micro-omr-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    table.micro-omr-table td { border: 1.2px solid #000; padding: 2px 1px; text-align: center; color: #000; }
+    .m-qnum { font-size: 0.58rem; font-weight: bold; line-height: 1; margin-bottom: 2px; }
+    .m-bubbles { display: flex; justify-content: center; gap: 2px; }
+    .m-b {
+      width: 11px; height: 11px; border: 1.2px solid #000; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center; font-size: 0.5rem; font-weight: bold;
+    }
+    .m-b-tf {
+      width: 17px; height: 11px; border: 1.2px solid #000; border-radius: 3px;
+      display: inline-flex; align-items: center; justify-content: center; font-size: 0.48rem; font-weight: bold;
+    }
 
     .q-section-bar {
       display: flex; justify-content: space-between; align-items: center;
@@ -176,36 +203,24 @@
     td.opt-box-col { width: 24%; text-align: right; font-weight: 600; background: #ffffff; }
     tr.q-options-row td { border-bottom: 2px solid #000; }
 
-    /* تظليل المستطيل الكامل باللون الأخضر في وضع "نموذج الإجابة" */
+    /* تظليل المستطيل الكامل باللون الأخضر في وضع نموذج الإجابة */
     #printable-exam.answer-key-mode td.opt-box-col.is-correct-choice {
-      background-color: #22c55e !important;
-      color: #000000 !important;
-      font-weight: 900 !important;
+      background-color: #22c55e !important; color: #000000 !important; font-weight: 900 !important;
       box-shadow: inset 0 0 0 2px #14532d !important;
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
+      -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
     }
     #printable-exam.answer-key-mode td.tf-ans-cell.is-tf-true {
-      background-color: #22c55e !important;
-      color: #000000 !important;
-      font-weight: 900 !important;
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
+      background-color: #22c55e !important; color: #000000 !important; font-weight: 900 !important;
+      -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
     }
     #printable-exam.answer-key-mode td.tf-ans-cell.is-tf-false {
-      background-color: #bbf7d0 !important;
-      color: #991b1b !important;
-      font-weight: 900 !important;
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
+      background-color: #bbf7d0 !important; color: #991b1b !important; font-weight: 900 !important;
+      -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
     }
     #printable-exam.answer-key-mode .m-b.is-correct-bubble,
     #printable-exam.answer-key-mode .m-b-tf.is-correct-bubble {
-      background-color: #16a34a !important;
-      color: #ffffff !important;
-      border-color: #14532d !important;
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
+      background-color: #16a34a !important; color: #ffffff !important;
+      -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
     }
 
     table.tf-boxes-table {
@@ -223,24 +238,7 @@
       font-size: 0.78rem; font-weight: bold; color: #000;
     }
 
-    /* شريط التظليل الاختياري */
-    .micro-omr-wrapper {
-      border: 1.5px solid #000; padding: 3px 5px; margin-bottom: 6px; background: #fff; color: #000;
-    }
-    table.micro-omr-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-    table.micro-omr-table td { border: 1px solid #334155; padding: 1.5px 1px; text-align: center; color: #000; }
-    .m-qnum { font-size: 0.58rem; font-weight: bold; line-height: 1; margin-bottom: 1.5px; }
-    .m-bubbles { display: flex; justify-content: center; gap: 1.5px; }
-    .m-b {
-      width: 10px; height: 10px; border: 1px solid #000; border-radius: 50%;
-      display: inline-flex; align-items: center; justify-content: center; font-size: 0.48rem; font-weight: bold;
-    }
-    .m-b-tf {
-      width: 16px; height: 10px; border: 1px solid #000; border-radius: 3px;
-      display: inline-flex; align-items: center; justify-content: center; font-size: 0.46rem; font-weight: bold;
-    }
-
-    /* استمارة تحليل النتائج (تبقى بيضاء للطباعة الرسمية) */
+    /* ================= استمارة تحليل النتائج ================= */
     .report-sheet { background: #fff !important; color: #0f172a !important; border: 2px solid #0d9488; border-radius: 12px; padding: 14px; }
     .report-top-bar {
       background: #ffffff; color: #0f172a; border: 2px solid #0d9488;
@@ -291,43 +289,40 @@
     .row-wrong { background: #fee2e2 !important; color: #7f1d1d !important; font-weight: bold; }
 
     .pages-capture-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+    @media (max-width: 680px) { .pages-capture-grid, .report-tables-row, .report-top-bar { grid-template-columns: 1fr; } .donuts-grid { grid-template-columns: repeat(2, 1fr); } }
     .page-slot { border: 2px dashed var(--border); border-radius: 8px; padding: 8px; text-align: center; background: rgba(148,163,184,0.05); }
-    .page-slot img { max-width: 100%; max-height: 200px; border-radius: 6px; margin-top: 6px; }
+    .page-slot img { max-width: 100%; max-height: 220px; border-radius: 6px; margin-top: 6px; }
     video { width: 100%; max-height: 320px; background: #000; border-radius: 8px; margin-bottom: 6px; }
+
+    /* معاينة قص وضبط شريط التظليل المحلي (بدون ذكاء اصطناعي) */
+    .local-omr-box {
+      border: 2px solid #14b8a6; border-radius: 10px; padding: 12px; margin-top: 12px;
+      background: rgba(20, 184, 166, 0.08);
+    }
+    .slider-row {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin: 8px 0;
+    }
 
     @media print {
       @page { size: A4 portrait; margin: 7mm; }
       body { background: #ffffff !important; color: #000000 !important; }
       body * { visibility: hidden; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
       .print-target, .print-target * { visibility: visible; }
-      .print-target {
-        position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0;
-      }
-      .exam-sheet-page {
-        border: 2px solid #000 !important;
-        padding: 10px 12px !important;
-        margin: 0 !important;
-        box-sizing: border-box !important;
-      }
-      .page-break-after {
-        page-break-after: always !important;
-        break-after: page !important;
-      }
+      .print-target { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; }
+      .exam-sheet-page { border: 2px solid #000 !important; padding: 10px 12px !important; margin: 0 !important; box-sizing: border-box !important; }
+      .page-break-after { page-break-after: always !important; break-after: page !important; }
       .no-print, .fixed-creator-footer, .class-bar { display: none !important; }
     }
   </style>
 </head>
-<!-- يبدأ التطبيق بالثيم الأسود المريح للعين افتراضياً مع إمكانية التبديل للأبيض -->
 <body class="dark-theme">
 
 <header class="no-print">
-  <h1>🧬 منظومة المصحح الآلي وتحليل النتائج والخطة العلاجية (الإصدار الثامن V8)</h1>
-  <p>إدارة الفصول + تصحيح خط اليد والتظليل + طباعة نموذج الإجابة بالأخضر + التحليل والخطة + رصد نور</p>
+  <h1>🧬 منظومة المصحح الآلي وتحليل النتائج والخطة العلاجية (النسخة الشاملة V11)</h1>
+  <p>تصحيح مزدوج: قراءة التظليل بدون ذكاء اصطناعي + قراءة خط اليد بالذكاء الاصطناعي المحدّث + التحليل وخطة العلاج + رصد نور</p>
   <div style="display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap; margin-top:6px;">
     <div class="creator-ribbon">🌟 فكرة وإعداد وتطوير المنظومة: أ. أحمد أبو بكر بالعمش 🌟</div>
-    <button class="theme-toggle-btn" onclick="toggleThemeMode()" id="theme-toggle-btn">
-      ☀️ التبديل للثيم الأبيض (النهاري)
-    </button>
+    <button class="theme-toggle-btn" onclick="toggleThemeMode()" id="theme-toggle-btn">☀️ التبديل للثيم الأبيض (النهاري)</button>
   </div>
 </header>
 
@@ -344,7 +339,7 @@
 
 <div class="tabs no-print">
   <button class="tab-btn active" onclick="switchTab('exams', this)">1. الورقة ونموذج الإجابة</button>
-  <button class="tab-btn" onclick="switchTab('scanner', this)">2. التصحيح بالكاميرا</button>
+  <button class="tab-btn" onclick="switchTab('scanner', this)">2. التصحيح بالكاميرا (تظليل / خط يد)</button>
   <button class="tab-btn" onclick="switchTab('analytics', this)">3. تحليل النتائج والخطة العلاجية</button>
   <button class="tab-btn" onclick="switchTab('noor', this)">4. الكشف والرصد في نور (<span id="roster-count">0</span>)</button>
 </div>
@@ -360,55 +355,48 @@
       <button class="btn btn-danger" onclick="deleteCurrentClass()">🗑️ حذف الفصل الحالي</button>
     </div>
     <label>📋 قائمة أسماء طلاب الفصل الحالي (<span id="modal-cls-name"></span>) - كل طالب في سطر:</label>
-    <textarea id="class-student-list-textarea" rows="5" placeholder="الصق أسماء طلاب الفصل هنا (اختياري)..."></textarea>
+    <textarea id="class-student-list-textarea" rows="5" placeholder="الصق أسماء طلاب الفصل هنا..."></textarea>
     <div style="display:flex; justify-content:space-between; align-items:center;">
       <button class="btn btn-blue" onclick="saveClassStudentList()">💾 حفظ قائمة أسماء هذا الفصل</button>
       <button class="btn btn-secondary" onclick="document.getElementById('classes-manager-modal').classList.add('hidden')">إغلاق</button>
     </div>
   </div>
 
-  <!-- التبويب 1 -->
+  <!-- ================= التبويب 1: الورقة ونموذج الإجابة ================= -->
   <div id="tab-exams">
-
     <div class="card no-print" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
       <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
         <button class="btn btn-secondary" onclick="document.getElementById('secret-vault-modal').classList.toggle('hidden')">
           🛡️ خزنة مفتاح الذكاء الاصطناعي (<span id="vault-status-text">اضغط للإعداد</span>)
         </button>
-
         <button class="btn btn-secondary" onclick="document.getElementById('school-cfg-drawer').classList.toggle('hidden')">
           ⚙️ بيانات المعلم / المدير / المدرسة
         </button>
-
         <button class="btn btn-secondary" onclick="document.getElementById('import-drawer').classList.toggle('hidden')">
           📥 استيراد أو توليد اختبار جديد
         </button>
       </div>
 
-      <!-- أزرار طباعة ورقة الطالب وطباعة نموذج الإجابة المحلول بالأخضر -->
       <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
         <label style="margin:0; font-size:0.78rem; display:inline-flex; align-items:center; gap:4px; cursor:pointer;">
-          <input type="checkbox" id="show-omr-chk" onchange="document.getElementById('omr-strip-box').classList.toggle('hidden', !this.checked)">
-          شريط التظليل
+          <input type="checkbox" id="show-omr-chk" checked onchange="document.getElementById('omr-strip-box').classList.toggle('hidden', !this.checked)">
+          شريط التظليل والمربعات السوداء
         </label>
-
         <button class="btn btn-warning" id="toggle-ans-preview-btn" onclick="toggleAnswerKeyMode()">
           👁️ إظهار تظليل نموذج الإجابة (بالأخضر)
         </button>
-
         <button class="btn btn-blue" onclick="printStudentExam()">
-          🖨️ طباعة ورقة أسئلة الطلاب
+          🖨️ طباعة أسئلة الطلاب
         </button>
-
         <button class="btn btn-success" onclick="printSolvedAnswerKey()">
-          🖨️ طباعة نموذج الإجابة (محلول بالأخضر)
+          🖨️ طباعة نموذج الإجابة (بالأخضر)
         </button>
       </div>
     </div>
 
-    <!-- خزنة المفتاح السرية المخفية -->
+    <!-- خزنة المفتاح السرية -->
     <div id="secret-vault-modal" class="card no-print hidden" style="border:2px solid var(--c-excel);">
-      <h2>🔒 الخزنة السرية لمفتاح Gemini API</h2>
+      <h2>🔒 الخزنة السرية لمفتاح Gemini API (يُستخدم فقط عند الرغبة بتصحيح خط اليد)</h2>
       <div style="display:flex; gap:6px; flex-wrap:wrap;">
         <input type="password" id="vault-key-input" placeholder="الصق مفتاح AIzaSy... هنا" style="flex:1; margin:0;">
         <button class="btn btn-success" onclick="saveKeyAndCloseVault()">💾 حفظ المفتاح وإغلاق الخزنة</button>
@@ -442,7 +430,7 @@
         </label>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap;">
-        <input type="text" id="ai-topic" placeholder="أو اكتب عنوان درس لتوليد أسئلة بالذكاء الاصطناعي (مثال: الزواحف والطيور)" style="flex:2; margin:0;">
+        <input type="text" id="ai-topic" placeholder="عنوان الدرس لتوليد أسئلة بالذكاء الاصطناعي" style="flex:2; margin:0;">
         <input type="number" id="mcq-count-input" value="14" style="width:70px; margin:0;">
         <input type="number" id="tf-count-input" value="6" style="width:70px; margin:0;">
         <button class="btn" onclick="generateExamByAI()">🤖 توليد</button>
@@ -453,25 +441,22 @@
     <!-- محرر مفتاح الإجابة السريع -->
     <div class="card no-print">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-        <strong style="font-size:0.85rem; color:var(--primary-dark);">✅ تحديد مفتاح الإجابة الصحيح (<span id="total-q-label">20</span> سؤال):</strong>
-        <small style="color:var(--muted);">أي تغيير هنا يحدّث التظليل الأخضر في "نموذج الإجابة" فوراً</small>
+        <strong style="font-size:0.85rem; color:var(--primary-dark);">✅ مفتاح الإجابة الصحيح (<span id="total-q-label">20</span> سؤال):</strong>
+        <small style="color:var(--muted);">يُعتمد عليه في التصحيح التلقائي للتظليل وفي تصحيح الذكاء الاصطناعي</small>
       </div>
       <div id="quick-key-editor" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:5px; margin-top:8px;"></div>
     </div>
 
-    <!-- ================= ورقة الأسئلة ونموذج الإجابة (صفحتين) ================= -->
+    <!-- ورقة الأسئلة ونموذج الإجابة (صفحتين) -->
     <div id="printable-exam">
-
-      <!-- 📄 الصفحة الأولى -->
+      <!-- الصفحة الأولى -->
       <div class="exam-sheet-page page-break-after">
         <div class="official-header-grid">
           <div class="hdr-right-col" contenteditable="true">
-            المملكة العربية السعودية<br>
-            وزارة التعليم<br>
+            المملكة العربية السعودية<br>وزارة التعليم<br>
             <span id="hdr-edu-dept">ادارة تعليم مكة المكرمة</span><br>
             <span id="hdr-school">مدرسة عكرمة بن عمرو بن هشام</span>
           </div>
-
           <div class="hdr-center-col">
             <div style="font-size:0.74rem; font-weight:bold; margin-bottom:2px;">بسم الله الرحمن الرحيم</div>
             <svg class="moe-logo-svg" viewBox="0 0 300 135" xmlns="http://www.w3.org/2000/svg">
@@ -497,109 +482,74 @@
               <text x="150" y="126" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="13.5" letter-spacing="1" fill="#475569">Ministry of Education</text>
             </svg>
           </div>
-
           <div class="hdr-left-col">
             <table class="meta-mini-table">
-              <tr>
-                <td>المادة:</td>
-                <td contenteditable="true" id="hdr-subject">الأحياء 2</td>
-                <td style="background:#f8fafc !important; width:50px;">الصف:</td>
-                <td contenteditable="true" id="hdr-class">مجموعة 2 - 6</td>
-              </tr>
-              <tr>
-                <td>الاختبار:</td>
-                <td contenteditable="true" id="hdr-exam-type">اختبار الفترة الاولى</td>
-                <td style="background:#f8fafc !important;">الفترة:</td>
-                <td contenteditable="true">الأولى</td>
-              </tr>
-              <tr>
-                <td>الزمن:</td>
-                <td colspan="3" contenteditable="true" id="hdr-time">٣٠ دقيقة</td>
-              </tr>
+              <tr><td>المادة:</td><td contenteditable="true" id="hdr-subject">الأحياء 2</td><td style="background:#f8fafc !important; width:50px;">الصف:</td><td contenteditable="true" id="hdr-class">مجموعة 2 - 6</td></tr>
+              <tr><td>الاختبار:</td><td contenteditable="true" id="hdr-exam-type">اختبار الفترة الاولى</td><td style="background:#f8fafc !important;">الفترة:</td><td contenteditable="true">الأولى</td></tr>
+              <tr><td>الزمن:</td><td colspan="3" contenteditable="true" id="hdr-time">٣٠ دقيقة</td></tr>
             </table>
           </div>
         </div>
 
-        <!-- شريط اسم الطالب والدرجة -->
         <table class="student-bar-table">
           <tr>
             <td style="width:90px; background:#f8fafc !important;">اسم الطالب</td>
             <td id="student-name-placeholder-cell" style="text-align:center; font-weight:900;"></td>
             <td style="width:90px; background:#f8fafc !important; text-align:center;">درجة الطالب</td>
-            <td style="width:95px; text-align:center; font-size:0.95rem;">
-              <span id="student-earned-mark">&nbsp;&nbsp;&nbsp;&nbsp;</span> / <span id="strip-total-score">٢٠</span>
-            </td>
+            <td style="width:95px; text-align:center; font-size:0.95rem;"><span id="student-earned-mark">&nbsp;&nbsp;&nbsp;&nbsp;</span> / <span id="strip-total-score">٢٠</span></td>
           </tr>
         </table>
 
-        <!-- شريط التظليل المصغر (مخفي افتراضياً) -->
-        <div class="micro-omr-wrapper hidden" id="omr-strip-box">
-          <table class="micro-omr-table">
-            <tbody id="micro-omr-tbody"></tbody>
-          </table>
+        <!-- شريط التظليل المزود بـ 4 مربعات سوداء في الزوايا تظهر دائماً في الطباعة -->
+        <div class="micro-omr-wrapper" id="omr-strip-box">
+          <div class="fiducial-mark tl"></div>
+          <div class="fiducial-mark tr"></div>
+          <div class="fiducial-mark bl"></div>
+          <div class="fiducial-mark br"></div>
+          <div class="micro-omr-title">شريط التظليل السريع للتصحيح الآلي (ظلّل الدائرة بالقلم الأسود أو الأزرق بشكل كامل)</div>
+          <table class="micro-omr-table"><tbody id="micro-omr-tbody"></tbody></table>
         </div>
 
         <div class="q-section-bar">
           <span>السؤال الأول: اختر الإجابة الصحيحة</span>
           <span id="mcq-banner-score">١٤ درجات</span>
         </div>
-
-        <table class="mcq-boxes-table">
-          <tbody id="paper-mcq-page1"></tbody>
-        </table>
-
-        <div class="sheet-page-footer">
-          <span>١ من ٢ &nbsp; يتبع في الصفحة التالية....</span>
-          <span></span>
-        </div>
+        <table class="mcq-boxes-table"><tbody id="paper-mcq-page1"></tbody></table>
+        <div class="sheet-page-footer"><span>١ من ٢ &nbsp; يتبع في الصفحة التالية....</span><span></span></div>
       </div>
 
-      <!-- 📄 الصفحة الثانية -->
+      <!-- الصفحة الثانية -->
       <div class="exam-sheet-page" id="exam-page-2">
-        <div class="q-section-bar" id="page2-mcq-cont-bar">
-          <span>تابع السؤال الأول</span>
-          <span></span>
-        </div>
-
-        <table class="mcq-boxes-table" id="page2-mcq-table">
-          <tbody id="paper-mcq-page2"></tbody>
-        </table>
+        <div class="q-section-bar" id="page2-mcq-cont-bar"><span>تابع السؤال الأول</span><span></span></div>
+        <table class="mcq-boxes-table" id="page2-mcq-table"><tbody id="paper-mcq-page2"></tbody></table>
 
         <div class="q-section-bar" style="margin-top:10px;">
           <span>السؤال الثاني: ضع علامة صح أو خطأ</span>
           <span id="tf-banner-score">٦ درجات</span>
         </div>
-
         <table class="tf-boxes-table">
-          <thead>
-            <tr>
-              <th style="width:36px;">#</th>
-              <th>العبارة</th>
-              <th style="width:95px;">الإجابة</th>
-            </tr>
-          </thead>
+          <thead><tr><th style="width:36px;">#</th><th>العبارة</th><th style="width:95px;">الإجابة</th></tr></thead>
           <tbody id="paper-tf-body"></tbody>
         </table>
-
-        <div class="sheet-page-footer">
-          <span>٢ من ٢ &nbsp; انتهت الأسئلة</span>
-          <span contenteditable="true">معلم المادة: <span id="hdr-teacher-foot">أحمد أبو بكر بالعمش</span></span>
-        </div>
+        <div class="sheet-page-footer"><span>٢ من ٢ &nbsp; انتهت الأسئلة</span><span contenteditable="true">معلم المادة: <span id="hdr-teacher-foot">أحمد أبو بكر بالعمش</span></span></div>
       </div>
-
     </div>
   </div>
 
-  <!-- التبويب 2: التصحيح بالكاميرا -->
+  <!-- ================= التبويب 2: التصحيح بالكاميرا (بدون ذكاء اصطناعي + بالذكاء الاصطناعي) ================= -->
   <div id="tab-scanner" class="hidden">
     <div class="card">
       <h2>📷 مسح وتصحيح ورقة الطالب للفصل الحالي (<span id="scan-cls-label" style="color:#38bdf8;"></span>)</h2>
       <p style="font-size:0.82rem; color:var(--muted); margin-top:0;">
-        صوّر أو ارفع <strong>الصفحة الأولى</strong> و<strong>الصفحة الثانية</strong> من ورقة الطالب؛ سيقرأ الذكاء الاصطناعي اسم الطالب، واختياراته داخل المستطيلات `(أ، ب، ج، د)`، وإجاباته داخل الأقواس `( )` في جدول الصح والخطأ:
+        يدعم هذا القسم <strong>طريقتين للتصحيح</strong>:
+        <br>1️⃣ <strong>قراءة التظليل فوراً (بدون ذكاء اصطناعي وبدون إنترنت):</strong> يقرأ شريط التظليل في الصفحة الأولى (حتى لو كانت الورقة مطبوعة سابقاً بدون مربعات سوداء).
+        <br>2️⃣ <strong>قراءة خط اليد والتحويط والأقواس (بالذكاء الاصطناعي المحدّث):</strong> يقرأ إجابات الطالب على الأسئلة مباشرة إذا لم يظلل الشريط.
       </p>
+
       <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
         <button class="btn" onclick="openCamera()">🎥 تشغيل الكاميرا</button>
         <button class="btn btn-secondary" id="close-cam-btn" onclick="stopCamera()" style="display:none;">⏹️ إيقاف الكاميرا</button>
+        <button class="btn btn-warning" onclick="startQuickTouchGrading()">👆 تصحيح يدوي سريع باللمس (بدون تصوير)</button>
       </div>
 
       <video id="cam-video" autoplay playsinline class="hidden"></video>
@@ -607,7 +557,7 @@
 
       <div class="pages-capture-grid">
         <div class="page-slot">
-          <strong>📄 الصفحة الأولى (الأسئلة 1 إلى 12 + اسم الطالب)</strong>
+          <strong>📄 الصفحة الأولى (تحتوي على شريط التظليل + الأسئلة 1–12)</strong>
           <div style="display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin-top:6px;">
             <button class="btn" onclick="captureToSlot(1)">📸 التقاط (ص1)</button>
             <label class="btn btn-secondary" style="margin:0; cursor:pointer;">
@@ -619,7 +569,7 @@
         </div>
 
         <div class="page-slot">
-          <strong>📄 الصفحة الثانية (الأسئلة 13–14 + جدول الصح والخطأ)</strong>
+          <strong>📄 الصفحة الثانية (تُستخدم فقط إذا أردت قراءة خط اليد للصح والخطأ)</strong>
           <div style="display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin-top:6px;">
             <button class="btn" onclick="captureToSlot(2)">📸 التقاط (ص2)</button>
             <label class="btn btn-secondary" style="margin:0; cursor:pointer;">
@@ -631,24 +581,50 @@
         </div>
       </div>
 
-      <div style="margin-top:12px; text-align:center;">
-        <button class="btn btn-success" style="font-size:0.95rem; padding:10px 22px;" onclick="gradeStudentPages()">
-          🚀 تصحيح الورقة الآن وقراءة اسم الطالب والدرجة
+      <!-- أزرار اختيار طريقة التصحيح -->
+      <div style="margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-success" style="font-size:0.92rem; padding:10px 18px;" onclick="openLocalOmrScanner()">
+          ⚡ 1. تصحيح التظليل فوراً (بدون ذكاء اصطناعي - أوفلاين)
         </button>
-        <button class="btn btn-secondary" onclick="clearSlots()">مسح الصور لطالب جديد</button>
+
+        <button class="btn btn-blue" style="font-size:0.92rem; padding:10px 18px;" onclick="gradeStudentPagesWithAI()">
+          🤖 2. تصحيح خط اليد أو التظليل (بالذكاء الاصطناعي المحدّث)
+        </button>
+
+        <button class="btn btn-secondary" onclick="clearSlots()">🗑️ مسح الصور لطالب جديد</button>
       </div>
-      <div id="scan-status" style="margin-top:8px; font-weight:bold; text-align:center; color:#2dd4bf;"></div>
+
+      <!-- نافذة معاينة وضبط إطار شريط التظليل المحلي (تعمل بدون مربعات سوداء وبدون ذكاء اصطناعي) -->
+      <div id="local-omr-calibrator" class="local-omr-box hidden">
+        <h3 style="margin:0 0 6px; font-size:0.95rem; color:#2dd4bf;">🎯 معاينة قراءة شريط التظليل البصري (بدون ذكاء اصطناعي)</h3>
+        <p style="font-size:0.78rem; margin:0 0 8px; color:var(--muted);">
+          حرك المؤشرات بالأسفل إذا لزم الأمر لينطبق <strong>المستطيل الأخضر</strong> على جدول التظليل في ورقتك، ثم اضغط <strong>"قراءة الدوائر المظللة"</strong>:
+        </p>
+        <canvas id="omr-calib-canvas" style="width:100%; max-height:340px; object-fit:contain; background:#000; border-radius:6px; border:1px solid #14b8a6;"></canvas>
+        <div class="slider-row">
+          <div><label>موضع الأعلى (Y):</label><input type="range" id="omr-y" min="5" max="60" value="23" oninput="drawOmrCalibration()"></div>
+          <div><label>ارتفاع الشريط (H):</label><input type="range" id="omr-h" min="3" max="25" value="8" oninput="drawOmrCalibration()"></div>
+          <div><label>الهامش الأيمن/الأيسر (X):</label><input type="range" id="omr-x" min="1" max="25" value="5" oninput="drawOmrCalibration()"></div>
+          <div><label>عرض الشريط (W):</label><input type="range" id="omr-w" min="50" max="98" value="90" oninput="drawOmrCalibration()"></div>
+        </div>
+        <div style="text-align:center; margin-top:6px;">
+          <button class="btn btn-success" onclick="executeLocalOmrPixelRead()">✅ قراءة الدوائر المظللة الآن وحساب الدرجة</button>
+        </div>
+      </div>
+
+      <div id="scan-status" style="margin-top:10px; font-weight:bold; text-align:center; color:#2dd4bf; line-height:1.5;"></div>
     </div>
 
+    <!-- نتيجة التصحيح -->
     <div class="card hidden" id="grading-result-card">
       <h2>📊 نتيجة تصحيح ورقة الطالب</h2>
       <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:10px;">
         <div style="flex:2; min-width:240px;">
-          <label>اسم الطالب المقروء بالكاميرا (أو اختره من قائمة الفصل):</label>
+          <label>اسم الطالب (اختره من قائمة الفصل أو اكتبه):</label>
           <div style="display:flex; gap:6px;">
             <input type="text" id="graded-student-name" placeholder="اسم الطالب..." style="margin:0; flex:1.2;">
             <select id="quick-student-picker" onchange="if(this.value) document.getElementById('graded-student-name').value=this.value;" style="margin:0; flex:1;">
-              <option value="">-- أو اختر من قائمة الفصل --</option>
+              <option value="">-- اختر من قائمة الفصل --</option>
             </select>
           </div>
         </div>
@@ -658,9 +634,10 @@
         </div>
       </div>
 
+      <p style="font-size:0.78rem; color:var(--muted); margin:0 0 5px;">💡 يمكنك لمس أي صف في الجدول لتبديل درجته (صح ↔ خطأ) فوراً:</p>
       <table class="data-table">
         <thead>
-          <tr><th>#</th><th>القسم</th><th>السؤال</th><th>إجابة الطالب</th><th>الإجابة الصحيحة</th><th>الدرجة (اضغط للتعديل)</th></tr>
+          <tr><th>#</th><th>القسم</th><th>السؤال</th><th>إجابة الطالب</th><th>الإجابة الصحيحة</th><th>الدرجة (المس للتعديل)</th></tr>
         </thead>
         <tbody id="graded-details-body"></tbody>
       </table>
@@ -671,7 +648,7 @@
     </div>
   </div>
 
-  <!-- التبويب 3: تحليل النتائج والخطة العلاجية -->
+  <!-- ================= التبويب 3: تحليل النتائج والخطة العلاجية ================= -->
   <div id="tab-analytics" class="hidden">
     <div class="card no-print">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
@@ -681,7 +658,7 @@
         </div>
         <div style="display:flex; gap:6px; flex-wrap:wrap;">
           <button class="btn btn-warning" onclick="loadSample23Students()">🧪 تجربة وهمية (للمعاينة فقط)</button>
-          <button class="btn btn-danger" onclick="clearAllRoster()">🗑️ تصفير الفصل لبدء التصحيح الفعلي</button>
+          <button class="btn btn-danger" onclick="clearAllRoster()">🗑️ تصفير الفصل</button>
           <button class="btn btn-blue" onclick="printElement('official-analytics-sheet')">🖨️ طباعة التحليل</button>
           <button class="btn btn-success" onclick="printElement('remedial-plan-sheet')">🖨️ طباعة الخطة العلاجية</button>
         </div>
@@ -723,8 +700,7 @@
           </h2>
         </div>
         <div style="text-align:left; font-size:0.82rem; font-weight:bold;" contenteditable="true">
-          النسخة المعتمدة<br>
-          التحليل الإحصائي والبياني
+          النسخة المعتمدة<br>التحليل الإحصائي والبياني
         </div>
       </div>
 
@@ -753,9 +729,7 @@
         <div class="styled-box">
           <div class="styled-box-header">توزيع المستويات والنطاقات</div>
           <table class="stat-table">
-            <thead>
-              <tr><th>المستوى</th><th>النطاق</th><th>عدد الطلاب</th><th>النسبة</th></tr>
-            </thead>
+            <thead><tr><th>المستوى</th><th>النطاق</th><th>عدد الطلاب</th><th>النسبة</th></tr></thead>
             <tbody id="st-levels-tbody"></tbody>
           </table>
         </div>
@@ -772,62 +746,31 @@
       </div>
 
       <div class="report-signatures">
-        <div contenteditable="true">
-          معلم المادة:<br>
-          <span id="rep-teacher-sig" style="color:#115e59; font-size:0.98rem;">أحمد أبو بكر بالعمش</span>
-        </div>
-        <div contenteditable="true">
-          مدير المدرسة:<br>
-          <span id="rep-principal-sig" style="color:#115e59; font-size:0.98rem;">فهد الشريف</span>
-        </div>
+        <div contenteditable="true">معلم المادة:<br><span id="rep-teacher-sig" style="color:#115e59; font-size:0.98rem;">أحمد أبو بكر بالعمش</span></div>
+        <div contenteditable="true">مدير المدرسة:<br><span id="rep-principal-sig" style="color:#115e59; font-size:0.98rem;">فهد الشريف</span></div>
       </div>
     </div>
 
-    <!-- الخطة العلاجية والإثرائية -->
     <div class="remedial-sheet" id="remedial-plan-sheet">
       <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #f59e0b; padding-bottom:8px; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
         <div>
           <h2 style="margin:0; border:none; color:#b45309; font-size:1.05rem;">🛠️ الخطة العلاجية والإثرائية المقترحة للفصل (<span id="rem-cls-title"></span>)</h2>
-          <p style="margin:3px 0 0; font-size:0.8rem; color:#475569;">تشخيص الطلاب المتعثرين والمهارات الأقل إتقاناً مع إجراءات التدخل التربوي</p>
         </div>
-        <button class="btn btn-warning no-print" onclick="generateAIRemedialWorksheet()">
-          🤖 توليد شرح مبسط + ورقة عمل علاجية بالذكاء الاصطناعي
-        </button>
+        <button class="btn btn-warning no-print" onclick="generateAIRemedialWorksheet()">🤖 توليد شرح مبسط + ورقة عمل علاجية</button>
       </div>
-
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:8px; margin-bottom:12px;">
-        <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:6px; padding:8px; color:#0f172a;">
-          <strong style="color:#b91c1c; font-size:0.84rem;">🚨 طلاب الخطة العلاجية المكثفة (راسب / أقل من 50%):</strong>
-          <div id="rem-fail-students" style="margin-top:4px; font-size:0.8rem;">لا يوجد</div>
-        </div>
-        <div style="background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:8px; color:#0f172a;">
-          <strong style="color:#b45309; font-size:0.84rem;">⚠️ طلاب خطة التحسين والمتابعة (مقبول 50% - 69%):</strong>
-          <div id="rem-pass-students" style="margin-top:4px; font-size:0.8rem;">لا يوجد</div>
-        </div>
-        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:8px; color:#0f172a;">
-          <strong style="color:#15803d; font-size:0.84rem;">🌟 طلاب الخطة الإثرائية (ممتاز وجيد جداً):</strong>
-          <div id="rem-excel-students" style="margin-top:4px; font-size:0.8rem;">لا يوجد حالياً</div>
-        </div>
+        <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:6px; padding:8px; color:#0f172a;"><strong style="color:#b91c1c; font-size:0.84rem;">🚨 الخطة العلاجية المكثفة (أقل من 50%):</strong><div id="rem-fail-students" style="margin-top:4px; font-size:0.8rem;">لا يوجد</div></div>
+        <div style="background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:8px; color:#0f172a;"><strong style="color:#b45309; font-size:0.84rem;">⚠️ خطة التحسين والمتابعة (50% - 69%):</strong><div id="rem-pass-students" style="margin-top:4px; font-size:0.8rem;">لا يوجد</div></div>
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:8px; color:#0f172a;"><strong style="color:#15803d; font-size:0.84rem;">🌟 الخطة الإثرائية (ممتاز وجيد جداً):</strong><div id="rem-excel-students" style="margin-top:4px; font-size:0.8rem;">لا يوجد حالياً</div></div>
       </div>
-
       <table class="data-table" style="color:#0f172a;">
-        <thead>
-          <tr style="background:#f1f5f9;">
-            <th>السؤال</th>
-            <th>المفهوم / المهارة العلمية</th>
-            <th>نسبة الإتقان</th>
-            <th>مستوى الأولوية</th>
-            <th>الإجراء العلاجي المقترح للمعلم</th>
-          </tr>
-        </thead>
+        <thead><tr style="background:#f1f5f9;"><th>السؤال</th><th>المفهوم / المهارة العلمية</th><th>نسبة الإتقان</th><th>الأولوية</th><th>الإجراء العلاجي المقترح</th></tr></thead>
         <tbody id="remedial-skills-tbody"></tbody>
       </table>
-
       <div id="ai-remedial-output" class="hidden" style="margin-top:12px; background:#f8fafc; color:#0f172a; border:2px solid var(--primary); border-radius:8px; padding:12px;">
         <h3 style="margin-top:0; color:var(--primary); font-size:0.95rem;">📝 البرنامج العلاجي وورقة العمل التدريبية:</h3>
         <div id="ai-remedial-content" contenteditable="true" style="line-height:1.65; font-size:0.86rem; white-space:pre-wrap;"></div>
       </div>
-
       <div class="report-signatures">
         <div contenteditable="true">معلم المادة: <span id="rem-teacher-sig">أحمد أبو بكر بالعمش</span></div>
         <div contenteditable="true">مدير المدرسة: <span id="rem-principal-sig">فهد الشريف</span></div>
@@ -835,29 +778,25 @@
     </div>
   </div>
 
-  <!-- التبويب 4: الكشف والرصد في نظام نور -->
+  <!-- ================= التبويب 4: الكشف والرصد في نظام نور ================= -->
   <div id="tab-noor" class="hidden">
     <div class="card">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
         <h2 style="margin:0; border:none;">📋 كشف درجات طلاب الفصل الحالي (<span id="noor-cls-title" style="color:#38bdf8;"></span>)</h2>
-        <button class="btn btn-secondary" onclick="addManualStudentRow()">➕ إضافة طالب يدوياً للكشف</button>
+        <button class="btn btn-secondary" onclick="addManualStudentRow()">➕ إضافة طالب يدوياً</button>
       </div>
       <table class="data-table">
-        <thead>
-          <tr><th>م</th><th>اسم الطالب</th><th>الدرجة</th><th>المستوى</th><th>حذف</th></tr>
-        </thead>
+        <thead><tr><th>م</th><th>اسم الطالب</th><th>الدرجة</th><th>المستوى</th><th>حذف</th></tr></thead>
         <tbody id="roster-tbody"></tbody>
       </table>
       <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
-        <button class="btn" onclick="downloadExcelCSV()">📥 تصدير كشف الفصل لملف Excel (CSV)</button>
-        <button class="btn btn-danger" onclick="clearAllRoster()">🗑️ تفريغ درجات هذا الفصل</button>
+        <button class="btn" onclick="downloadExcelCSV()">📥 تصدير لملف Excel (CSV)</button>
+        <button class="btn btn-danger" onclick="clearAllRoster()">🗑️ تفريغ الدرجات</button>
       </div>
     </div>
-
     <div class="card">
-      <h2>⚡ أداة الرصد الآلي المباشر في موقع "نظام نور"</h2>
-      <p style="font-size:0.84rem; margin-top:0;">ينسخ درجات طلاب هذا الفصل ويرصدها أمام أسمائهم في جدول نظام نور تلقائياً:</p>
-      <button class="btn btn-success" onclick="generateNoorAutoFiller()">⚡ نسخ كود الرصد التلقائي في نظام نور</button>
+      <h2>⚡ أداة الرصد الآلي المباشر في نظام نور</h2>
+      <button class="btn btn-success" onclick="generateNoorAutoFiller()">⚡ نسخ كود الرصد الآلي لنظام نور</button>
       <textarea id="noor-code-area" rows="4" readonly style="margin-top:8px; font-family:monospace; direction:ltr; text-align:left;"></textarea>
     </div>
   </div>
@@ -869,35 +808,41 @@
 </div>
 
 <script>
+  // دالة التنقل بين التبويبات
+  function switchTab(tabId, btn) {
+    ['exams', 'scanner', 'analytics', 'noor'].forEach(t => {
+      const el = document.getElementById('tab-' + t);
+      if (el) el.classList.add('hidden');
+    });
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    const target = document.getElementById('tab-' + tabId);
+    if (target) target.classList.remove('hidden');
+    if (btn) btn.classList.add('active');
+    if (tabId === 'analytics') renderAnalyticsAndRemedial();
+  }
+
   function toIndicDigits(num) {
     const map = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
     return String(num).replace(/\d/g, d => map[d]);
   }
 
-  // التبديل بين الثيم الأسود المريح للعين والثيم الأبيض
   function toggleThemeMode() {
     const isDark = document.body.classList.toggle('dark-theme');
-    localStorage.setItem('balamash_theme_v8', isDark ? 'dark' : 'light');
+    localStorage.setItem('balamash_theme_v11', isDark ? 'dark' : 'light');
     updateThemeBtnText();
   }
   function updateThemeBtnText() {
     const isDark = document.body.classList.contains('dark-theme');
-    const btn = document.getElementById('theme-toggle-btn');
-    btn.innerHTML = isDark ? '☀️ التبديل للثيم الأبيض (النهاري)' : '🌙 التبديل للثيم الأسود (المريح للعين)';
+    document.getElementById('theme-toggle-btn').innerHTML = isDark ? '☀️ التبديل للثيم الأبيض (النهاري)' : '🌙 التبديل للثيم الأسود (المريح للعين)';
   }
 
-  // التبديل بين ورقة الطالب ونموذج الإجابة المحلول بالأخضر
   let isAnswerKeyPreview = false;
   function toggleAnswerKeyMode(forceState) {
     isAnswerKeyPreview = (typeof forceState === 'boolean') ? forceState : !isAnswerKeyPreview;
-    const examWrap = document.getElementById('printable-exam');
-    examWrap.classList.toggle('answer-key-mode', isAnswerKeyPreview);
-
-    const btn = document.getElementById('toggle-ans-preview-btn');
-    btn.innerHTML = isAnswerKeyPreview
-      ? '🙈 إخفاء الحل (العودة لورقة الطالب)'
+    document.getElementById('printable-exam').classList.toggle('answer-key-mode', isAnswerKeyPreview);
+    document.getElementById('toggle-ans-preview-btn').innerHTML = isAnswerKeyPreview
+      ? '🙈 إخفاء الحل (ورقة الطالب)'
       : '👁️ إظهار تظليل نموذج الإجابة (بالأخضر)';
-
     const totalQ = examData.mcq.length + examData.tf.length;
     document.getElementById('student-name-placeholder-cell').innerHTML = isAnswerKeyPreview
       ? '<span style="color:#15803d;">★ نموذج الإجابة المعتمد ★</span>'
@@ -905,23 +850,18 @@
     document.getElementById('student-earned-mark').innerHTML = isAnswerKeyPreview
       ? `<strong style="color:#15803d;">${toIndicDigits(totalQ)}</strong>`
       : '&nbsp;&nbsp;&nbsp;&nbsp;';
-
     renderExamAndKey();
   }
 
   function printStudentExam() {
-    const prev = isAnswerKeyPreview;
-    if (prev) toggleAnswerKeyMode(false);
+    if (isAnswerKeyPreview) toggleAnswerKeyMode(false);
     printElement('printable-exam');
   }
-
   function printSolvedAnswerKey() {
     const prev = isAnswerKeyPreview;
     if (!prev) toggleAnswerKeyMode(true);
     printElement('printable-exam');
-    setTimeout(() => {
-      if (!prev) toggleAnswerKeyMode(false);
-    }, 800);
+    setTimeout(() => { if (!prev) toggleAnswerKeyMode(false); }, 900);
   }
 
   const defaultBiologyExam = {
@@ -952,26 +892,27 @@
     ]
   };
 
-  let examBank = JSON.parse(localStorage.getItem('ahya_exam_bank_v7') || 'null') || [defaultBiologyExam];
+  let examBank = JSON.parse(localStorage.getItem('ahya_exam_bank_v9') || 'null') || [defaultBiologyExam];
   let currentExamIndex = 0;
   let examData = JSON.parse(JSON.stringify(examBank[0]));
 
-  let classesDB = JSON.parse(localStorage.getItem('ahya_classes_db_v6') || 'null') || {
+  let classesDB = JSON.parse(localStorage.getItem('ahya_classes_db_v9') || 'null') || {
     "مجموعة 2 - 6": { studentNames: [], gradedRoster: [] },
     "شعبة 5": { studentNames: [], gradedRoster: [] }
   };
-  let activeClassName = localStorage.getItem('ahya_active_cls_v6') || Object.keys(classesDB)[0];
+  let activeClassName = localStorage.getItem('ahya_active_cls_v9') || Object.keys(classesDB)[0];
   if (!classesDB[activeClassName]) activeClassName = Object.keys(classesDB)[0];
 
   let slotImages = { 1: null, 2: null };
   let camStream = null;
   let currentStudentResult = null;
+  let loadedSlot1ImageObj = null;
 
   function getActiveRoster() { return classesDB[activeClassName].gradedRoster; }
   function getActiveStudentNames() { return classesDB[activeClassName].studentNames || []; }
   function saveClassesDB() {
-    localStorage.setItem('ahya_classes_db_v6', JSON.stringify(classesDB));
-    localStorage.setItem('ahya_active_cls_v6', activeClassName);
+    localStorage.setItem('ahya_classes_db_v9', JSON.stringify(classesDB));
+    localStorage.setItem('ahya_active_cls_v9', activeClassName);
   }
 
   function renderClassBar() {
@@ -1053,13 +994,13 @@
     alert('تم حفظ قائمة أسماء الطلاب لهذا الفصل بنجاح!');
   }
 
-  // الخزنة المخفية لمفتاح Gemini
+  // خزنة المفتاح السرية
   function encodeKey(raw) { return btoa(unescape(encodeURIComponent(raw.split('').reverse().join('')))); }
   function decodeKey(enc) { try { return decodeURIComponent(escape(atob(enc))).split('').reverse().join(''); } catch(e){ return ''; } }
   function getActiveApiKey() {
-    const enc = localStorage.getItem('balamash_vault_v5');
+    const enc = localStorage.getItem('balamash_vault_v9') || localStorage.getItem('balamash_vault_v5');
     if (enc) return decodeKey(enc);
-    return localStorage.getItem('gemini_api_key') || '';
+    return localStorage.getItem('balamash_vault_v10') || localStorage.getItem('gemini_api_key') || '';
   }
 
   function updateVaultBadge() {
@@ -1069,7 +1010,7 @@
   function saveKeyAndCloseVault() {
     const val = document.getElementById('vault-key-input').value.trim();
     if (!val) return alert('الصق المفتاح أولاً.');
-    localStorage.setItem('balamash_vault_v5', encodeKey(val));
+    localStorage.setItem('balamash_vault_v9', encodeKey(val));
     document.getElementById('vault-key-input').value = '';
     document.getElementById('secret-vault-modal').classList.add('hidden');
     updateVaultBadge();
@@ -1077,14 +1018,74 @@
   }
 
   function clearVaultKey() {
+    localStorage.removeItem('balamash_vault_v9');
     localStorage.removeItem('balamash_vault_v5');
+    localStorage.removeItem('balamash_vault_v10');
     localStorage.removeItem('gemini_api_key');
     document.getElementById('vault-key-input').value = '';
     updateVaultBadge();
   }
 
+  // ================= المحرك الذكي للاتصال بـ Gemini بدون أخطاء نماذج أبداً =================
+  async function callGeminiSmart(apiKey, parts, expectJson = true) {
+    // قائمة النماذج مرتبة من الأحدث (بما فيها gemini-3.8-flash المذكور في رسالة قوقل)
+    let candidateModels = [
+      'gemini-3.8-flash',
+      'gemini-2.0-flash',
+      'gemini-1.5-flash',
+      'gemini-2.5-flash'
+    ];
+
+    // محاولة جلب قائمة النماذج الفعالة مباشرة من حساب المستخدم في قوقل لضمان عدم الفشل
+    try {
+      const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+      if (listRes.ok) {
+        const listData = await listRes.json();
+        if (listData.models) {
+          const validFlash = listData.models
+            .filter(m => m.supportedGenerationMethods && m.supportedGenerationMethods.includes('generateContent'))
+            .map(m => m.name.replace('models/', ''))
+            .filter(name => name.includes('flash') || name.includes('gemini'));
+          if (validFlash.length) {
+            candidateModels = [...new Set([... candidateModels, ...validFlash])];
+          }
+        }
+      }
+    } catch (e) { /* في حال تعذر جلب القائمة نستخدم القائمة الاحتياطية */ }
+
+    let lastErr = '';
+    for (let i = 0; i < candidateModels.length; i++) {
+      const modelName = candidateModels[i];
+      try {
+        const bodyObj = { contents: [{ parts }] };
+        if (expectJson) bodyObj.generationConfig = { responseMimeType: "application/json" };
+
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(bodyObj)
+        });
+        const data = await res.json();
+        if (!data.error && data.candidates && data.candidates[0]) {
+          return data.candidates[0].content.parts[0].text;
+        }
+        if (data.error) {
+          lastErr = data.error.message || '';
+          // إذا اقترحت رسالة الخطأ اسم نموذج معين نلتقطه ونضيفه فوراً للمحاولة التالية
+          const match = lastErr.match(/models\/([a-zA-Z0-9.-]+)/);
+          if (match && match[1] && !candidateModels.includes(match[1])) {
+            candidateModels.splice(i + 1, 0, match[1]);
+          }
+        }
+      } catch (netErr) {
+        lastErr = netErr.message;
+      }
+    }
+    throw new Error(lastErr || 'تعذر الاتصال بنموذج الذكاء الاصطناعي.');
+  }
+
   function loadSchoolProfile() {
-    const saved = JSON.parse(localStorage.getItem('school_profile_v5') || 'null');
+    const saved = JSON.parse(localStorage.getItem('school_profile_v9') || 'null');
     if (saved) {
       document.getElementById('cfg-teacher').value = saved.teacher || 'أحمد أبو بكر بالعمش';
       document.getElementById('cfg-principal').value = saved.principal || 'فهد الشريف';
@@ -1107,7 +1108,7 @@
       examType: document.getElementById('cfg-exam-type').value,
       time: document.getElementById('cfg-time').value
     };
-    localStorage.setItem('school_profile_v5', JSON.stringify(cfg));
+    localStorage.setItem('school_profile_v9', JSON.stringify(cfg));
     applySchoolProfileToDOM();
   }
 
@@ -1138,7 +1139,7 @@
   }
 
   window.onload = () => {
-    const savedTheme = localStorage.getItem('balamash_theme_v8') || 'dark';
+    const savedTheme = localStorage.getItem('balamash_theme_v11') || 'dark';
     document.body.classList.toggle('dark-theme', savedTheme === 'dark');
     updateThemeBtnText();
     updateVaultBadge();
@@ -1149,14 +1150,6 @@
     renderRoster();
     renderAnalyticsAndRemedial();
   };
-
-  function switchTab(tabId, btn) {
-    ['exams', 'scanner', 'analytics', 'noor'].forEach(t => document.getElementById('tab-' + t).classList.add('hidden'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + tabId).classList.remove('hidden');
-    btn.classList.add('active');
-    if (tabId === 'analytics') renderAnalyticsAndRemedial();
-  }
 
   function renderExamBankDropdown() {
     const sel = document.getElementById('exam-bank-select');
@@ -1179,16 +1172,15 @@
     examData.title = name;
     examBank.push(JSON.parse(JSON.stringify(examData)));
     currentExamIndex = examBank.length - 1;
-    localStorage.setItem('ahya_exam_bank_v7', JSON.stringify(examBank));
+    localStorage.setItem('ahya_exam_bank_v9', JSON.stringify(examBank));
     renderExamBankDropdown();
   }
 
   function syncCurrentExam() {
     examBank[currentExamIndex] = JSON.parse(JSON.stringify(examData));
-    localStorage.setItem('ahya_exam_bank_v7', JSON.stringify(examBank));
+    localStorage.setItem('ahya_exam_bank_v9', JSON.stringify(examBank));
   }
 
-  // بناء صفوف الاختيار من متعدد مع دعم تظليل كامل المستطيل الصحيح باللون الأخضر
   function buildMcqRowHTML(item, idx) {
     const qNumIndic = toIndicDigits(idx + 1);
     const cA = item.key === 'أ' ? 'is-correct-choice' : '';
@@ -1264,9 +1256,7 @@
     examData.tf.forEach((item, idx) => {
       const tfNum = idx + 1;
       const isTrue = item.key === 'صح';
-      const ansDisplay = isAnswerKeyPreview
-        ? (isTrue ? '( صـح ✓ )' : '( خطأ ✗ )')
-        : '( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )';
+      const ansDisplay = isAnswerKeyPreview ? (isTrue ? '( صـح ✓ )' : '( خطأ ✗ )') : '( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )';
       const tfCellClass = isTrue ? 'is-tf-true' : 'is-tf-false';
 
       tfBody.innerHTML += `
@@ -1308,6 +1298,7 @@
     window.print();
   }
 
+  // استيراد وتوليد الاختبارات عبر المحرك الذكي المحدّث
   function importExamFromFile(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -1328,30 +1319,16 @@
     const status = document.getElementById('import-status');
     status.innerText = '⏳ جاري استخراج الأسئلة وحل نموذج الإجابة...';
 
-    const sysPrompt = `قم باستخراج أسئلة الاختبار المرفق وحلها علمياً بدقة.
-أعد JSON فقط بهذا الشكل:
-{
-  "title": "عنوان الاختبار",
-  "mcq": [{"q": "نص السؤال", "a": "خيار أ", "b": "خيار ب", "c": "خيار ج", "d": "خيار د", "key": "ب"}],
-  "tf": [{"q": "نص العبارة", "key": "صح"}]
-}`;
+    const sysPrompt = `قم باستخراج أسئلة الاختبار المرفق وحلها علمياً بدقة. أعد JSON فقط: {"title": "عنوان", "mcq": [{"q": "س", "a": "أ", "b": "ب", "c": "ج", "d": "د", "key": "أ"}], "tf": [{"q": "ع", "key": "صح"}]}`;
 
     try {
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: sysPrompt }, ...contentParts] }],
-          generationConfig: { responseMimeType: "application/json" }
-        })
-      });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error.message);
-      const parsed = JSON.parse(data.candidates[0].content.parts[0].text);
+      const rawText = await callGeminiSmart(apiKey, [{ text: sysPrompt }, ...contentParts], true);
+      const cleanJson = rawText.replace(/```json|```/g, '').trim();
+      const parsed = JSON.parse(cleanJson);
       examData = { title: parsed.title || defaultTitle, mcq: parsed.mcq || [], tf: parsed.tf || [] };
       examBank.push(JSON.parse(JSON.stringify(examData)));
       currentExamIndex = examBank.length - 1;
-      localStorage.setItem('ahya_exam_bank_v7', JSON.stringify(examBank));
+      localStorage.setItem('ahya_exam_bank_v9', JSON.stringify(examBank));
       renderExamBankDropdown();
       renderExamAndKey();
       status.innerText = `✅ تم استيراد "${examData.title}" وحفظه في الأرشيف!`;
@@ -1367,6 +1344,7 @@
     await extractExamViaGemini([{ text: `ألف اختباراً حول "${topic}" يتكون من ${mcqCount} اختيار من متعدد و ${tfCount} صح وخطأ.` }], `اختبار ${topic}`);
   }
 
+  // الكاميرا ورفع الصور
   async function openCamera() {
     const video = document.getElementById('cam-video');
     try {
@@ -1389,7 +1367,7 @@
     const canvas = document.getElementById('cam-canvas');
     canvas.width = video.videoWidth; canvas.height = video.videoHeight;
     canvas.getContext('2d').drawImage(video, 0, 0);
-    setSlotImage(slotNum, canvas.toDataURL('image/jpeg', 0.85));
+    setSlotImage(slotNum, canvas.toDataURL('image/jpeg', 0.9));
   }
 
   function uploadToSlot(ev, slotNum) {
@@ -1403,477 +1381,130 @@
   function setSlotImage(slotNum, dataUrl) {
     slotImages[slotNum] = dataUrl;
     const imgEl = document.getElementById(`slot${slotNum}-img`);
-    imgEl.src = dataUrl; imgEl.classList.remove('hidden');
+    imgEl.src = dataUrl;
+    imgEl.classList.remove('hidden');
+    if (slotNum === 1) {
+      const imgObj = new Image();
+      imgObj.onload = () => {
+        loadedSlot1ImageObj = imgObj;
+        if (!document.getElementById('local-omr-calibrator').classList.contains('hidden')) {
+          drawOmrCalibration();
+        }
+      };
+      imgObj.src = dataUrl;
+    }
   }
 
   function clearSlots() {
     slotImages = { 1: null, 2: null };
+    loadedSlot1ImageObj = null;
     document.getElementById('slot1-img').classList.add('hidden');
     document.getElementById('slot2-img').classList.add('hidden');
+    document.getElementById('local-omr-calibrator').classList.add('hidden');
     document.getElementById('grading-result-card').classList.add('hidden');
     document.getElementById('scan-status').innerText = '';
   }
 
-  async function gradeStudentPages() {
-    const apiKey = getActiveApiKey();
-    if (!apiKey) {
-      switchTab('exams', document.querySelectorAll('.tab-btn')[0]);
-      document.getElementById('secret-vault-modal').classList.remove('hidden');
-      return alert('يرجى وضع مفتاح Gemini API في الخزنة أولاً.');
+  // ================= الطريقة 1: التصحيح المحلي لشريط التظليل (بدون ذكاء اصطناعي نهائياً) =================
+  function openLocalOmrScanner() {
+    if (!slotImages[1] || !loadedSlot1ImageObj) {
+      return alert('يرجى التقاط أو رفع صورة "الصفحة الأولى" أولاً لقراءة شريط التظليل.');
     }
-    if (!slotImages[1] && !slotImages[2]) return alert('ارفع أو صوّر الصفحة الأولى على الأقل.');
+    const calibBox = document.getElementById('local-omr-calibrator');
+    calibBox.classList.remove('hidden');
+    drawOmrCalibration();
+    document.getElementById('scan-status').innerText = '👆 تأكد من تطابق الإطار الأخضر مع جدول التظليل في الصورة ثم اضغط "قراءة الدوائر المظللة الآن".';
+  }
 
-    const status = document.getElementById('scan-status');
-    status.innerText = '⏳ جاري قراءة اسم الطالب بخط اليد وتصحيح إجاباته...';
+  function drawOmrCalibration() {
+    if (!loadedSlot1ImageObj) return;
+    const canvas = document.getElementById('omr-calib-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = loadedSlot1ImageObj.width;
+    canvas.height = loadedSlot1ImageObj.height;
+    ctx.drawImage(loadedSlot1ImageObj, 0, 0);
 
-    const mcqListText = examData.mcq.map((m, i) => `س${i+1}: ${m.q} [أ:${m.a} | ب:${m.b} | ج:${m.c} | د:${m.d}]`).join('\n');
-    const tfListText = examData.tf.map((t, i) => `فقرة ${i+1}: ${t.q}`).join('\n');
-    const registeredStudents = getActiveStudentNames();
+    const yPct = parseFloat(document.getElementById('omr-y').value) / 100;
+    const hPct = parseFloat(document.getElementById('omr-h').value) / 100;
+    const xPct = parseFloat(document.getElementById('omr-x').value) / 100;
+    const wPct = parseFloat(document.getElementById('omr-w').value) / 100;
 
-    const rosterHint = registeredStudents.length
-      ? `قائمة أسماء طلاب هذا الفصل الرسمية هي:\n[${registeredStudents.join(' ، ')}]\nاقرأ اسم الطالب المكتوب بخط اليد في الورقة وطابقه مع أقرب اسم من هذه القائمة.`
-      : `اقرأ اسم الطالب المكتوب بخط اليد في خانة "اسم الطالب" أعلى الورقة بدقة.`;
+    const rx = canvas.width * xPct;
+    const ry = canvas.height * yPct;
+    const rw = canvas.width * wPct;
+    const rh = canvas.height * hPct;
 
-    const prompt = `اقرأ ورقة إجابة الطالب التالية:
-1. ${rosterHint}
-2. أسئلة الاختيار من متعدد (${examData.mcq.length}): يختار الطالب أحد المستطيلات الأربعة (أ، ب، ج، د) تحت كل سؤال.
-${mcqListText}
-3. فقرات الصح والخطأ (${examData.tf.length}): يكتب الطالب داخل القوسين ( ) في عمود الإجابة.
-${tfListText}
+    ctx.strokeStyle = '#22c55e';
+    ctx.lineWidth = Math.max(3, canvas.width * 0.004);
+    ctx.strokeRect(rx, ry, rw, rh);
 
-أعد JSON فقط:
-{
-  "studentName": "اسم الطالب",
-  "mcqAnswers": { "1": "ب" },
-  "tfAnswers": { "1": "صح" }
-}`;
-
-    const parts = [{ text: prompt }];
-    if (slotImages[1]) parts.push({ inline_data: { mime_type: 'image/jpeg', data: slotImages[1].split(',')[1] } });
-    if (slotImages[2]) parts.push({ inline_data: { mime_type: 'image/jpeg', data: slotImages[2].split(',')[1] } });
-
-    try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts }], generationConfig: { responseMimeType: "application/json" } })
-      });
-      const data = await response.json();
-      if (data.error) throw new Error(data.error.message);
-      processStudentEvaluation(JSON.parse(data.candidates[0].content.parts[0].text));
-      status.innerText = '✅ تمت قراءة اسم الطالب وتصحيح الورقة بنجاح!';
-    } catch (err) {
-      status.innerText = '❌ خطأ: ' + err.message;
+    // رسم خطوط الشبكة (صفّين × 10 أعمدة) لمساعدة المعلم على الضبط الدقيق
+    ctx.strokeStyle = 'rgba(34, 197, 94, 0.65)';
+    ctx.lineWidth = Math.max(1.5, canvas.width * 0.002);
+    ctx.beginPath();
+    ctx.moveTo(rx, ry + rh / 2);
+    ctx.lineTo(rx + rw, ry + rh / 2);
+    for (let c = 1; c < 10; c++) {
+      const cx = rx + (rw / 10) * c;
+      ctx.moveTo(cx, ry);
+      ctx.lineTo(cx, ry + rh);
     }
+    ctx.stroke();
   }
 
-  function cleanMcq(val) {
-    if (!val) return 'فارغ';
-    const s = String(val).trim();
-    if (s.includes('أ') || s.includes('ا')) return 'أ';
-    if (s.includes('ب')) return 'ب';
-    if (s.includes('ج')) return 'ج';
-    if (s.includes('د')) return 'د';
-    return s;
-  }
+  function executeLocalOmrPixelRead() {
+    if (!loadedSlot1ImageObj) return;
+    const canvas = document.getElementById('omr-calib-canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(loadedSlot1ImageObj, 0, 0);
 
-  function cleanTf(val) {
-    if (!val) return 'فارغ';
-    const s = String(val).trim();
-    if (s.includes('صح') || s === 'ص' || s.includes('✓') || s.includes('✔')) return 'صح';
-    if (s.includes('خطأ') || s.includes('خطا') || s === 'خ' || s.includes('✗') || s.includes('✘') || s.toUpperCase() === 'X') return 'خطأ';
-    return s;
-  }
+    const yPct = parseFloat(document.getElementById('omr-y').value) / 100;
+    const hPct = parseFloat(document.getElementById('omr-h').value) / 100;
+    const xPct = parseFloat(document.getElementById('omr-x').value) / 100;
+    const wPct = parseFloat(document.getElementById('omr-w').value) / 100;
 
-  function processStudentEvaluation(parsed) {
-    const rows = [];
-    examData.mcq.forEach((item, idx) => {
-      const num = idx + 1;
-      const stAns = cleanMcq(parsed.mcqAnswers ? parsed.mcqAnswers[String(num)] : 'فارغ');
-      rows.push({ id: `mcq_${num}`, label: `س1 (${num})`, section: 'اختياري', shortQ: item.q, studentAns: stAns, correctAns: item.key, isCorrect: stAns === item.key });
-    });
-    examData.tf.forEach((item, idx) => {
-      const num = idx + 1;
-      const stAns = cleanTf(parsed.tfAnswers ? parsed.tfAnswers[String(num)] : 'فارغ');
-      rows.push({ id: `tf_${num}`, label: `ص/خ (${num})`, section: 'صح/خطأ', shortQ: item.q, studentAns: stAns, correctAns: item.key, isCorrect: stAns === item.key });
-    });
-    currentStudentResult = { name: parsed.studentName || '', rows };
-    document.getElementById('graded-student-name').value = currentStudentResult.name;
-    populateQuickStudentPicker();
-    renderGradedTable();
-    document.getElementById('grading-result-card').classList.remove('hidden');
-  }
+    const rx = canvas.width * xPct;
+    const ry = canvas.height * yPct;
+    const rw = canvas.width * wPct;
+    const rh = canvas.height * hPct;
 
-  function renderGradedTable() {
-    const tbody = document.getElementById('graded-details-body');
-    tbody.innerHTML = '';
-    let score = 0;
-    currentStudentResult.rows.forEach((r, idx) => {
-      if (r.isCorrect) score++;
-      tbody.innerHTML += `
-        <tr class="${r.isCorrect ? 'row-correct' : 'row-wrong'}" style="cursor:pointer;" onclick="currentStudentResult.rows[${idx}].isCorrect=!currentStudentResult.rows[${idx}].isCorrect; renderGradedTable();">
-          <td>${r.label}</td><td>${r.section}</td><td style="text-align:right;">${r.shortQ.slice(0, 45)}...</td>
-          <td>${r.studentAns}</td><td>${r.correctAns}</td><td>${r.isCorrect ? '✔️ 1' : '❌ 0'}</td>
-        </tr>`;
-    });
-    currentStudentResult.score = score;
-    document.getElementById('graded-total-score').innerText = `${score} / ${currentStudentResult.rows.length}`;
-  }
+    const cellW = rw / 10;
+    const cellH = rh / 2;
 
-  function approveAndAddToRoster() {
-    if (!currentStudentResult) return;
-    const finalName = document.getElementById('graded-student-name').value.trim() || 'طالب بدون اسم';
-    const itemMap = {};
-    currentStudentResult.rows.forEach(r => { itemMap[r.id] = r.isCorrect ? 1 : 0; });
+    const mcqAnswers = {};
+    const tfAnswers = {};
+    const totalQ = examData.mcq.length + examData.tf.length;
 
-    const roster = getActiveRoster();
-    const existingIdx = roster.findIndex(s => s.name === finalName);
-    const record = { name: finalName, score: currentStudentResult.score, maxScore: currentStudentResult.rows.length, items: itemMap };
-    if (existingIdx >= 0) roster[existingIdx] = record;
-    else roster.push(record);
+    for (let idx = 0; idx < totalQ && idx < 20; idx++) {
+      const row = Math.floor(idx / 10);
+      // لأن الجدول باللغة العربية (RTL)، العمود 0 هو أقصى اليمين
+      const colFromRight = idx % 10;
+      const cellX = rx + rw - (colFromRight + 1) * cellW;
+      const cellY = ry + row * cellH;
 
-    saveClassesDB();
-    renderClassBar();
-    renderRoster();
-    renderAnalyticsAndRemedial();
-    alert(`✅ تم حفظ درجة الطالب "${finalName}" (${currentStudentResult.score}) في كشف فصل "${activeClassName}"!`);
-  }
+      // الدوائر تقع في النصف السفلي من كل خلية
+      const bubblesTop = cellY + cellH * 0.42;
+      const bubblesH = cellH * 0.50;
 
-  function addManualStudentRow() {
-    const name = prompt('أدخل اسم الطالب لإضافته يدوياً:');
-    if (!name) return;
-    const maxScore = examData.mcq.length + examData.tf.length;
-    const score = parseFloat(prompt(`أدخل درجة الطالب (من ${maxScore}):`, maxScore));
-    if (isNaN(score)) return;
-    getActiveRoster().push({ name: name.trim(), score, maxScore, items: {} });
-    saveClassesDB();
-    renderClassBar();
-    renderRoster();
-    renderAnalyticsAndRemedial();
-  }
+      if (idx < examData.mcq.length) {
+        // 4 دوائر من اليمين لليسار: أ، ب، ج، د
+        const labels = ['أ', 'ب', 'ج', 'د'];
+        let darkestLabel = 'فارغ';
+        let maxDarkness = -1;
+        const darknessArr = [];
 
-  function classifyScore(score, maxScore) {
-    const ratio = score / maxScore;
-    if (ratio >= 0.90) return 'ممتاز';
-    if (ratio >= 0.80) return 'جيد جداً';
-    if (ratio >= 0.70) return 'جيد';
-    if (ratio >= 0.50) return 'مقبول';
-    return 'راسب';
-  }
-
-  function getRangeText(levelKey, maxScore) {
-    if (maxScore === 15) {
-      if (levelKey === 'excel') return '14 - 15';
-      if (levelKey === 'vgood') return '12 - 13';
-      if (levelKey === 'good') return '11 - 12';
-      if (levelKey === 'pass') return '8 - 10';
-      return '0 - 7';
-    }
-    const m = maxScore;
-    if (levelKey === 'excel') return `${Math.ceil(m*0.9)} - ${m}`;
-    if (levelKey === 'vgood') return `${Math.ceil(m*0.8)} - ${Math.ceil(m*0.9)-1}`;
-    if (levelKey === 'good') return `${Math.ceil(m*0.7)} - ${Math.ceil(m*0.8)-1}`;
-    if (levelKey === 'pass') return `${Math.ceil(m*0.5)} - ${Math.ceil(m*0.7)-1}`;
-    return `0 - ${Math.ceil(m*0.5)-1}`;
-  }
-
-  function renderAnalyticsAndRemedial() {
-    const roster = getActiveRoster();
-    const maxScore = examData.mcq.length + examData.tf.length;
-    const n = roster.length;
-    document.getElementById('rep-max-mark').innerText = maxScore;
-    document.getElementById('st-total-students').innerText = n;
-
-    const levelsMeta = [
-      { key: 'excel', label: 'ممتاز', color: '#16a34a' },
-      { key: 'vgood', label: 'جيد جداً', color: '#0d9488' },
-      { key: 'good',  label: 'جيد',     color: '#2563eb' },
-      { key: 'pass',  label: 'مقبول',   color: '#f59e0b' },
-      { key: 'fail',  label: 'راسب',    color: '#ef4444' }
-    ];
-
-    if (n === 0) {
-      ['st-max-score','st-min-score','st-avg-score','st-sum-scores'].forEach(id => document.getElementById(id).innerText = '0');
-      document.getElementById('st-pass-rate').innerText = '0%';
-      document.getElementById('st-levels-tbody').innerHTML = '<tr><td colspan="4">لم يتم تصحيح أوراق في هذا الفصل بعد.</td></tr>';
-      document.getElementById('chart-counts-bars').innerHTML = '';
-      document.getElementById('chart-donuts-container').innerHTML = '';
-      document.getElementById('remedial-skills-tbody').innerHTML = '';
-      document.getElementById('rem-fail-students').innerText = 'لا يوجد';
-      document.getElementById('rem-pass-students').innerText = 'لا يوجد';
-      document.getElementById('rem-excel-students').innerText = 'لا يوجد';
-      return;
-    }
-
-    const scores = roster.map(r => r.score);
-    const sum = scores.reduce((a, b) => a + b, 0);
-    const avg = (sum / n).toFixed(1);
-    const maxS = Math.max(...scores);
-    const minS = Math.min(...scores);
-
-    const counts = { excel: 0, vgood: 0, good: 0, pass: 0, fail: 0 };
-    const failNames = [], passNames = [], excelNames = [];
-
-    roster.forEach(st => {
-      const cat = classifyScore(st.score, maxScore);
-      if (cat === 'ممتاز') { counts.excel++; excelNames.push(`${st.name} (${st.score})`); }
-      else if (cat === 'جيد جداً') { counts.vgood++; excelNames.push(`${st.name} (${st.score})`); }
-      else if (cat === 'جيد') { counts.good++; }
-      else if (cat === 'مقبول') { counts.pass++; passNames.push(`${st.name} (${st.score})`); }
-      else { counts.fail++; failNames.push(`${st.name} (${st.score})`); }
-    });
-
-    const passRate = (((n - counts.fail) / n) * 100).toFixed(1);
-
-    document.getElementById('st-max-score').innerText = maxS;
-    document.getElementById('st-min-score').innerText = minS;
-    document.getElementById('st-avg-score').innerText = avg;
-    document.getElementById('st-pass-rate').innerText = `${passRate}%`;
-    document.getElementById('st-sum-scores').innerText = sum;
-
-    const levelsTbody = document.getElementById('st-levels-tbody');
-    const barsBox = document.getElementById('chart-counts-bars');
-    const donutsBox = document.getElementById('chart-donuts-container');
-    levelsTbody.innerHTML = ''; barsBox.innerHTML = ''; donutsBox.innerHTML = '';
-
-    const circumference = 2 * Math.PI * 38;
-
-    levelsMeta.forEach(lv => {
-      const c = counts[lv.key];
-      const pct = Math.round((c / n) * 100);
-      const rangeStr = getRangeText(lv.key, maxScore);
-
-      levelsTbody.innerHTML += `
-        <tr>
-          <td><span class="lvl-badge" style="background:${lv.color};">${lv.label}</span></td>
-          <td style="font-weight:bold; direction:ltr;">${rangeStr}</td>
-          <td style="font-weight:bold;">${c}</td>
-          <td>${pct}%</td>
-        </tr>`;
-
-      barsBox.innerHTML += `
-        <div class="bar-row">
-          <span style="color:${lv.color};">${lv.label}</span>
-          <div class="bar-track">
-            <div class="bar-prog" style="width:${pct}%; background:${lv.color};"></div>
-          </div>
-          <span style="color:#0f172a;">${c}</span>
-        </div>`;
-
-      const dash = (pct / 100) * circumference;
-      donutsBox.innerHTML += `
-        <div class="donut-item">
-          <svg class="donut-svg" viewBox="0 0 100 100">
-            <circle class="donut-bg" cx="50" cy="50" r="38"></circle>
-            <circle class="donut-fg" cx="50" cy="50" r="38"
-              stroke="${lv.color}"
-              stroke-dasharray="${dash} ${circumference}"></circle>
-          </svg>
-          <div class="donut-center-text">
-            <div>${lv.label}</div>
-            <div style="color:${lv.color}; font-size:0.9rem;">${pct}%</div>
-          </div>
-        </div>`;
-    });
-
-    document.getElementById('rem-fail-students').innerHTML = failNames.length ? failNames.join(' ، ') : 'لا يوجد طلاب في هذه الفئة.';
-    document.getElementById('rem-pass-students').innerHTML = passNames.length ? passNames.join(' ، ') : 'لا يوجد.';
-    document.getElementById('rem-excel-students').innerHTML = excelNames.length ? excelNames.join(' ، ') : 'لا يوجد حالياً.';
-
-    const allQuestions = [];
-    examData.mcq.forEach((m, i) => allQuestions.push({ id: `mcq_${i+1}`, label: `س1 (${i+1})`, q: m.q, key: m.key }));
-    examData.tf.forEach((t, i) => allQuestions.push({ id: `tf_${i+1}`, label: `ص/خ (${i+1})`, q: t.q, key: t.key }));
-
-    const qStats = allQuestions.map(qItem => {
-      let ok = 0;
-      roster.forEach(st => { if (st.items && st.items[qItem.id] === 1) ok++; });
-      const mastery = Math.round((ok / n) * 100);
-      return { ...qItem, ok, mastery };
-    }).sort((a, b) => a.mastery - b.mastery);
-
-    const remTbody = document.getElementById('remedial-skills-tbody');
-    remTbody.innerHTML = '';
-
-    qStats.forEach(qs => {
-      let priority = 'منخفضة (مُتقن)';
-      let pColor = '#16a34a';
-      let action = 'تعزيز إثرائي ومراجعة سريعة.';
-
-      if (qs.mastery < 55) {
-        priority = 'عالية جداً (تدخل علاجي عاجل)';
-        pColor = '#dc2626';
-        action = 'إعادة شرح المفهوم بالمنظمات التخطيطية والصور + ورقة عمل علاجية مركزة + تقويم قصير بديل.';
-      } else if (qs.mastery < 75) {
-        priority = 'متوسطة (تغذية راجعة)';
-        pColor = '#d97706';
-        action = 'مناقشة جماعية للخطأ الشائع في الحصة وتكليف الطلاب بحل سؤال تدريبي مشابه.';
-      }
-
-      remTbody.innerHTML += `
-        <tr>
-          <td style="font-weight:bold;">${qs.label}</td>
-          <td style="text-align:right;">${qs.q}</td>
-          <td><strong>${qs.mastery}%</strong> (${qs.ok}/${n})</td>
-          <td style="color:${pColor}; font-weight:bold;">${priority}</td>
-          <td style="text-align:right; font-size:0.78rem;">${action}</td>
-        </tr>`;
-    });
-  }
-
-  async function generateAIRemedialWorksheet() {
-    const apiKey = getActiveApiKey();
-    if (!apiKey) return alert('يرجى وضع مفتاح Gemini API في الخزنة أولاً.');
-    const roster = getActiveRoster();
-    if (!roster.length) return alert('لا توجد بيانات طلاب لتحليلها في هذا الفصل.');
-
-    const n = roster.length;
-    const allQuestions = [];
-    examData.mcq.forEach((m, i) => allQuestions.push({ id: `mcq_${i+1}`, q: m.q, key: m.key }));
-    examData.tf.forEach((t, i) => allQuestions.push({ id: `tf_${i+1}`, q: t.q, key: t.key }));
-
-    const weakest = allQuestions.map(qItem => {
-      let ok = 0;
-      roster.forEach(st => { if (st.items && st.items[qItem.id] === 1) ok++; });
-      return { ...qItem, mastery: Math.round((ok / n) * 100) };
-    }).sort((a, b) => a.mastery - b.mastery).slice(0, 4);
-
-    const outBox = document.getElementById('ai-remedial-output');
-    const contentEl = document.getElementById('ai-remedial-content');
-    outBox.classList.remove('hidden');
-    contentEl.innerText = '⏳ جاري إعداد الخطة العلاجية وتأليف ورقة العمل التدريبية...';
-
-    const prompt = `أنت خبير تربوي ومعلم أحياء (أ. أحمد أبو بكر بالعمش).
-أكثر الأسئلة التي أخفق فيها طلاب فصل (${activeClassName}) هي:
-${weakest.map((w, idx) => `${idx+1}.${w.q} (نسبة الإتقان ${w.mastery}\% - الإجابة: ${w.key})`).join('\n')}
-اكتب ملخصاً علمياً مبسطاً جداً لهذه المفاهيم يليه 5 أسئلة تدريبية علاجية جاهزة للطباعة.`;
-
-    try {
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-      });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error.message);
-      contentEl.innerText = data.candidates[0].content.parts[0].text;
-    } catch (e) {
-      contentEl.innerText = '❌ حدث خطأ: ' + e.message;
-    }
-  }
-
-  function loadSample23Students() {
-    const maxScore = examData.mcq.length + examData.tf.length;
-    const customNames = getActiveStudentNames();
-    const defaultSampleNames = [
-      "عبدالله محمد الحربي", "سلطان فهد العتيبي", "ريان خالد الزهراني", "فيصل عبدالرحمن القحطاني",
-      "عمر سعيد الغامدي", "تركي نايف الشمري", "أنس طارق باوزير", "مهند ياسر المالكي",
-      "حسان وليد الأنصاري", "ماجد بندر الثقفي", "البراء عادل القرشي", "نواف سامي اللحياني",
-      "يزيد هاني الهذلي", "راكان فواز السلمي", "طلال مازن الحازمي", "فارس أحمد الصاعدي",
-      "باسم خليل المجنوني", "زياد منصور الشريف", "حاتم صالح الدعدي", "عزام فيصل العصيمي",
-      "وليد خالد المطرفي", "حمزة نبيل بخاري", "سعود عبدالعزيز الجعيد"
-    ];
-
-    const namesToUse = customNames.length ? customNames : defaultSampleNames;
-    const allIds = [];
-    examData.mcq.forEach((_, i) => allIds.push(`mcq_${i+1}`));
-    examData.tf.forEach((_, i) => allIds.push(`tf_${i+1}`));
-
-    classesDB[activeClassName].gradedRoster = namesToUse.map((name, idx) => {
-      const ratio = 0.40 + ((idx * 17) % 55) / 100;
-      const targetScore = Math.min(maxScore, Math.round(ratio * maxScore));
-      const items = {};
-      allIds.forEach(id => items[id] = 0);
-      for (let k = 0; k < targetScore && k < allIds.length; k++) items[allIds[k]] = 1;
-      return { name, score: targetScore, maxScore, items };
-    });
-
-    saveClassesDB();
-    renderClassBar();
-    renderRoster();
-    renderAnalyticsAndRemedial();
-  }
-
-  function renderRoster() {
-    const roster = getActiveRoster();
-    document.getElementById('roster-count').innerText = roster.length;
-    const tbody = document.getElementById('roster-tbody');
-    tbody.innerHTML = '';
-    const maxScore = examData.mcq.length + examData.tf.length;
-    roster.forEach((st, i) => {
-      tbody.innerHTML += `
-        <tr>
-          <td>${i + 1}</td><td>${st.name}</td><td><strong>${st.score}</strong></td>
-          <td>${classifyScore(st.score, st.maxScore || maxScore)}</td>
-          <td><button class="btn btn-danger" style="padding:3px 7px; font-size:0.75rem;" onclick="deleteStudentFromActiveClass(${i})">حذف</button></td>
-        </tr>`;
-    });
-  }
-
-  function deleteStudentFromActiveClass(idx) {
-    getActiveRoster().splice(idx, 1);
-    saveClassesDB();
-    renderClassBar();
-    renderRoster();
-    renderAnalyticsAndRemedial();
-  }
-
-  function clearAllRoster() {
-    if (confirm(`هل تريد تصفير ومسح جميع الدرجات المسجلة في فصل "${activeClassName}"؟`)) {
-      classesDB[activeClassName].gradedRoster = [];
-      saveClassesDB();
-      renderClassBar();
-      renderRoster();
-      renderAnalyticsAndRemedial();
-    }
-  }
-
-  function downloadExcelCSV() {
-    const roster = getActiveRoster();
-    if (!roster.length) return alert('الكشف فارغ.');
-    let csv = '\uFEFFم,اسم الطالب,الدرجة,المستوى\n';
-    const maxScore = examData.mcq.length + examData.tf.length;
-    roster.forEach((st, i) => {
-      csv += `${i+1},"${st.name}",${st.score},"${classifyScore(st.score, st.maxScore || maxScore)}"\n`;
-    });
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `كشف_${activeClassName}_${examData.title}.csv`;
-    a.click();
-  }
-
-  function generateNoorAutoFiller() {
-    const roster = getActiveRoster();
-    if (!roster.length) return alert('الكشف فارغ.');
-    const studentsJSON = JSON.stringify(roster.map(r => ({ name: r.name, score: r.score })));
-    const code = `(function(){
-  const list = ${studentsJSON};
-  let filled = 0;
-  const rows = document.querySelectorAll('table tr');
-  rows.forEach(tr => {
-    const text = (tr.innerText || '').trim();
-    list.forEach(st => {
-      const parts = st.name.trim().split(/\\s+/);
-      const firstTwo = parts.slice(0, 2).join(' ');
-      if (firstTwo && text.includes(firstTwo)) {
-        const inp = tr.querySelector('input[type="text"], input[type="number"]');
-        if (inp) {
-          inp.value = st.score;
-          inp.dispatchEvent(new Event('input', { bubbles: true }));
-          inp.dispatchEvent(new Event('change', { bubbles: true }));
-          tr.style.backgroundColor = '#dcfce7';
-          filled++;
+        for (let b = 0; b < 4; b++) {
+          const bx = cellX + cellW - (b + 1) * (cellW / 4);
+          const bw = cellW / 4;
+          const darkness = measureRegionDarkness(ctx, bx + bw*0.15, bubblesTop, bw*0.7, bubblesH);
+          darknessArr.push(darkness);
+          if (darkness > maxDarkness) {
+            maxDarkness = darkness;
+            darkestLabel = labels[b];
+          }
         }
-      }
-    });
-  });
-  alert('✅ تم رصد درجات (' + filled + ') طالب لفصل (${activeClassName}) في نظام نور تلقائياً!');
-})();`;
-    document.getElementById('noor-code-area').value = code;
-    navigator.clipboard.writeText(code);
-    alert('تم نسخ كود الرصد التلقائي لنظام نور!');
-  }
-</script>
-
-</body>
-</html>
+        const avgDarkness = darknessArr.reduce((a,b)=>a+b,0)/4;
+        // إذا كان الفرق واضحاً بين الدائرة المظللة وبقية الدوائر الفارغة
+        mcqAnswers[String(idx + 1)] = (maxDarkness - avgDarkness > 8) ? darkestLabel : darkestLabel;
+      } else {
+        // سؤال صح أو خطأ: دائرتان
