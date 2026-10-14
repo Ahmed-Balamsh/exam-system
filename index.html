@@ -1507,4 +1507,451 @@
         // إذا كان الفرق واضحاً بين الدائرة المظللة وبقية الدوائر الفارغة
         mcqAnswers[String(idx + 1)] = (maxDarkness - avgDarkness > 8) ? darkestLabel : darkestLabel;
       } else {
-        // سؤال صح أو خطأ: دائرتان
+        // سؤال صح أو خطأ: دائرتان من اليمين لليسار (صح ، خطأ)
+        const tfIdx = (idx - examData.mcq.length) + 1;
+        const labels = ['صح', 'خطأ'];
+        const dTrue = measureRegionDarkness(ctx, cellX + cellW*0.52, bubblesTop, cellW*0.40, bubblesH);
+        const dFalse = measureRegionDarkness(ctx, cellX + cellW*0.08, bubblesTop, cellW*0.40, bubblesH);
+        tfAnswers[String(tfIdx)] = dTrue >= dFalse ? 'صح' : 'خطأ';
+      }
+    }
+
+    drawOmrCalibration();
+    processStudentEvaluation({
+      studentName: '',
+      mcqAnswers,
+      tfAnswers
+    });
+    document.getElementById('scan-status').innerText = '✅ تمت قراءة شريط التظليل محلياً (بدون ذكاء اصطناعي)! راجع الجدول بالأسفل واختر اسم الطالب.';
+  }
+
+  function measureRegionDarkness(ctx, x, y, w, h) {
+    const ix = Math.max(0, Math.floor(x));
+    const iy = Math.max(0, Math.floor(y));
+    const iw = Math.max(1, Math.floor(w));
+    const ih = Math.max(1, Math.floor(h));
+    const imgData = ctx.getImageData(ix, iy, iw, ih).data;
+    let darkSum = 0;
+    let count = 0;
+    for (let i = 0; i < imgData.length; i += 4) {
+      const lum = 0.299 * imgData[i] + 0.587 * imgData[i+1] + 0.114 * imgData[i+2];
+      darkSum += (255 - lum);
+      count++;
+    }
+    return count ? (darkSum / count) : 0;
+  }
+
+  // ================= الطريقة 2: التصحيح اليدوي السريع باللمس (بدون تصوير وبدون ذكاء اصطناعي) =================
+  function startQuickTouchGrading() {
+    const mcqAnswers = {};
+    const tfAnswers = {};
+    examData.mcq.forEach((m, i) => mcqAnswers[String(i+1)] = m.key);
+    examData.tf.forEach((t, i) => tfAnswers[String(i+1)] = t.key);
+    processStudentEvaluation({
+      studentName: '',
+      mcqAnswers,
+      tfAnswers
+    });
+    document.getElementById('scan-status').innerText = '👆 وضع التصحيح السريع باللمس: جميع الأسئلة مضبوطة (صح 20/20)، المس فقط السؤال الذي أخطأ فيه الطالب لخصم درجته فوراً!';
+  }
+
+  // ================= الطريقة 3: التصحيح بالذكاء الاصطناعي المحدّث (لقراءة خط اليد أو التظليل) =================
+  async function gradeStudentPagesWithAI() {
+    const apiKey = getActiveApiKey();
+    if (!apiKey) {
+      switchTab('exams', document.querySelectorAll('.tab-btn')[0]);
+      document.getElementById('secret-vault-modal').classList.remove('hidden');
+      return alert('يرجى وضع مفتاح Gemini API في الخزنة أولاً (أو استخدم الزر الأخضر للتصحيح بدون ذكاء اصطناعي).');
+    }
+    if (!slotImages[1] && !slotImages[2]) return alert('ارفع أو صوّر الصفحة الأولى على الأقل.');
+
+    const status = document.getElementById('scan-status');
+    status.innerText = '⏳ جاري الاتصال التلقائي بأحدث نموذج Gemini لقراءة خط يد الطالب وتصحيح الورقة...';
+
+    const mcqListText = examData.mcq.map((m, i) => `س${i+1}: ${m.q} [أ:${m.a} | ب:${m.b} | ج:${m.c} | د:${m.d}]`).join('\n');
+    const tfListText = examData.tf.map((t, i) => `فقرة ${i+1}: ${t.q}`).join('\n');
+    const registeredStudents = getActiveStudentNames();
+
+    const rosterHint = registeredStudents.length
+      ? `قائمة أسماء طلاب هذا الفصل الرسمية هي:\n[${registeredStudents.join(' ، ')}]\nاقرأ اسم الطالب المكتوب بخط اليد في الورقة وطابقه مع أقرب اسم من القائمة.`
+      : `اقرأ اسم الطالب المكتوب بخط اليد في خانة "اسم الطالب" أعلى الورقة بدقة.`;
+
+    const prompt = `اقرأ ورقة إجابة الطالب التالية (سواء ظلّل الطالب شريط التظليل العلوي أو وضع دائرة/خطاً على المستطيلات أو كتب داخل الأقواس):
+1. ${rosterHint}
+2. أسئلة الاختيار من متعدد (${examData.mcq.length}):
+${mcqListText}
+3. فقرات الصح والخطأ (${examData.tf.length}):
+${tfListText}
+
+أعد النتيجة بصيغة JSON فقط بدون أي نص إضافي:
+{
+  "studentName": "اسم الطالب",
+  "mcqAnswers": { "1": "ب" },
+  "tfAnswers": { "1": "صح" }
+}`;
+
+    const parts = [{ text: prompt }];
+    if (slotImages[1]) parts.push({ inline_data: { mime_type: 'image/jpeg', data: slotImages[1].split(',')[1] } });
+    if (slotImages[2]) parts.push({ inline_data: { mime_type: 'image/jpeg', data: slotImages[2].split(',')[1] } });
+
+    try {
+      const rawText = await callGeminiSmart(apiKey, parts, true);
+      const cleanJson = rawText.replace(/```json|```/g, '').trim();
+      processStudentEvaluation(JSON.parse(cleanJson));
+      status.innerText = '✅ تمت قراءة خط اليد وتصحيح الورقة بالذكاء الاصطناعي بنجاح!';
+    } catch (err) {
+      status.innerText = '❌ تعذر الاتصال بالذكاء الاصطناعي (' + err.message + ') — يمكنك الضغط على الزر الأخضر بالأعلى لتصحيح التظليل فوراً بدون ذكاء اصطناعي!';
+    }
+  }
+
+  function cleanMcq(val) {
+    if (!val) return 'فارغ';
+    const s = String(val).trim();
+    if (s.includes('أ') || s.includes('ا')) return 'أ';
+    if (s.includes('ب')) return 'ب';
+    if (s.includes('ج')) return 'ج';
+    if (s.includes('د')) return 'د';
+    return s;
+  }
+
+  function cleanTf(val) {
+    if (!val) return 'فارغ';
+    const s = String(val).trim();
+    if (s.includes('صح') || s === 'ص' || s.includes('✓') || s.includes('✔')) return 'صح';
+    if (s.includes('خطأ') || s.includes('خطا') || s === 'خ' || s.includes('✗') || s.includes('✘') || s.toUpperCase() === 'X') return 'خطأ';
+    return s;
+  }
+
+  function processStudentEvaluation(parsed) {
+    const rows = [];
+    examData.mcq.forEach((item, idx) => {
+      const num = idx + 1;
+      const stAns = cleanMcq(parsed.mcqAnswers ? parsed.mcqAnswers[String(num)] : 'فارغ');
+      rows.push({ id: `mcq_${num}`, label: `س1 (${num})`, section: 'اختياري', shortQ: item.q, studentAns: stAns, correctAns: item.key, isCorrect: stAns === item.key });
+    });
+    examData.tf.forEach((item, idx) => {
+      const num = idx + 1;
+      const stAns = cleanTf(parsed.tfAnswers ? parsed.tfAnswers[String(num)] : 'فارغ');
+      rows.push({ id: `tf_${num}`, label: `ص/خ (${num})`, section: 'صح/خطأ', shortQ: item.q, studentAns: stAns, correctAns: item.key, isCorrect: stAns === item.key });
+    });
+    currentStudentResult = { name: parsed.studentName || '', rows };
+    document.getElementById('graded-student-name').value = currentStudentResult.name;
+    populateQuickStudentPicker();
+    renderGradedTable();
+    document.getElementById('grading-result-card').classList.remove('hidden');
+  }
+
+  function renderGradedTable() {
+    const tbody = document.getElementById('graded-details-body');
+    tbody.innerHTML = '';
+    let score = 0;
+    currentStudentResult.rows.forEach((r, idx) => {
+      if (r.isCorrect) score++;
+      tbody.innerHTML += `
+        <tr class="${r.isCorrect ? 'row-correct' : 'row-wrong'}" style="cursor:pointer;" onclick="currentStudentResult.rows[${idx}].isCorrect=!currentStudentResult.rows[${idx}].isCorrect; renderGradedTable();">
+          <td>${r.label}</td><td>${r.section}</td><td style="text-align:right;">${r.shortQ.slice(0, 45)}...</td>
+          <td>${r.studentAns}</td><td>${r.correctAns}</td><td>${r.isCorrect ? '✔️ 1' : '❌ 0'}</td>
+        </tr>`;
+    });
+    currentStudentResult.score = score;
+    document.getElementById('graded-total-score').innerText = `${score} / ${currentStudentResult.rows.length}`;
+  }
+
+  function approveAndAddToRoster() {
+    if (!currentStudentResult) return;
+    const finalName = document.getElementById('graded-student-name').value.trim() || 'طالب ' + (getActiveRoster().length + 1);
+    const itemMap = {};
+    currentStudentResult.rows.forEach(r => { itemMap[r.id] = r.isCorrect ? 1 : 0; });
+
+    const roster = getActiveRoster();
+    const existingIdx = roster.findIndex(s => s.name === finalName);
+    const record = { name: finalName, score: currentStudentResult.score, maxScore: currentStudentResult.rows.length, items: itemMap };
+    if (existingIdx >= 0) roster[existingIdx] = record;
+    else roster.push(record);
+
+    saveClassesDB();
+    renderClassBar();
+    renderRoster();
+    renderAnalyticsAndRemedial();
+    alert(`✅ تم حفظ درجة الطالب "${finalName}" (${currentStudentResult.score}) في كشف فصل "${activeClassName}"!`);
+  }
+
+  function addManualStudentRow() {
+    const name = prompt('أدخل اسم الطالب لإضافته يدوياً:');
+    if (!name) return;
+    const maxScore = examData.mcq.length + examData.tf.length;
+    const score = parseFloat(prompt(`أدخل درجة الطالب (من ${maxScore}):`, maxScore));
+    if (isNaN(score)) return;
+    getActiveRoster().push({ name: name.trim(), score, maxScore, items: {} });
+    saveClassesDB();
+    renderClassBar();
+    renderRoster();
+    renderAnalyticsAndRemedial();
+  }
+
+  function classifyScore(score, maxScore) {
+    const ratio = score / maxScore;
+    if (ratio >= 0.90) return 'ممتاز';
+    if (ratio >= 0.80) return 'جيد جداً';
+    if (ratio >= 0.70) return 'جيد';
+    if (ratio >= 0.50) return 'مقبول';
+    return 'راسب';
+  }
+
+  function getRangeText(levelKey, maxScore) {
+    if (maxScore === 15) {
+      if (levelKey === 'excel') return '14 - 15';
+      if (levelKey === 'vgood') return '12 - 13';
+      if (levelKey === 'good') return '11 - 12';
+      if (levelKey === 'pass') return '8 - 10';
+      return '0 - 7';
+    }
+    const m = maxScore;
+    if (levelKey === 'excel') return `${Math.ceil(m*0.9)} - ${m}`;
+    if (levelKey === 'vgood') return `${Math.ceil(m*0.8)} - ${Math.ceil(m*0.9)-1}`;
+    if (levelKey === 'good') return `${Math.ceil(m*0.7)} - ${Math.ceil(m*0.8)-1}`;
+    if (levelKey === 'pass') return `${Math.ceil(m*0.5)} - ${Math.ceil(m*0.7)-1}`;
+    return `0 - ${Math.ceil(m*0.5)-1}`;
+  }
+
+  function renderAnalyticsAndRemedial() {
+    const roster = getActiveRoster();
+    const maxScore = examData.mcq.length + examData.tf.length;
+    const n = roster.length;
+    document.getElementById('rep-max-mark').innerText = maxScore;
+    document.getElementById('st-total-students').innerText = n;
+
+    const levelsMeta = [
+      { key: 'excel', label: 'ممتاز', color: '#16a34a' },
+      { key: 'vgood', label: 'جيد جداً', color: '#0d9488' },
+      { key: 'good',  label: 'جيد',     color: '#2563eb' },
+      { key: 'pass',  label: 'مقبول',   color: '#f59e0b' },
+      { key: 'fail',  label: 'راسب',    color: '#ef4444' }
+    ];
+
+    if (n === 0) {
+      ['st-max-score','st-min-score','st-avg-score','st-sum-scores'].forEach(id => document.getElementById(id).innerText = '0');
+      document.getElementById('st-pass-rate').innerText = '0%';
+      document.getElementById('st-levels-tbody').innerHTML = '<tr><td colspan="4">لم يتم تصحيح أوراق في هذا الفصل بعد.</td></tr>';
+      document.getElementById('chart-counts-bars').innerHTML = '';
+      document.getElementById('chart-donuts-container').innerHTML = '';
+      document.getElementById('remedial-skills-tbody').innerHTML = '';
+      document.getElementById('rem-fail-students').innerText = 'لا يوجد';
+      document.getElementById('rem-pass-students').innerText = 'لا يوجد';
+      document.getElementById('rem-excel-students').innerText = 'لا يوجد';
+      return;
+    }
+
+    const scores = roster.map(r => r.score);
+    const sum = scores.reduce((a, b) => a + b, 0);
+    const avg = (sum / n).toFixed(1);
+    const maxS = Math.max(...scores);
+    const minS = Math.min(...scores);
+
+    const counts = { excel: 0, vgood: 0, good: 0, pass: 0, fail: 0 };
+    const failNames = [], passNames = [], excelNames = [];
+
+    roster.forEach(st => {
+      const cat = classifyScore(st.score, maxScore);
+      if (cat === 'ممتاز') { counts.excel++; excelNames.push(`${st.name} (${st.score})`); }
+      else if (cat === 'جيد جداً') { counts.vgood++; excelNames.push(`${st.name} (${st.score})`); }
+      else if (cat === 'جيد') { counts.good++; }
+      else if (cat === 'مقبول') { counts.pass++; passNames.push(`${st.name} (${st.score})`); }
+      else { counts.fail++; failNames.push(`${st.name} (${st.score})`); }
+    });
+
+    const passRate = (((n - counts.fail) / n) * 100).toFixed(1);
+
+    document.getElementById('st-max-score').innerText = maxS;
+    document.getElementById('st-min-score').innerText = minS;
+    document.getElementById('st-avg-score').innerText = avg;
+    document.getElementById('st-pass-rate').innerText = `${passRate}%`;
+    document.getElementById('st-sum-scores').innerText = sum;
+
+    const levelsTbody = document.getElementById('st-levels-tbody');
+    const barsBox = document.getElementById('chart-counts-bars');
+    const donutsBox = document.getElementById('chart-donuts-container');
+    levelsTbody.innerHTML = ''; barsBox.innerHTML = ''; donutsBox.innerHTML = '';
+
+    const circumference = 2 * Math.PI * 38;
+
+    levelsMeta.forEach(lv => {
+      const c = counts[lv.key];
+      const pct = Math.round((c / n) * 100);
+      const rangeStr = getRangeText(lv.key, maxScore);
+
+      levelsTbody.innerHTML += `
+        <tr>
+          <td><span class="lvl-badge" style="background:${lv.color};">${lv.label}</span></td>
+          <td style="font-weight:bold; direction:ltr;">${rangeStr}</td>
+          <td style="font-weight:bold;">${c}</td>
+          <td>${pct}%</td>
+        </tr>`;
+
+      barsBox.innerHTML += `
+        <div class="bar-row">
+          <span style="color:${lv.color};">${lv.label}</span>
+          <div class="bar-track">
+            <div class="bar-prog" style="width:${pct}%; background:${lv.color};"></div>
+          </div>
+          <span style="color:#0f172a;">${c}</span>
+        </div>`;
+
+      const dash = (pct / 100) * circumference;
+      donutsBox.innerHTML += `
+        <div class="donut-item">
+          <svg class="donut-svg" viewBox="0 0 100 100">
+            <circle class="donut-bg" cx="50" cy="50" r="38"></circle>
+            <circle class="donut-fg" cx="50" cy="50" r="38" stroke="${lv.color}" stroke-dasharray="${dash} ${circumference}"></circle>
+          </svg>
+          <div class="donut-center-text"><div>${lv.label}</div><div style="color:${lv.color}; font-size:0.9rem;">${pct}%</div></div>
+        </div>`;
+    });
+
+    document.getElementById('rem-fail-students').innerHTML = failNames.length ? failNames.join(' ، ') : 'لا يوجد طلاب.';
+    document.getElementById('rem-pass-students').innerHTML = passNames.length ? passNames.join(' ، ') : 'لا يوجد.';
+    document.getElementById('rem-excel-students').innerHTML = excelNames.length ? excelNames.join(' ، ') : 'لا يوجد.';
+
+    const allQuestions = [];
+    examData.mcq.forEach((m, i) => allQuestions.push({ id: `mcq_${i+1}`, label: `س1 (${i+1})`, q: m.q, key: m.key }));
+    examData.tf.forEach((t, i) => allQuestions.push({ id: `tf_${i+1}`, label: `ص/خ (${i+1})`, q: t.q, key: t.key }));
+
+    const qStats = allQuestions.map(qItem => {
+      let ok = 0;
+      roster.forEach(st => { if (st.items && st.items[qItem.id] === 1) ok++; });
+      const mastery = Math.round((ok / n) * 100);
+      return { ...qItem, ok, mastery };
+    }).sort((a, b) => a.mastery - b.mastery);
+
+    const remTbody = document.getElementById('remedial-skills-tbody');
+    remTbody.innerHTML = '';
+
+    qStats.forEach(qs => {
+      let priority = 'منخفضة (مُتقن)';
+      let pColor = '#16a34a';
+      let action = 'تعزيز إثرائي ومراجعة سريعة.';
+      if (qs.mastery < 55) { priority = 'عالية جداً (تدخل علاجي)'; pColor = '#dc2626'; action = 'إعادة شرح المفهوم + ورقة عمل علاجية مركزة.'; }
+      else if (qs.mastery < 75) { priority = 'متوسطة (تغذية راجعة)'; pColor = '#d97706'; action = 'مناقشة جماعية للخطأ الشائع.'; }
+
+      remTbody.innerHTML += `
+        <tr>
+          <td style="font-weight:bold;">${qs.label}</td>
+          <td style="text-align:right;">${qs.q}</td>
+          <td><strong>${qs.mastery}%</strong> (${qs.ok}/${n})</td>
+          <td style="color:${pColor}; font-weight:bold;">${priority}</td>
+          <td style="text-align:right; font-size:0.78rem;">${action}</td>
+        </tr>`;
+    });
+  }
+
+  async function generateAIRemedialWorksheet() {
+    const apiKey = getActiveApiKey();
+    if (!apiKey) return alert('يرجى وضع مفتاح Gemini API في الخزنة أولاً.');
+    const roster = getActiveRoster();
+    if (!roster.length) return alert('لا توجد بيانات طلاب لتحليلها.');
+
+    const n = roster.length;
+    const allQuestions = [];
+    examData.mcq.forEach((m, i) => allQuestions.push({ id: `mcq_${i+1}`, q: m.q, key: m.key }));
+    examData.tf.forEach((t, i) => allQuestions.push({ id: `tf_${i+1}`, q: t.q, key: t.key }));
+
+    const weakest = allQuestions.map(qItem => {
+      let ok = 0;
+      roster.forEach(st => { if (st.items && st.items[qItem.id] === 1) ok++; });
+      return { ...qItem, mastery: Math.round((ok / n) * 100) };
+    }).sort((a, b) => a.mastery - b.mastery).slice(0, 4);
+
+    const outBox = document.getElementById('ai-remedial-output');
+    const contentEl = document.getElementById('ai-remedial-content');
+    outBox.classList.remove('hidden');
+    contentEl.innerText = '⏳ جاري إعداد الخطة العلاجية...';
+
+    const prompt = `أنت خبير تربوي ومعلم أحياء (أ. أحمد أبو بكر بالعمش). أكثر الأسئلة إخفاقاً: ${weakest.map(w => w.q).join(' | ')}. اكتب ملخصاً علمياً مبسطاً و5 أسئلة علاجية.`;
+    try {
+      const text = await callGeminiSmart(apiKey, [{ text: prompt }], false);
+      contentEl.innerText = text;
+    } catch (e) { contentEl.innerText = '❌ خطأ: ' + e.message; }
+  }
+
+  function loadSample23Students() {
+    const maxScore = examData.mcq.length + examData.tf.length;
+    const customNames = getActiveStudentNames();
+    const defaultSampleNames = ["عبدالله الحربي", "سلطان العتيبي", "ريان الزهراني", "فيصل القحطاني", "عمر الغامدي", "تركي الشمري", "أنس باوزير", "مهند المالكي", "حسان الأنصاري", "ماجد الثقفي", "البراء القرشي", "نواف اللحياني", "يزيد الهذلي", "راكان السلمي", "طلال الحازمي", "فارس الصاعدي", "باسم المجنوني", "زياد الشريف", "حاتم الدعدي", "عزام العصيمي", "وليد المطرفي", "حمزة بخاري", "سعود الجعيد"];
+    const namesToUse = customNames.length ? customNames : defaultSampleNames;
+    const allIds = [];
+    examData.mcq.forEach((_, i) => allIds.push(`mcq_${i+1}`));
+    examData.tf.forEach((_, i) => allIds.push(`tf_${i+1}`));
+
+    classesDB[activeClassName].gradedRoster = namesToUse.map((name, idx) => {
+      const ratio = 0.40 + ((idx * 17) % 55) / 100;
+      const targetScore = Math.min(maxScore, Math.round(ratio * maxScore));
+      const items = {};
+      allIds.forEach(id => items[id] = 0);
+      for (let k = 0; k < targetScore && k < allIds.length; k++) items[allIds[k]] = 1;
+      return { name, score: targetScore, maxScore, items };
+    });
+
+    saveClassesDB();
+    renderClassBar();
+    renderRoster();
+    renderAnalyticsAndRemedial();
+  }
+
+  function renderRoster() {
+    const roster = getActiveRoster();
+    document.getElementById('roster-count').innerText = roster.length;
+    const tbody = document.getElementById('roster-tbody');
+    tbody.innerHTML = '';
+    const maxScore = examData.mcq.length + examData.tf.length;
+    roster.forEach((st, i) => {
+      tbody.innerHTML += `<tr><td>${i + 1}</td><td>${st.name}</td><td><strong>${st.score}</strong></td><td>${classifyScore(st.score, st.maxScore || maxScore)}</td><td><button class="btn btn-danger" style="padding:3px 7px; font-size:0.75rem;" onclick="getActiveRoster().splice(${i},1); saveClassesDB(); renderClassBar(); renderRoster(); renderAnalyticsAndRemedial();">حذف</button></td></tr>`;
+    });
+  }
+
+  function clearAllRoster() {
+    if (confirm(`تفريغ درجات فصل "${activeClassName}"؟`)) {
+      classesDB[activeClassName].gradedRoster = [];
+      saveClassesDB();
+      renderClassBar();
+      renderRoster();
+      renderAnalyticsAndRemedial();
+    }
+  }
+
+  function downloadExcelCSV() {
+    const roster = getActiveRoster();
+    if (!roster.length) return alert('الكشف فارغ.');
+    let csv = '\uFEFFم,اسم الطالب,الدرجة,المستوى\n';
+    const maxScore = examData.mcq.length + examData.tf.length;
+    roster.forEach((st, i) => { csv += `${i+1},"${st.name}",${st.score},"${classifyScore(st.score, st.maxScore || maxScore)}"\n`; });
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `كشف_${activeClassName}.csv`; a.click();
+  }
+
+  function generateNoorAutoFiller() {
+    const roster = getActiveRoster();
+    if (!roster.length) return alert('الكشف فارغ.');
+    const studentsJSON = JSON.stringify(roster.map(r => ({ name: r.name, score: r.score })));
+    const code = `(function(){
+  const list = ${studentsJSON};
+  let filled = 0;
+  document.querySelectorAll('table tr').forEach(tr => {
+    const text = (tr.innerText || '').trim();
+    list.forEach(st => {
+      const firstTwo = st.name.trim().split(/\\s+/).slice(0, 2).join(' ');
+      if (firstTwo && text.includes(firstTwo)) {
+        const inp = tr.querySelector('input[type="text"], input[type="number"]');
+        if (inp) { inp.value = st.score; inp.dispatchEvent(new Event('input', { bubbles: true })); inp.dispatchEvent(new Event('change', { bubbles: true })); tr.style.backgroundColor = '#dcfce7'; filled++; }
+      }
+    });
+  });
+  alert('✅ تم رصد (' + filled + ') طالب في نظام نور!');
+})();`;
+    document.getElementById('noor-code-area').value = code;
+    navigator.clipboard.writeText(code);
+    alert('تم نسخ كود الرصد!');
+  }
+</script>
+
+</body>
+</html>
