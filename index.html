@@ -1700,5 +1700,428 @@
     renderAnalyticsAndRemedial();
   });
 </script>
-</body>
-</html>
+<!-- ================= رقعة الترقية الذكية (V18): محاذاة تلقائية + إصلاح الاتجاه العربي + تصوير متتابع سريع ================= -->
+<style>
+  /* تثبيت مواقع الدوائر هندسياً من اليمين لليسار بدقة 100% */
+  .zg-col-hdr { display: flex; justify-content: space-between; font-size: 0.58rem; font-weight: 900; background: #e2e8f0 !important; padding: 2px 4px; border-bottom: 1px solid #000; color: #000; }
+  .zg-row { display: grid !important; grid-template-columns: 24px 1fr !important; align-items: center !important; padding: 2px 3px !important; }
+  .zg-bubbles { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; justify-items: center !important; direction: rtl !important; width: 100% !important; }
+  .zg-bubbles.tf-mode { grid-template-columns: repeat(2, 1fr) !important; }
+  .fast-batch-bar { background: rgba(34, 197, 94, 0.12); border: 2px solid #22c55e; border-radius: 10px; padding: 10px; margin-bottom: 10px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: center; }
+  .toast-saved { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); background: #16a34a; color: #fff; padding: 12px 24px; border-radius: 30px; font-weight: 900; font-size: 1rem; box-shadow: 0 6px 20px rgba(0,0,0,0.4); z-index: 9999; border: 2px solid #fde047; }
+</style>
+
+<script>
+  let autoSnapInterval = null;
+  let steadyFramesCount = 0;
+  let prevFrameSample = null;
+
+  // 1. حقن شريط التصوير المتتابع السريع والتقاط الكاميرا التلقائي
+  window.addEventListener('DOMContentLoaded', () => {
+    document.title = "منظومة المصحح والمحلل الذكي (V18) - أ. أحمد أبو بكر بالعمش";
+    const h1 = document.querySelector('header h1');
+    if (h1) h1.innerText = "🧬 منظومة المصحح الآلي وتحليل النتائج والأرشفة الذكية (الإصدار V18)";
+
+    const scannerCard = document.querySelector('#tab-scanner .card');
+    if (scannerCard) {
+      const batchBar = document.createElement('div');
+      batchBar.className = 'fast-batch-bar';
+      batchBar.innerHTML = `
+        <label style="margin:0; cursor:pointer; display:inline-flex; align-items:center; gap:6px; font-size:0.88rem; color:#4ade80;">
+          <input type="checkbox" id="auto-snap-chk" checked style="width:18px; height:18px;">
+          🎯 <strong>التقاط ومحاذاة تلقائية بالكاميرا</strong> (يلتقط البطاقة تلقائياً بمجرد ثبات اليد)
+        </label>
+        <label style="margin:0; cursor:pointer; display:inline-flex; align-items:center; gap:6px; font-size:0.88rem; color:#fde047;">
+          <input type="checkbox" id="continuous-batch-chk" style="width:18px; height:18px;">
+          ⚡ <strong>تصوير أوراق الفصل وراء بعض</strong> (حفظ تلقائي وتجهيز فوري للورقة التالية)
+        </label>
+      `;
+      scannerCard.insertBefore(batchBar, scannerCard.children[1]);
+    }
+    upgradeZipGradeColumnsRTL();
+  });
+
+  // 2. تحديث أعمدة بطاقة التظليل لتكون ثابتة هندسياً من اليمين لليسار (أ - ب - ج - د)
+  const origRenderExamAndKey = window.renderExamAndKey;
+  window.renderExamAndKey = function() {
+    if (origRenderExamAndKey) origRenderExamAndKey();
+    upgradeZipGradeColumnsRTL();
+  };
+
+  function upgradeZipGradeColumnsRTL() {
+    document.querySelectorAll('#zipgrade-box .zg-bubbles').forEach(bBox => {
+      if (bBox.querySelectorAll('.zg-b-tf').length > 0) bBox.classList.add('tf-mode');
+    });
+    ['zg-col-right', 'zg-col-left'].forEach(colId => {
+      const col = document.getElementById(colId);
+      if (col && !col.querySelector('.zg-col-hdr')) {
+        const hdr = document.createElement('div');
+        hdr.className = 'zg-col-hdr';
+        hdr.innerHTML = `<span>س</span><span>أ</span><span>ب</span><span>ج</span><span>د</span>`;
+        col.insertBefore(hdr, col.firstChild);
+      }
+    });
+  }
+
+  // 3. نغمة بيب صوتية عند لقط الورقة مثل ZipGrade
+  function playScanBeep(freq = 880, duration = 0.12) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.frequency.value = freq;
+      gain.gain.value = 0.15;
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(); setTimeout(() => { osc.stop(); ctx.close(); }, duration * 1000);
+    } catch(e) {}
+  }
+
+  function showFloatingToast(msg) {
+    let t = document.getElementById('v18-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'v18-toast';
+      t.className = 'toast-saved hidden';
+      document.body.appendChild(t);
+    }
+    t.innerText = msg;
+    t.classList.remove('hidden');
+    setTimeout(() => t.classList.add('hidden'), 2600);
+  }
+
+  // 4. خوارزمية البحث التلقائي عن المربعات السوداء الأربعة أو إطار بطاقة التظليل وقصها بالملي
+  function autoDetectAndCropCard(sourceCanvas) {
+    const w = sourceCanvas.width, h = sourceCanvas.height;
+    const ctx = sourceCanvas.getContext('2d');
+    const imgData = ctx.getImageData(0, 0, w, h).data;
+
+    // حساب متوسط الإضاءة لتحديد اللون الأسود بدقة
+    let totalLum = 0, samples = 0;
+    for (let i = 0; i < imgData.length; i += 64) {
+      totalLum += (0.299 * imgData[i] + 0.587 * imgData[i+1] + 0.114 * imgData[i+2]);
+      samples++;
+    }
+    const darkThreshold = Math.min(115, (totalLum / samples) * 0.58);
+
+    // مسح داخل منطقة البحث لإيجاد حدود مربع التظليل الأسود
+    const sx0 = Math.floor(w * 0.08), sx1 = Math.floor(w * 0.92);
+    const sy0 = Math.floor(h * 0.06), sy1 = Math.floor(h * 0.94);
+
+    // البحث عن الكثافة الأفقية والعمودية لخطوط وزوايا البطاقة
+    const rowDark = new Int32Array(h);
+    const colDark = new Int32Array(w);
+    for (let y = sy0; y < sy1; y += 2) {
+      for (let x = sx0; x < sx1; x += 2) {
+        const idx = (y * w + x) * 4;
+        const lum = 0.299 * imgData[idx] + 0.587 * imgData[idx+1] + 0.114 * imgData[idx+2];
+        if (lum < darkThreshold) {
+          rowDark[y]++;
+          colDark[x]++;
+        }
+      }
+    }
+
+    const minRowHits = (sx1 - sx0) * 0.12;
+    const minColHits = (sy1 - sy0) * 0.10;
+
+    let topY = sy0, botY = sy1, leftX = sx0, rightX = sx1;
+    for (let y = sy0; y < sy1; y += 2) { if (rowDark[y] > minRowHits) { topY = y; break; } }
+    for (let y = sy1 - 1; y > topY; y -= 2) { if (rowDark[y] > minRowHits) { botY = y; break; } }
+    for (let x = sx0; x < sx1; x += 2) { if (colDark[x] > minColHits) { leftX = x; break; } }
+    for (let x = sx1 - 1; x > leftX; x -= 2) { if (colDark[x] > minColHits) { rightX = x; break; } }
+
+    const boxW = rightX - leftX, boxH = botY - topY;
+    // إذا كانت الأبعاد منطقية لبطاقة التظليل، نعتمد القص الذكي التلقائي
+    if (boxW > w * 0.22 && boxH > h * 0.22) {
+      return {
+        x: Math.max(0, leftX / w),
+        y: Math.max(0, topY / h),
+        w: Math.min(1, boxW / w),
+        h: Math.min(1, boxH / h)
+      };
+    }
+    return { x: 0.18, y: 0.10, w: 0.64, h: 0.80 };
+  }
+
+  // 5. ترقية الكاميرا الحية لتدعم الالتقاط التلقائي بمجرد ثبات اليد على البطاقة
+  window.openLiveOmrCamera = async function() {
+    try {
+      camStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment', width: { ideal: 1920 }, height: { ideal: 1080 } }
+      });
+      const video = document.getElementById('cam-video');
+      video.srcObject = camStream;
+      document.getElementById('live-camera-container').classList.remove('hidden');
+      document.getElementById('scan-status').innerText = '🎯 وجّه الكاميرا على بطاقة التظليل؛ سيتم المحاذاة والالتقاط تلقائياً فور ثبات اليد...';
+
+      steadyFramesCount = 0;
+      prevFrameSample = null;
+      if (autoSnapInterval) clearInterval(autoSnapInterval);
+
+      autoSnapInterval = setInterval(() => {
+        const autoChk = document.getElementById('auto-snap-chk');
+        if (!autoChk || !autoChk.checked || !video.videoWidth) return;
+
+        const tmp = document.createElement('canvas');
+        tmp.width = 160; tmp.height = 160;
+        const tctx = tmp.getContext('2d');
+        tctx.drawImage(video, video.videoWidth * 0.2, video.videoHeight * 0.15, video.videoWidth * 0.6, video.videoHeight * 0.7, 0, 0, 160, 160);
+        const data = tctx.getImageData(0, 0, 160, 160).data;
+
+        let diff = 0, darkPixels = 0;
+        if (prevFrameSample) {
+          for (let i = 0; i < data.length; i += 16) {
+            diff += Math.abs(data[i] - prevFrameSample[i]);
+            if (data[i] < 110) darkPixels++;
+          }
+          const avgDiff = diff / (data.length / 16);
+          // إذا كانت الصورة ثابتة وتحتوي على خطوط ودوائر البطاقة السوداء
+          if (avgDiff < 7.5 && darkPixels > 120 && darkPixels < 950) {
+            steadyFramesCount++;
+            document.getElementById('scan-status').innerText = `🎯 جاري القفل التلقائي على البطاقة (${steadyFramesCount}/3)...`;
+            if (steadyFramesCount >= 3) {
+              steadyFramesCount = 0;
+              snapAndGradeLiveOmrStrip();
+            }
+          } else {
+            steadyFramesCount = 0;
+          }
+        }
+        prevFrameSample = new Uint8ClampedArray(data);
+      }, 380);
+    } catch (e) {
+      alert('تعذر فتح الكاميرا المباشرة، استخدم الزر الأزرق للتصوير بكاميرا الجوال.');
+    }
+  };
+
+  const origStopCamera = window.stopCamera;
+  window.stopCamera = function() {
+    if (autoSnapInterval) { clearInterval(autoSnapInterval); autoSnapInterval = null; }
+    if (origStopCamera) origStopCamera();
+  };
+
+  window.snapAndGradeLiveOmrStrip = function() {
+    const video = document.getElementById('cam-video');
+    if (!video.videoWidth) return;
+    playScanBeep(920, 0.14);
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0);
+    lastOmrVideoFrame = canvas;
+    // محاذاة وقص تلقائي على حدود البطاقة السوداء
+    omrCropBox = autoDetectAndCropCard(canvas);
+
+    const isContinuous = document.getElementById('continuous-batch-chk') && document.getElementById('continuous-batch-chk').checked;
+    if (!isContinuous) stopCamera();
+    processZipGradeOmrFrame();
+  };
+
+  // 6. قراءة الدوائر من اليمين لليسار بدقة عالية (مع مقارنة التباين النسبي لمنع القراءة العشوائية)
+  window.processZipGradeOmrFrame = function() {
+    if (!lastOmrVideoFrame) return;
+    const srcW = lastOmrVideoFrame.width, srcH = lastOmrVideoFrame.height;
+    const rx = Math.floor(srcW * omrCropBox.x), ry = Math.floor(srcH * omrCropBox.y);
+    const rw = Math.floor(srcW * omrCropBox.w), rh = Math.floor(srcH * omrCropBox.h);
+
+    const debugCanvas = document.getElementById('omr-debug-canvas');
+    debugCanvas.width = rw; debugCanvas.height = rh;
+    const ctx = debugCanvas.getContext('2d');
+    ctx.drawImage(lastOmrVideoFrame, rx, ry, rw, rh, 0, 0, rw, rh);
+
+    // قص مستطيل اسم الطالب بدقة من أعلى داخل البطاقة (بين 7% و 23% من ارتفاع البطاقة)
+    const nameCanvas = document.getElementById('student-name-crop-canvas');
+    const nameY = Math.floor(rh * 0.07), nameH = Math.floor(rh * 0.17);
+    nameCanvas.width = rw; nameCanvas.height = nameH;
+    nameCanvas.getContext('2d').drawImage(debugCanvas, 0, nameY, rw, nameH, 0, 0, rw, nameH);
+    document.getElementById('cropped-name-banner').classList.remove('hidden');
+
+    const totalQ = examData.mcq.length + examData.tf.length;
+    const half = Math.ceil(totalQ / 2);
+    // بداية صفوف الأسئلة بعد ترويسة الحروف (أ ب ج د)
+    const topPad = rh * 0.30;
+    const usableH = rh * 0.67;
+    const rowH = usableH / half;
+    const colW = rw / 2;
+    const mcqAnswers = {}, tfAnswers = {};
+
+    for (let idx = 0; idx < totalQ; idx++) {
+      const isRightCol = idx < half;
+      const rowInCol = isRightCol ? idx : (idx - half);
+      // العمود الأول (1-10) في النصف الأيمن، والعمود الثاني (11-20) في النصف الأيسر
+      const colStartX = isRightCol ? (rw * 0.50) : (rw * 0.03);
+      const effectiveColW = rw * 0.46;
+      const cy = topPad + (rowInCol + 0.5) * rowH;
+      const r = Math.min(effectiveColW * 0.055, rowH * 0.30);
+
+      if (idx < examData.mcq.length) {
+        // ترتيب الدوائر من اليمين إلى اليسار داخل العمود: أ (يمين)، ب، ج، د (يسار)
+        const labels = ['أ', 'ب', 'ج', 'د'];
+        const xRatios = [0.72, 0.52, 0.32, 0.12];
+        const pts = xRatios.map(xr => colStartX + effectiveColW * xr);
+        const darks = pts.map(cx => sampleCircleDarkness(ctx, cx, cy, r));
+
+        const maxD = Math.max(...darks);
+        const minD = Math.min(...darks);
+        const best = darks.indexOf(maxD);
+        // لا نعتبر الدائرة مظللة إلا إذا كان هناك فرق واضح في السواد عن بقية الدوائر في نفس السطر
+        const isClearlyShaded = (maxD - minD) > 14;
+        mcqAnswers[String(idx + 1)] = isClearlyShaded ? labels[best] : 'فارغ';
+
+        pts.forEach((cx, b) => {
+          const picked = isClearlyShaded && b === best;
+          ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+          ctx.lineWidth = picked ? 3 : 1;
+          ctx.strokeStyle = picked ? '#22c55e' : 'rgba(239,68,68,0.45)';
+          ctx.stroke();
+        });
+      } else {
+        const tfNum = (idx - examData.mcq.length) + 1;
+        // في الصح والخطأ: (صح) على اليمين، و(خطأ) على اليسار
+        const cxT = colStartX + effectiveColW * 0.62;
+        const cxF = colStartX + effectiveColW * 0.22;
+        const dT = sampleCircleDarkness(ctx, cxT, cy, r * 1.15);
+        const dF = sampleCircleDarkness(ctx, cxF, cy, r * 1.15);
+        const isShaded = Math.abs(dT - dF) > 12;
+        const pickT = dT >= dF;
+        tfAnswers[String(tfNum)] = isShaded ? (pickT ? 'صح' : 'خطأ') : 'فارغ';
+
+        [cxT, cxF].forEach((cx, b) => {
+          const active = isShaded && ((b === 0 && pickT) || (b === 1 && !pickT));
+          ctx.beginPath(); ctx.arc(cx, cy, r * 1.15, 0, Math.PI * 2);
+          ctx.lineWidth = active ? 3 : 1;
+          ctx.strokeStyle = active ? '#22c55e' : 'rgba(239,68,68,0.45)';
+          ctx.stroke();
+        });
+      }
+    }
+
+    document.getElementById('omr-visual-feedback-box').classList.remove('hidden');
+    processStudentEvaluation({ studentName: getNextUngradedStudentName(), mcqAnswers, tfAnswers });
+    document.getElementById('scan-status').innerText = '✅ تمت محاذاة البطاقة وقراءة الدوائر من اليمين لليسار بنجاح!';
+    handleContinuousAutoSaveIfNeeded();
+  };
+
+  // اختيار اسم الطالب التالي تلقائياً من قائمة الفصل لتسريع التصوير المتتابع
+  function getNextUngradedStudentName() {
+    const allNames = getActiveStudentNames();
+    const gradedNames = getActiveRoster().map(r => r.name);
+    const nextName = allNames.find(n => !gradedNames.includes(n));
+    return nextName || '';
+  }
+
+  // 7. إصلاح قراءة الذكاء الاصطناعي لاتجاه الدوائر العربي (من اليمين لليسار) + مطابقة اسم الطالب الذكية
+  window.gradeStudentPagesWithAI = async function() {
+    const apiKey = getActiveApiKey();
+    if (!apiKey) {
+      switchTab('exams', document.querySelectorAll('.tab-btn')[0]);
+      document.getElementById('secret-vault-modal').classList.remove('hidden');
+      return alert('يرجى وضع مفتاح Gemini API في الخزنة أولاً.');
+    }
+    if (!slotImages[1] && !slotImages[2]) return alert('صوّر مربع التظليل أولاً.');
+    const status = document.getElementById('scan-status');
+    status.innerText = '🚀 جاري قص البطاقة وقراءة اسم الطالب والدوائر بالاتجاه العربي (من اليمين لليسار)...';
+
+    // قص البطاقة تلقائياً قبل إرسالها للذكاء الاصطناعي ليرى الدوائر والاسم بوضوح فائق
+    const croppedImgDataUrl = await cropDataUrlToCard(slotImages[1]);
+
+    const registeredStudents = getActiveStudentNames();
+    const rosterHint = registeredStudents.length
+      ? `قائمة طلاب الفصل المعتمدة هي: [${registeredStudents.join(' ، ')}]. طابق الاسم المكتوب بخط اليد مع أقرب اسم في هذه القائمة حرفياً.`
+      : `اقرأ الاسم العربي المكتوب بخط اليد في خانة (اسم الطالب:) بدقة (انتبه للنقاط مثل: بالعمش).`;
+
+    const prompt = `أنت مصحح أوراق اختبارات عربية فائق الدقة. أمامك صورة بطاقة تظليل (ZipGrade) باللغة العربية (اتجاهها من اليمين إلى اليسار RTL):
+1. ${rosterHint}
+2. انتبه جيداً لاتجاه الدوائر من اليمين إلى اليسار (لا تقرأها من اليسار لليمين أبداً!):
+   - العمود الأيمن يحتوي على الأسئلة من 1 إلى 10.
+   - العمود الأيسر يحتوي على الأسئلة من 11 إلى ${examData.mcq.length} ثم أسئلة الصح والخطأ (ص1 إلى ص${examData.tf.length}).
+   - في كل سؤال اختياري: رقم السؤال على اليمين، وبجانبه 4 دوائر مرتبة من اليمين إلى اليسار كالتالي:
+     * الدائرة الأولى من اليمين = "أ"
+     * الدائرة الثانية من اليمين = "ب"
+     * الدائرة الثالثة من اليمين = "ج"
+     * الدائرة الرابعة (أقصى اليسار) = "د"
+   - في أسئلة الصح والخطأ (ص1 إلى ص${examData.tf.length}):
+     * الدائرة اليمنى (الأولى من اليمين) = "صح"
+     * الدائرة اليسرى (الأخيرة في اليسار) = "خطأ"
+أعد JSON فقط بهذا الشكل:
+{"studentName": "اسم الطالب", "mcqAnswers": {"1": "ب", "2": "ب"}, "tfAnswers": {"1": "صح", "2": "خطأ"}}`;
+
+    const parts = [
+      { text: prompt },
+      { inline_data: { mime_type: 'image/jpeg', data: croppedImgDataUrl.split(',')[1] } }
+    ];
+
+    try {
+      const rawText = await callGeminiSmart(apiKey, parts, true);
+      const parsed = JSON.parse(rawText.replace(/```json|```/g, '').trim());
+      if (parsed.studentName) parsed.studentName = matchClosestRosterName(parsed.studentName);
+      playScanBeep(980, 0.15);
+      processStudentEvaluation(parsed);
+      status.innerText = `✅ تم التصحيح بنجاح! الطالب: (${parsed.studentName || 'تم رصد الدرجة'})`;
+      handleContinuousAutoSaveIfNeeded();
+    } catch (err) {
+      status.innerText = '❌ خطأ: ' + err.message;
+    }
+  };
+
+  function cropDataUrlToCard(dataUrl) {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => {
+        const srcCanvas = document.createElement('canvas');
+        srcCanvas.width = img.width; srcCanvas.height = img.height;
+        srcCanvas.getContext('2d').drawImage(img, 0, 0);
+        const box = autoDetectAndCropCard(srcCanvas);
+        const padX = Math.max(0, box.x - 0.03), padY = Math.max(0, box.y - 0.03);
+        const padW = Math.min(1 - padX, box.w + 0.06), padH = Math.min(1 - padY, box.h + 0.06);
+        const out = document.createElement('canvas');
+        out.width = Math.floor(img.width * padW);
+        out.height = Math.floor(img.height * padH);
+        out.getContext('2d').drawImage(srcCanvas, Math.floor(img.width * padX), Math.floor(img.height * padY), out.width, out.height, 0, 0, out.width, out.height);
+        resolve(out.toDataURL('image/jpeg', 0.85));
+      };
+      img.src = dataUrl;
+    });
+  }
+
+  // مطابقة ذكية لاسم الطالب مع قائمة الفصل لمنع الأخطاء الإملائية البسيطة
+  function matchClosestRosterName(readName) {
+    const list = getActiveStudentNames();
+    if (!list.length || !readName) return readName;
+    const clean = s => s.replace(/[أإآا]/g, 'ا').replace(/[ةه]/g, 'ه').replace(/[ىي]/g, 'ي').trim();
+    const target = clean(readName);
+    let bestMatch = readName, bestScore = 0;
+    list.forEach(candidate => {
+      const cClean = clean(candidate);
+      const words = target.split(/\s+/);
+      let hits = 0;
+      words.forEach(w => { if (w.length > 2 && cClean.includes(w)) hits += 2; });
+      if (hits > bestScore) { bestScore = hits; bestMatch = candidate; }
+    });
+    return bestMatch;
+  }
+
+  // 8. الحفظ التلقائي الفوري عند تفعيل خيار "تصوير أوراق الفصل وراء بعض"
+  function handleContinuousAutoSaveIfNeeded() {
+    const isContinuous = document.getElementById('continuous-batch-chk') && document.getElementById('continuous-batch-chk').checked;
+    if (!isContinuous || !currentStudentResult) {
+      document.getElementById('grading-result-card').scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    if (!activeClassName) {
+      activeClassName = 'الفصل الحالي';
+      if (!classesDB[activeClassName]) classesDB[activeClassName] = { studentNames: [], gradedRoster: [] };
+    }
+    const finalName = document.getElementById('graded-student-name').value.trim() || ('طالب ' + (getActiveRoster().length + 1));
+    const itemMap = {};
+    currentStudentResult.rows.forEach(r => { itemMap[r.id] = r.isCorrect ? 1 : 0; });
+    const roster = getActiveRoster();
+    const existingIdx = roster.findIndex(s => s.name === finalName);
+    const record = { name: finalName, score: currentStudentResult.score, maxScore: currentStudentResult.rows.length, items: itemMap };
+    if (existingIdx >= 0) roster[existingIdx] = record;
+    else roster.push(record);
+
+    saveClassesDB(); renderClassBar(); renderRoster(); renderAnalyticsAndRemedial();
+    showFloatingToast(`✅ تم حفظ: ${finalName} (${currentStudentResult.score} / ${currentStudentResult.rows.length}) — صوّر الورقة التالية 📸`);
+  }
+</script>
+
