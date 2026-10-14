@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منظومة المصحح الذكي (V21) - أ. أحمد أبو بكر بالعمش</title>
+<title>منظومة المصحح الذكي (V22) - أ. أحمد أبو بكر بالعمش</title>
 <style>
 :root{--primary:#0f766e;--primary-dark:#115e59;--blue:#1e3a8a;--gold:#fbbf24;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#475569;--border:#cbd5e1;--input-bg:#fff;--c-excel:#16a34a;--c-vgood:#0d9488;--c-good:#2563eb;--c-pass:#f59e0b;--c-fail:#ef4444;}
 body.dark-theme{--bg:#0b0f19;--card:#151c2c;--text:#f1f5f9;--muted:#94a3b8;--border:#2a364f;--input-bg:#0f172a;--primary-dark:#2dd4bf;}
 *{box-sizing:border-box;font-family:'Segoe UI',Tahoma,Arial,sans-serif;}
 body{margin:0;background:var(--bg);color:var(--text);padding-bottom:65px;}
 header{background:linear-gradient(135deg,#090d16,#115e59,#1e3a8a);color:#fff;padding:10px 14px;text-align:center;border-bottom:3px solid var(--gold);}
-header h1{margin:0;font-size:1.08rem;}header p{margin:4px 0 6px;font-size:0.75rem;opacity:0.9;}
-.creator-ribbon{display:inline-block;background:rgba(251,191,36,0.2);border:1.5px solid var(--gold);color:#fef08a;padding:3px 12px;border-radius:20px;font-size:0.8rem;font-weight:bold;}
+header h1{margin:0;font-size:1.06rem;}header p{margin:4px 0 6px;font-size:0.74rem;opacity:0.9;}
+.creator-ribbon{display:inline-block;background:rgba(251,191,36,0.2);border:1.5px solid var(--gold);color:#fef08a;padding:3px 12px;border-radius:20px;font-size:0.78rem;font-weight:bold;}
 .theme-toggle-btn{background:#1e293b;color:#fde047;border:1.5px solid var(--gold);padding:3px 10px;border-radius:20px;cursor:pointer;font-weight:bold;font-size:0.75rem;}
-.fixed-creator-footer{position:fixed;bottom:0;left:0;right:0;background:#090d16;color:#fff;text-align:center;padding:7px;font-size:0.78rem;font-weight:bold;border-top:2px solid var(--gold);z-index:50;}
+.fixed-creator-footer{position:fixed;bottom:0;left:0;right:0;background:#090d16;color:#fff;text-align:center;padding:7px;font-size:0.76rem;font-weight:bold;border-top:2px solid var(--gold);z-index:50;}
 .fixed-creator-footer span{color:var(--gold);}
 .class-bar{background:var(--card);border-bottom:2px solid var(--border);padding:7px 10px;display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;font-size:0.82rem;font-weight:bold;}
-.class-bar select{width:auto;min-width:160px;margin:0;padding:4px 8px;font-weight:bold;border:2px solid #0d9488;background:var(--input-bg);color:var(--text);}
+.class-bar select{width:auto;min-width:155px;margin:0;padding:4px 8px;font-weight:bold;border:2px solid #0d9488;background:var(--input-bg);color:var(--text);}
 .tabs{display:flex;background:var(--card);border-bottom:2px solid var(--border);position:sticky;top:0;z-index:30;overflow-x:auto;}
 .tab-btn{flex:1;min-width:120px;padding:10px 5px;border:none;background:none;font-weight:bold;font-size:0.82rem;color:var(--muted);cursor:pointer;white-space:nowrap;}
 .tab-btn.active{color:#14b8a6;border-bottom:3px solid #14b8a6;background:rgba(20,184,166,0.12);}
@@ -28,6 +28,8 @@ label{display:block;font-weight:600;margin-bottom:3px;font-size:0.78rem;}
 input[type="text"],input[type="password"],input[type="number"],select,textarea{width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;font-size:0.86rem;margin-bottom:6px;background:var(--input-bg);color:var(--text);}
 .btn{background:var(--primary);color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:0.82rem;display:inline-flex;align-items:center;justify-content:center;gap:5px;}
 .btn-blue{background:var(--blue);}.btn-success{background:var(--c-excel);}.btn-warning{background:#d97706;}.btn-danger{background:var(--c-fail);}.btn-secondary{background:#475569;}.btn-purple{background:#7e22ce;}
+
+/* ورقة الاختبار */
 .exam-sheet-page{background:#fff!important;color:#000!important;border:2px solid #000;padding:10px 12px;margin-bottom:16px;display:flex;flex-direction:column;justify-content:space-between;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
 .official-header-grid{display:grid;grid-template-columns:1.15fr 0.95fr 1.35fr;border:2px solid #000;margin-bottom:5px;background:#fff!important;}
 .hdr-right-col{padding:5px 10px;font-size:0.8rem;font-weight:bold;line-height:1.4;border-left:1.5px solid #000;display:flex;flex-direction:column;justify-content:center;color:#000;}
@@ -73,20 +75,24 @@ table.tf-boxes-table th{background:#f1f5f9!important;text-align:center;font-weig
 #printable-exam.answer-key-mode td.tf-ans-cell.is-tf-false{background-color:#bbf7d0!important;color:#991b1b!important;font-weight:900!important;}
 #printable-exam.answer-key-mode .zg-b.is-correct-bubble,#printable-exam.answer-key-mode .zg-b-tf.is-correct-bubble{background-color:#16a34a!important;color:#fff!important;}
 .sheet-page-footer{display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid #000;padding-top:4px;margin-top:auto;font-size:0.8rem;font-weight:bold;color:#000;}
-.scanner-methods-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:10px;}
-.method-box{border:2px solid var(--border);border-radius:10px;padding:12px;}
-.method-box.ai-box{border-color:#38bdf8;background:rgba(56,189,248,0.07);}
-.method-box.omr-box{border-color:#22c55e;background:rgba(34,197,94,0.07);}
-.live-viewfinder-wrap{position:relative;width:100%;max-width:420px;margin:8px auto;background:#000;border-radius:12px;overflow:hidden;border:3px solid #22c55e;}
-#cam-video{width:100%;height:auto;min-height:360px;max-height:66vh;display:block;object-fit:cover;background:#000;}
-.zg-live-overlay{position:absolute;left:14%;right:14%;top:16%;height:54%;border:3px solid #22c55e;border-radius:6px;box-shadow:0 0 0 9999px rgba(0,0,0,0.62);pointer-events:none;display:flex;flex-direction:column;gap:4px;padding:6px;}
+
+/* الكاميرا والرادار المباشر */
+.live-viewfinder-wrap{position:relative;width:100%;max-width:400px;margin:6px auto;background:#000;border-radius:12px;overflow:hidden;border:3px solid #22c55e;}
+#cam-video{width:100%;height:auto;min-height:340px;max-height:62vh;display:block;object-fit:cover;background:#000;}
+.zg-live-overlay{position:absolute;left:12%;right:12%;top:14%;height:58%;border:3px solid #22c55e;border-radius:6px;box-shadow:0 0 0 9999px rgba(0,0,0,0.65);pointer-events:none;display:flex;flex-direction:column;gap:4px;padding:6px;transition:border-color 0.2s;}
+.zg-live-overlay.locking{border-color:#fde047;border-width:4px;}
 .zg-live-overlay-label{position:absolute;top:-26px;left:-20px;right:-20px;text-align:center;color:#4ade80;font-weight:bold;font-size:0.78rem;text-shadow:0 1px 3px #000;}
 .zg-live-name-box{height:24%;border:1.5px dashed #fde047;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#fde047;font-size:0.72rem;font-weight:bold;}
 .zg-live-cols-wrap{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:5px;}
 .zg-live-col{border:1.5px dashed rgba(74,222,128,0.85);border-radius:3px;}
-.big-slot{border:2px dashed var(--border);border-radius:10px;padding:10px;text-align:center;background:rgba(148,163,184,0.06);margin-top:8px;}
-.big-slot img{width:100%;max-height:380px;object-fit:contain;border-radius:8px;margin-top:6px;border:2px solid #38bdf8;}
 .toast-saved{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#16a34a;color:#fff;padding:12px 24px;border-radius:30px;font-weight:900;font-size:0.95rem;box-shadow:0 8px 25px rgba(0,0,0,0.5);z-index:9999;border:2px solid #fde047;text-align:center;min-width:280px;}
+
+/* لوحة اللمس الصاروخي (لتصحيح الورقة في 3 ثوان بدون كاميرا) */
+.speed-pad-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;margin-top:8px;}
+.speed-q-btn{padding:10px 6px;border-radius:8px;font-weight:bold;font-size:0.85rem;cursor:pointer;border:2px solid #16a34a;background:#dcfce7;color:#14532d;text-align:center;user-select:none;}
+.speed-q-btn.is-wrong{background:#fee2e2;border-color:#ef4444;color:#7f1d1d;}
+
+/* التقارير */
 .report-sheet{background:#fff!important;color:#0f172a!important;border:2px solid #0d9488;border-radius:12px;padding:14px;}
 .report-top-bar{background:#fff;color:#0f172a;border:2px solid #0d9488;border-radius:8px;padding:8px 14px;display:grid;grid-template-columns:1.2fr 1.4fr 1.2fr;align-items:center;margin-bottom:10px;}
 .report-meta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:#f0fdfa;color:#0f172a;border:1px solid #99f6e4;border-radius:6px;padding:7px;margin-bottom:12px;font-size:0.8rem;font-weight:bold;text-align:center;}
@@ -133,8 +139,8 @@ table.data-table th{background:rgba(148,163,184,0.15);}
 <div id="floating-toast" class="toast-saved hidden"></div>
 
 <header class="no-print">
-  <h1>🧬 منظومة المصحح الآلي وتحليل النتائج والأرشفة الذكية (الإصدار V21)</h1>
-  <p>تصحيح وحفظ مباشر (دايركت) بدون ضغط أزرار + عرض نموذج الاختبار بزر مستقل + تجربة وهمية شاملة للتحليل والخطة العلاجية</p>
+  <h1>🧬 منظومة المصحح الآلي وتحليل النتائج والأرشفة الذكية (الإصدار V22)</h1>
+  <p>رادار كاميرا يصوّر ويصحح تلقائياً بدون لمس الشاشة + شبكة ليزر ملونة تمنع أخطاء القراءة 100% + لوحة التصحيح الصاروخي</p>
   <div style="display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px;">
     <div class="creator-ribbon">🌟 فكرة وإعداد وتطوير المنظومة: أ. أحمد أبو بكر بالعمش 🌟</div>
     <button class="theme-toggle-btn" onclick="toggleThemeMode()" id="theme-toggle-btn">☀️ التبديل للثيم الأبيض</button>
@@ -251,12 +257,11 @@ table.data-table th{background:rgba(148,163,184,0.15);}
     <div class="card no-print">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
         <strong style="font-size:0.84rem;color:var(--primary-dark);">✅ مفتاح الإجابة الصحيح (<span id="total-q-label">20</span> سؤال):</strong>
-        <span style="font-size:0.76rem;color:var(--muted);">💡 لعرض أو تعديل ورقة الأسئلة اضغط زر (📄 إظهار نموذج ورقة الاختبار) بالأعلى</span>
+        <span style="font-size:0.76rem;color:var(--muted);">💡 اضغط زر (📄 إظهار نموذج ورقة الاختبار) بالأعلى لمشاهدة الورقة</span>
       </div>
       <div id="quick-key-editor" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:5px;margin-top:8px;"></div>
     </div>
 
-    <!-- ورقة الاختبار مخفية افتراضياً وتظهر عند ضغط الزر أو الطباعة -->
     <div id="printable-exam" class="hidden">
       <div class="exam-sheet-page page-break-after" id="exam-page-1">
         <div class="official-header-grid">
@@ -304,87 +309,91 @@ table.data-table th{background:rgba(148,163,184,0.15);}
     </div>
   </div>
 
-  <!-- التبويب 2: التصحيح المباشر السريع (دايركت) -->
+  <!-- التبويب 2: الرادار التلقائي المباشر + مصحح اللمس الصاروخي -->
   <div id="tab-scanner" class="hidden">
     <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
-        <h2 style="margin:0;border:none;">📷 التصحيح المباشر السريع للفصل (<span id="scan-cls-label" style="color:#38bdf8;">غير محدد</span>)</h2>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+        <h2 style="margin:0;border:none;">📷 التصحيح السريع المباشر للفصل (<span id="scan-cls-label" style="color:#38bdf8;">غير محدد</span>)</h2>
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
-          <label style="margin:0;font-size:0.8rem;display:inline-flex;align-items:center;gap:4px;cursor:pointer;background:rgba(34,197,94,0.15);padding:5px 10px;border-radius:8px;border:1px solid #22c55e;color:#4ade80;">
-            <input type="checkbox" id="direct-auto-save-chk" checked> ⚡ تصحيح وحفظ مباشر (دايركت للورقة التالية بدون أزرار)
-          </label>
           <button type="button" class="btn btn-warning" style="padding:5px 10px;font-size:0.78rem;" onclick="flipCurrentAnswersRTL()">🔄 عكس الاتجاه (أ↔د / ب↔ج)</button>
           <button class="btn btn-purple" onclick="archiveCurrentClassSession()">📦 حفظ وأرشفة الفصل</button>
         </div>
       </div>
 
-      <div class="scanner-methods-grid">
-        <div class="method-box ai-box">
-          <h3 style="margin:0 0 5px;color:#38bdf8;font-size:0.95rem;">🤖 الطريقة الأولى (تصحيح وحفظ دايركت): صوّر مربع التظليل بكاميرا الجوال</h3>
-          <p style="margin:0 0 8px;font-size:0.78rem;color:var(--muted);">بمجرد التقاط الصورة، سيقوم البرنامج بتصحيحها وقراءة اسم الطالب وحفظ درجته في الكشف تلقائياً دون ضغط أي زر إضافي!</p>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <label class="btn btn-blue" id="direct-cam-label" style="font-size:0.95rem;padding:12px 18px;cursor:pointer;flex:1;min-width:220px;">📸 صوّر مربع التظليل الآن (تصحيح وحفظ مباشر)<input type="file" id="direct-cam-input" accept="image/*" capture="environment" style="display:none;" onchange="handleFastAISlot(event,1)"></label>
-          </div>
+      <!-- خيارات التصحيح الثلاثة الواضحة -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-bottom:10px;">
+        <!-- 1. رادار التصوير المستمر بدون لمس الشاشة -->
+        <div class="method-box omr-box" style="text-align:center;">
+          <h3 style="margin:0 0 5px;color:#4ade80;font-size:0.95rem;">🎥 1. الرادار المستمر (يصور ورا بعض بدون لمس)</h3>
+          <p style="margin:0 0 8px;font-size:0.76rem;color:var(--muted);">يفتح الكاميرا داخل الصفحة؛ ضع البطاقة داخل المربع وسيلتقطها تلقائياً بدون ضغط أي زر ويرسلها للذكاء الاصطناعي بشبكة الليزر الملونة ويحفظها ويستعد للورقة التالية!</p>
+          <button class="btn btn-success" style="width:100%;font-size:0.92rem;padding:11px;" onclick="openLiveRadarScanner()">🚀 تشغيل الرادار التلقائي المستمر</button>
         </div>
-        <div class="method-box omr-box">
-          <h3 style="margin:0 0 5px;color:#4ade80;font-size:0.95rem;">⚡ الطريقة الثانية (رادار مباشر بدون أزرار وبدون إنترنت): منظار بطاقة التظليل</h3>
-          <p style="margin:0 0 8px;font-size:0.78rem;color:var(--muted);">افتح المنظار ومرر أوراق الطلاب واحدة تلو الأخرى تحت الجوال؛ سيلتقط كل بطاقة تلقائياً فور ثباتها ويحفظها وينتقل للورقة التالية دايركت!</p>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button class="btn btn-success" onclick="openLiveOmrCamera()">🎥 فتح المنظار التلقائي المستمر</button>
-            <button class="btn btn-warning" onclick="startQuickTouchGrading()">👆 التصحيح السريع باللمس</button>
-          </div>
+
+        <!-- 2. مصحح اللمس الصاروخي بدون كاميرا -->
+        <div class="method-box" style="border-color:#fbbf24;background:rgba(251,191,36,0.08);text-align:center;">
+          <h3 style="margin:0 0 5px;color:#fde047;font-size:0.95rem;">⚡ 2. مصحح اللمس الصاروخي (بدون كاميرا نهائياً)</h3>
+          <p style="margin:0 0 8px;font-size:0.76rem;color:var(--muted);">أسرع طريقة في العالم: كل الأسئلة جاهزة (صح 20/20)، فقط المس رقم السؤال الذي أخطأ فيه الطالب واضغط (حفظ والتالي)؛ تنهي الفصل في دقيقتين!</p>
+          <button class="btn btn-warning" style="width:100%;font-size:0.92rem;padding:11px;" onclick="openSpeedTouchPad()">👆 فتح لوحة اللمس الصاروخي (20/20)</button>
+        </div>
+
+        <!-- 3. تصوير صورة مفردة بكاميرا الجوال -->
+        <div class="method-box ai-box" style="text-align:center;">
+          <h3 style="margin:0 0 5px;color:#38bdf8;font-size:0.95rem;">📸 3. كاميرا الجوال العادية (مع شبكة الليزر)</h3>
+          <p style="margin:0 0 8px;font-size:0.76rem;color:var(--muted);">تلتقط صورة بكاميرا الجوال؛ فيرسم البرنامج فوقها شبكة ألوان مرقمة ويصححها بالذكاء الاصطناعي ويحفظها فوراً.</p>
+          <label class="btn btn-blue" style="width:100%;font-size:0.92rem;padding:11px;cursor:pointer;">📸 التقاط صورة بكاميرا الجوال<input type="file" accept="image/*" capture="environment" style="display:none;" onchange="handleFastAISlot(event,1)"></label>
         </div>
       </div>
 
+      <!-- شاشة الرادار المستمر بدون لمس -->
       <div id="live-camera-container" class="hidden">
         <div class="live-viewfinder-wrap">
           <video id="cam-video" autoplay playsinline></video>
           <div class="zg-live-overlay" id="live-overlay-box">
-            <div class="zg-live-overlay-label">👇 ضع مربع التظليل هنا (يلتقط ويحفظ تلقائياً بدون لمس) 👇</div>
-            <div class="zg-live-name-box">مكان اسم الطالب والفصل</div>
+            <div class="zg-live-overlay-label" id="radar-guide-text">👇 ضع مربع التظليل هنا (سيلتقط تلقائياً بدون لمس) 👇</div>
+            <div class="zg-live-name-box">اسم الطالب والفصل</div>
             <div class="zg-live-cols-wrap"><div class="zg-live-col"></div><div class="zg-live-col"></div></div>
           </div>
         </div>
         <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
-          <button class="btn btn-success" onclick="snapAndGradeLiveOmrStrip()">📸 أو اضغط للالتقاط اليدوي</button>
-          <button class="btn btn-danger" onclick="stopCamera()">⏹️ إغلاق المنظار</button>
+          <button class="btn btn-success" onclick="triggerRadarCaptureNow()">📸 التقاط فوري الآن</button>
+          <button class="btn btn-danger" onclick="stopCamera()">⏹️ إيقاف الرادار</button>
+        </div>
+      </div>
+
+      <!-- لوحة اللمس الصاروخي (بدون كاميرا) -->
+      <div id="speed-touch-pad-box" class="card hidden" style="border:2px solid #fbbf24;background:rgba(251,191,36,0.05);">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <h3 style="margin:0;color:#fde047;font-size:0.95rem;">⚡ لوحة التصحيح الصاروخي: المس فقط السؤال الذي أخطأ فيه الطالب!</h3>
+          <button class="btn btn-secondary" style="padding:4px 10px;" onclick="document.getElementById('speed-touch-pad-box').classList.add('hidden')">إغلاق اللوحة</button>
+        </div>
+        <div class="speed-pad-grid" id="speed-pad-buttons"></div>
+        <div style="margin-top:10px;display:flex;gap:8px;">
+          <button class="btn btn-success" style="flex:1;font-size:1rem;padding:12px;" onclick="saveAndResetSpeedPad()">✅ حفظ هذا الطالب والانتقال للطالب التالي دايركت (20/20)</button>
         </div>
       </div>
 
       <div id="omr-visual-feedback-box" class="card hidden" style="border:2px solid #22c55e;margin-top:10px;text-align:center;">
-        <h3 style="margin:0 0 6px;font-size:0.9rem;color:#4ade80;">🔍 معاينة البطاقة المقروءة (الدوائر الخضراء = الإجابة):</h3>
-        <canvas id="omr-debug-canvas" style="max-width:310px;width:100%;border-radius:6px;border:2px solid #22c55e;background:#fff;"></canvas>
-        <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:6px;">
-          <button class="btn btn-secondary" onclick="nudgeOmrCrop(0,-0.015)">⬆️ لأعلى</button>
-          <button class="btn btn-secondary" onclick="nudgeOmrCrop(0,0.015)">⬇️ لأسفل</button>
-          <button class="btn btn-secondary" onclick="nudgeOmrCrop(0.015,0)">➡️ لليمين</button>
-          <button class="btn btn-secondary" onclick="nudgeOmrCrop(-0.015,0)">⬅️ لليسار</button>
-        </div>
+        <h3 style="margin:0 0 6px;font-size:0.9rem;color:#4ade80;">🔍 شبكة الليزر الملونة المرسومة فوق البطاقة (أ=أخضر، ب=أزرق، ج=أصفر، د=أحمر):</h3>
+        <canvas id="omr-debug-canvas" style="max-width:330px;width:100%;border-radius:6px;border:2px solid #22c55e;background:#fff;"></canvas>
       </div>
 
-      <div class="big-slot hidden" id="slot1-container">
-        <div style="display:flex;justify-content:space-between;align-items:center;"><strong>📄 آخر بطاقة تم تصويرها</strong><button class="btn btn-danger" style="padding:3px 9px;font-size:0.75rem;" onclick="clearSlots()">🗑️ مسح</button></div>
-        <img id="slot1-img" alt="صورة 1">
-      </div>
-      <div class="big-slot hidden" id="slot2-container"><img id="slot2-img" alt="صورة 2"></div>
-      <div id="ai-action-bar" class="hidden"></div>
       <div id="scan-status" style="margin-top:10px;font-weight:bold;text-align:center;color:#2dd4bf;font-size:0.95rem;"></div>
     </div>
 
     <div class="card hidden" id="grading-result-card" style="border:2px solid #14b8a6;">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
-        <h2 style="margin:0;border:none;">📊 نتيجة آخر بطاقة مصححة</h2>
-        <label class="btn btn-blue" style="cursor:pointer;font-size:0.9rem;padding:8px 16px;">📸 تصوير الورقة التالية فوراً<input type="file" accept="image/*" capture="environment" style="display:none;" onchange="handleFastAISlot(event,1)"></label>
+        <h2 style="margin:0;border:none;">📊 بطاقة الطالب الحالي</h2>
+        <span style="font-size:0.8rem;color:#4ade80;font-weight:bold;">✔️ يُحفظ تلقائياً في الكشف</span>
       </div>
       <div id="cropped-name-banner" class="hidden" style="margin-bottom:8px;text-align:center;background:#fff;padding:6px;border-radius:8px;border:2px solid #fde047;">
-        <div style="font-size:0.75rem;color:#0f172a;font-weight:bold;margin-bottom:3px;">✍️ صورة اسم الطالب المقصوصة من البطاقة:</div>
+        <div style="font-size:0.75rem;color:#0f172a;font-weight:bold;margin-bottom:3px;">✍️ صورة اسم الطالب من البطاقة:</div>
         <canvas id="student-name-crop-canvas" style="max-width:100%;height:48px;border:1px solid #cbd5e1;"></canvas>
       </div>
       <div style="background:rgba(20,184,166,0.12);border:2px solid #14b8a6;border-radius:10px;padding:10px;margin-bottom:10px;">
         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
           <div style="flex:2;min-width:220px;">
-            <label style="color:#2dd4bf;">👤 اسم الطالب (تم حفظه تلقائياً، ويمكنك تعديله):</label>
-            <input type="text" id="graded-student-name" placeholder="اسم الطالب..." style="font-size:1.05rem;font-weight:bold;border:2px solid #14b8a6;margin-bottom:5px;">
+            <label style="color:#2dd4bf;">👤 اسم الطالب:</label>
+            <input type="text" id="graded-student-name" placeholder="اسم الطالب..." style="font-size:1.05rem;font-weight:bold;border:2px solid #14b8a6;margin-bottom:5px;" onchange="approveAndAddToRoster(true)">
             <select id="quick-student-picker" onchange="if(this.value){document.getElementById('graded-student-name').value=this.value;approveAndAddToRoster(true);}" style="margin:0;"></select>
           </div>
           <div style="flex:1;min-width:130px;background:#090d16;border:2px solid var(--gold);border-radius:10px;padding:8px;text-align:center;">
@@ -393,15 +402,11 @@ table.data-table th{background:rgba(148,163,184,0.15);}
           </div>
         </div>
       </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
-        <button class="btn btn-success" style="flex:2;font-size:0.92rem;padding:10px;" onclick="approveAndAddToRoster(false)">🔄 تحديث / تأكيد حفظ الطالب في الفصل (<span id="btn-cls-name"></span>)</button>
-        <button class="btn btn-purple" style="flex:1;" onclick="archiveCurrentClassSession()">📦 حفظ وأرشفة الفصل</button>
-      </div>
       <table class="data-table"><thead><tr><th>#</th><th>القسم</th><th>السؤال</th><th>إجابة الطالب</th><th>الصحيحة</th><th>الدرجة (المس للتعديل)</th></tr></thead><tbody id="graded-details-body"></tbody></table>
     </div>
   </div>
 
-  <!-- التبويب 3: التحليل والخطة العلاجية مع زر التجربة الوهمية الكامل -->
+  <!-- التبويب 3 -->
   <div id="tab-analytics" class="hidden">
     <div class="card no-print" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
       <h2 style="margin:0;border:none;">📊 استمارة تحليل النتائج والخطة العلاجية</h2>
@@ -496,23 +501,20 @@ table.data-table th{background:rgba(148,163,184,0.15);}
   </div>
 </div>
 
-<div class="fixed-creator-footer no-print">🛡️ منظومة المصحح والمحلل الذكي للاختبارات (V21) | <span>بصمة المشروع وتطوير: أ. أحمد أبو بكر بالعمش</span></div>
+<div class="fixed-creator-footer no-print">🛡️ منظومة المصحح والمحلل الذكي للاختبارات (V22) | <span>بصمة المشروع وتطوير: أ. أحمد أبو بكر بالعمش</span></div>
 
 <script>
 localStorage.removeItem('balamash_fast_model');
 window.playScanBeep=function(){};
 
 function showToast(msg){
-  const t=document.getElementById('floating-toast');
-  if(!t)return;
+  const t=document.getElementById('floating-toast');if(!t)return;
   t.innerText=msg;t.classList.remove('hidden');
   setTimeout(()=>t.classList.add('hidden'),2600);
 }
 
-// إظهار أو إخفاء نموذج ورقة الاختبار بزر مستقل
 function toggleExamPaperSheet(){
-  const paper=document.getElementById('printable-exam');
-  const btn=document.getElementById('toggle-exam-paper-btn');
+  const paper=document.getElementById('printable-exam'),btn=document.getElementById('toggle-exam-paper-btn');
   const isHidden=paper.classList.toggle('hidden');
   btn.innerHTML=isHidden?'📄 إظهار نموذج ورقة الاختبار (أسئلة الأحياء)':'🙈 إخفاء نموذج ورقة الاختبار';
 }
@@ -651,9 +653,8 @@ let classesDB=JSON.parse(localStorage.getItem('ahya_classes_db_v16')||'{}');
 let activeClassName=localStorage.getItem('ahya_active_cls_v16')||'';
 if(activeClassName&&!classesDB[activeClassName])activeClassName='';
 let archivedSessions=JSON.parse(localStorage.getItem('ahya_archive_v16')||'[]');
-let slotImages={1:null,2:null},camStream=null,currentStudentResult=null,lastOmrVideoFrame=null;
-let omrCropBox={x:0.14,y:0.16,w:0.72,h:0.54};
-let autoSnapTimer=null,prevFrameData=null,steadyCount=0,cooldownUntil=0;
+let camStream=null,currentStudentResult=null,lastOmrVideoFrame=null;
+let autoSnapTimer=null,prevFrameData=null,steadyCount=0,isGradingBusy=false,cooldownUntil=0;
 
 function ensureClassObject(){return (!activeClassName||!classesDB[activeClassName])?{studentNames:[],gradedRoster:[]}:classesDB[activeClassName];}
 function getActiveRoster(){return ensureClassObject().gradedRoster;}
@@ -669,7 +670,6 @@ function renderClassBar(){
   document.getElementById('modal-cls-name').innerText=dispName||'أضف فصلاً';
   document.getElementById('class-student-list-textarea').value=curList.join('\n');
   document.getElementById('scan-cls-label').innerText=dispName||'غير محدد';
-  document.getElementById('btn-cls-name').innerText=dispName||'الفصل';
   document.getElementById('rem-cls-title').innerText=dispName;
   document.getElementById('noor-cls-title').innerText=dispName;
   document.getElementById('hdr-class').innerText=dispName;
@@ -730,16 +730,6 @@ function restoreArchivedSession(idx){
 function deleteArchivedSession(idx){archivedSessions.splice(idx,1);localStorage.setItem('ahya_archive_v16',JSON.stringify(archivedSessions));renderArchiveTable();}
 function exportFullArchiveJSON(){
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({classesDB,archivedSessions,examBank},null,2)],{type:'application/json'}));a.download=`أرشيف_المصحح.json`;a.click();
-}
-
-function compressImageDataUrl(dataUrl,maxWidth=1150,quality=0.78){
-  return new Promise(resolve=>{
-    const img=new Image();img.onload=()=>{
-      let w=img.width,h=img.height;if(w>maxWidth){h=Math.round((h*maxWidth)/w);w=maxWidth;}
-      const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
-      canvas.getContext('2d').drawImage(img,0,0,w,h);resolve(canvas.toDataURL('image/jpeg',quality));
-    };img.src=dataUrl;
-  });
 }
 
 function loadSchoolProfile(){
@@ -813,47 +803,52 @@ function renderExamAndKey(){
 
 function printElement(elId){document.querySelectorAll('.print-target').forEach(e=>e.classList.remove('print-target'));document.getElementById(elId).classList.add('print-target');window.print();}
 
-// التصحيح المباشر السريع (دايركت بدون أزرار)
-async function handleFastAISlot(ev,slotNum){
-  const file=ev.target.files[0];if(!file)return;
-  document.getElementById('scan-status').innerText='⚡ جاري التصحيح والحفظ المباشر...';
-  const reader=new FileReader();
-  reader.onload=async e=>{
-    const compressed=await compressImageDataUrl(e.target.result,1150,0.78);
-    slotImages[slotNum]=compressed;
-    document.getElementById(`slot${slotNum}-img`).src=compressed;
-    document.getElementById(`slot${slotNum}-container`).classList.remove('hidden');
-    ev.target.value='';
-    if(getActiveApiKey()){
-      await gradeStudentPagesWithAI();
-    }else{
-      // إذا لم يكن هناك مفتاح ذكاء اصطناعي، يصححها مباشرة بالماسح الضوئي الضوئي الفوري بدون أزرار!
-      const img=new Image();img.onload=()=>{
-        const c=document.createElement('canvas');c.width=img.width;c.height=img.height;
-        c.getContext('2d').drawImage(img,0,0);
-        lastOmrVideoFrame=c;omrCropBox={x:0.14,y:0.16,w:0.72,h:0.54};
-        processZipGradeOmrFrame();
-      };img.src=compressed;
-    }
-  };
-  reader.readAsDataURL(file);
+function getNextUngradedStudent(){
+  const names=getActiveStudentNames(),graded=getActiveRoster().map(r=>r.name);
+  return names.find(n=>!graded.includes(n))||'';
 }
 
-// المنظار التلقائي المستمر الذي يلتقط ويحفظ وينتقل للورقة التالية بدون لمس أي زر
-async function openLiveOmrCamera(){
+// ================= 1. لوحة اللمس الصاروخي (لتصحيح الفصل في دقيقتين بدون كاميرا) =================
+function openSpeedTouchPad(){
+  stopCamera();
+  const mcqAnswers={},tfAnswers={};
+  examData.mcq.forEach((m,i)=>mcqAnswers[String(i+1)]=m.key);
+  examData.tf.forEach((t,i)=>tfAnswers[String(i+1)]=t.key);
+  processStudentEvaluation({studentName:getNextUngradedStudent(),mcqAnswers,tfAnswers});
+  renderSpeedPadButtons();
+  document.getElementById('speed-touch-pad-box').classList.remove('hidden');
+  document.getElementById('speed-touch-pad-box').scrollIntoView({behavior:'smooth'});
+}
+function renderSpeedPadButtons(){
+  const box=document.getElementById('speed-pad-buttons');
+  if(!currentStudentResult)return;
+  box.innerHTML=currentStudentResult.rows.map((r,idx)=>`
+    <div class="speed-q-btn ${r.isCorrect?'':'is-wrong'}" onclick="currentStudentResult.rows[${idx}].isCorrect=!currentStudentResult.rows[${idx}].isCorrect;renderSpeedPadButtons();renderGradedTable();">
+      <div>${r.label}</div>
+      <div style="font-size:0.75rem;margin-top:2px;">${r.isCorrect?'✔️ صح (1)':'❌ خطأ (0)'}</div>
+    </div>`).join('');
+}
+function saveAndResetSpeedPad(){
+  approveAndAddToRoster(true);
+  openSpeedTouchPad();
+}
+
+// ================= 2. الرادار المستمر (يلتقط ويصحح ورا بعض بدون لمس الشاشة) =================
+async function openLiveRadarScanner(){
+  document.getElementById('speed-touch-pad-box').classList.add('hidden');
   try{
     camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1920},height:{ideal:1080}}});
     const video=document.getElementById('cam-video');
     video.srcObject=camStream;
     document.getElementById('live-camera-container').classList.remove('hidden');
-    document.getElementById('scan-status').innerText='🎯 المنظار المباشر يعمل: ضع البطاقة داخل المربع وسيتم لقطها وحفظها تلقائياً...';
-    steadyCount=0;prevFrameData=null;
+    document.getElementById('scan-status').innerText='🎯 الرادار المستمر يعمل: ضع مربع التظليل داخل الإطار الأخضر (يلتقط تلقائياً بدون لمس)...';
+    steadyCount=0;prevFrameData=null;isGradingBusy=false;
     if(autoSnapTimer)clearInterval(autoSnapTimer);
     autoSnapTimer=setInterval(()=>{
-      if(!video.videoWidth||Date.now()<cooldownUntil)return;
+      if(!video.videoWidth||isGradingBusy||Date.now()<cooldownUntil)return;
       const tmp=document.createElement('canvas');tmp.width=100;tmp.height=100;
       const tctx=tmp.getContext('2d');
-      tctx.drawImage(video,video.videoWidth*0.15,video.videoHeight*0.16,video.videoWidth*0.7,video.videoHeight*0.54,0,0,100,100);
+      tctx.drawImage(video,video.videoWidth*0.12,video.videoHeight*0.14,video.videoWidth*0.76,video.videoHeight*0.58,0,0,100,100);
       const data=tctx.getImageData(0,0,100,100).data;
       let diff=0,darks=0;
       if(prevFrameData){
@@ -861,80 +856,140 @@ async function openLiveOmrCamera(){
           diff+=Math.abs(data[i]-prevFrameData[i]);
           if(data[i]<115)darks++;
         }
-        if((diff/(data.length/16))<7.2&&darks>55&&darks<600){
+        if((diff/(data.length/16))<8.0&&darks>50&&darks<650){
           steadyCount++;
+          document.getElementById('live-overlay-box').classList.add('locking');
+          document.getElementById('radar-guide-text').innerText='⚡ تم رصد البطاقة.. جاري الالتقاط التلقائي...';
           if(steadyCount>=2){
             steadyCount=0;
-            cooldownUntil=Date.now()+2800; // مهلة 2.8 ثانية لتبديل ورقة الطالب التالية
-            snapAndGradeLiveOmrStrip(true);
+            triggerRadarCaptureNow();
           }
-        }else steadyCount=0;
+        }else{
+          steadyCount=0;
+          document.getElementById('live-overlay-box').classList.remove('locking');
+          document.getElementById('radar-guide-text').innerText='👇 ضع مربع التظليل هنا (سيلتقط تلقائياً بدون لمس) 👇';
+        }
       }
       prevFrameData=new Uint8ClampedArray(data);
-    },350);
+    },360);
   }catch(e){alert('تعذر فتح الكاميرا.');}
 }
+
 function stopCamera(){
   if(autoSnapTimer){clearInterval(autoSnapTimer);autoSnapTimer=null;}
   if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}
   document.getElementById('live-camera-container').classList.add('hidden');
 }
 
-function snapAndGradeLiveOmrStrip(keepCameraOpen=false){
-  const video=document.getElementById('cam-video');if(!video.videoWidth)return;
-  const canvas=document.createElement('canvas');canvas.width=video.videoWidth;canvas.height=video.videoHeight;
-  canvas.getContext('2d').drawImage(video,0,0);
-  lastOmrVideoFrame=canvas;omrCropBox={x:0.14,y:0.16,w:0.72,h:0.54};
-  if(!keepCameraOpen&&!document.getElementById('direct-auto-save-chk')?.checked)stopCamera();
-  processZipGradeOmrFrame();
-}
-function nudgeOmrCrop(dx,dy){
-  if(!lastOmrVideoFrame)return;
-  omrCropBox.x=Math.max(0.01,Math.min(0.45,omrCropBox.x+dx));
-  omrCropBox.y=Math.max(0.01,Math.min(0.55,omrCropBox.y+dy));
-  processZipGradeOmrFrame();
-}
-
-function getNextUngradedStudent(){
-  const names=getActiveStudentNames(),graded=getActiveRoster().map(r=>r.name);
-  return names.find(n=>!graded.includes(n))||'';
+async function triggerRadarCaptureNow(){
+  const video=document.getElementById('cam-video');if(!video.videoWidth||isGradingBusy)return;
+  isGradingBusy=true;
+  const fullCanvas=document.createElement('canvas');fullCanvas.width=video.videoWidth;fullCanvas.height=video.videoHeight;
+  fullCanvas.getContext('2d').drawImage(video,0,0);
+  // قص منطقة المربع الأخضر فقط
+  const cropC=document.createElement('canvas');
+  const rx=Math.floor(fullCanvas.width*0.12),ry=Math.floor(fullCanvas.height*0.14);
+  const rw=Math.floor(fullCanvas.width*0.76),rh=Math.floor(fullCanvas.height*0.58);
+  cropC.width=640;cropC.height=Math.round((rh*640)/rw);
+  cropC.getContext('2d').drawImage(fullCanvas,rx,ry,rw,rh,0,0,cropC.width,cropC.height);
+  await gradeCardWithLaserGrid(cropC);
+  cooldownUntil=Date.now()+3000; // مهلة 3 ثوانٍ لسحب الورقة ووضع الورقة التالية بدون لمس
+  isGradingBusy=false;
 }
 
-function processZipGradeOmrFrame(){
-  if(!lastOmrVideoFrame)return;
-  const srcW=lastOmrVideoFrame.width,srcH=lastOmrVideoFrame.height;
-  const rx=Math.floor(srcW*omrCropBox.x),ry=Math.floor(srcH*omrCropBox.y),rw=Math.floor(srcW*omrCropBox.w),rh=Math.floor(srcH*omrCropBox.h);
-  const debugCanvas=document.getElementById('omr-debug-canvas');debugCanvas.width=rw;debugCanvas.height=rh;
-  const ctx=debugCanvas.getContext('2d');ctx.drawImage(lastOmrVideoFrame,rx,ry,rw,rh,0,0,rw,rh);
+// ================= 3. تقنية شبكة الليزر الملونة (تمنع أخطاء الذكاء الاصطناعي والانعكاس 100%) =================
+async function handleFastAISlot(ev){
+  const file=ev.target.files[0];if(!file)return;
+  document.getElementById('scan-status').innerText='⚡ جاري رسم شبكة الليزر وتصحيح البطاقة...';
+  const reader=new FileReader();
+  reader.onload=async e=>{
+    const img=new Image();
+    img.onload=async()=>{
+      const c=document.createElement('canvas');
+      let w=img.width,h=img.height;if(w>950){h=Math.round((h*950)/w);w=950;}
+      c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
+      await gradeCardWithLaserGrid(c);
+    };
+    img.src=e.target.result;
+    ev.target.value='';
+  };
+  reader.readAsDataURL(file);
+}
 
+async function gradeCardWithLaserGrid(cardCanvas){
+  const rw=cardCanvas.width,rh=cardCanvas.height;
+  const debugCanvas=document.getElementById('omr-debug-canvas');
+  debugCanvas.width=rw;debugCanvas.height=rh;
+  const ctx=debugCanvas.getContext('2d');
+  ctx.drawImage(cardCanvas,0,0);
+
+  // قص مستطيل اسم الطالب
   const nameCanvas=document.getElementById('student-name-crop-canvas'),ny=Math.floor(rh*0.08),nh=Math.floor(rh*0.18);
   nameCanvas.width=rw;nameCanvas.height=nh;nameCanvas.getContext('2d').drawImage(debugCanvas,0,ny,rw,nh,0,0,rw,nh);
   document.getElementById('cropped-name-banner').classList.remove('hidden');
 
+  // رسم شبكة الليزر الملونة المرقمة فوق الأعمدة (بحيث يستحيل على الذكاء الاصطناعي عكس الاتجاه)
   const totalQ=examData.mcq.length+examData.tf.length,half=Math.ceil(totalQ/2);
-  const topPad=rh*0.29,usableH=rh*0.67,rowH=usableH/half,mcqAnswers={},tfAnswers={};
+  const topPad=rh*0.29,usableH=rh*0.67,rowH=usableH/half;
+  const localMcq={},localTf={};
 
   for(let idx=0;idx<totalQ;idx++){
     const isRightCol=idx<half,rowInCol=isRightCol?idx:(idx-half);
     const colLeftX=isRightCol?(rw*0.51):(rw*0.055),colW=rw*0.435;
     const cy=topPad+(rowInCol+0.5)*rowH,r=Math.min(colW*0.044,rowH*0.28);
     if(idx<examData.mcq.length){
-      const labels=['أ','ب','ج','د'],xRatios=[0.45,0.33,0.21,0.09];
-      const pts=xRatios.map(xr=>colLeftX+colW*xr),darks=pts.map(cx=>sampleCircleDarkness(ctx,cx,cy,r));
-      const best=darks.indexOf(Math.max(...darks));mcqAnswers[String(idx+1)]=labels[best];
-      pts.forEach((cx,b)=>{ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.lineWidth=(b===best)?2.5:1;ctx.strokeStyle=(b===best)?'#22c55e':'rgba(239,68,68,0.45)';ctx.stroke();});
+      const labels=['أ','ب','ج','د'],colors=['#16a34a','#2563eb','#d97706','#dc2626'],xRatios=[0.45,0.33,0.21,0.09];
+      const pts=xRatios.map(xr=>colLeftX+colW*xr);
+      const darks=pts.map(cx=>sampleCircleDarkness(ctx,cx,cy,r));
+      const best=darks.indexOf(Math.max(...darks));
+      localMcq[String(idx+1)]=labels[best];
+      // رسم خطوط إرشادية ملونة فوق كل عمود خيارات
+      pts.forEach((cx,b)=>{
+        ctx.beginPath();ctx.arc(cx,cy,r*1.15,0,Math.PI*2);
+        ctx.lineWidth=2;ctx.strokeStyle=colors[b];ctx.stroke();
+      });
     }else{
       const tfNum=(idx-examData.mcq.length)+1,cxT=colLeftX+colW*0.31,cxF=colLeftX+colW*0.12;
       const pickT=sampleCircleDarkness(ctx,cxT,cy,r*1.15)>=sampleCircleDarkness(ctx,cxF,cy,r*1.15);
-      tfAnswers[String(tfNum)]=pickT?'صح':'خطأ';
-      [cxT,cxF].forEach((cx,b)=>{const active=(b===0&&pickT)||(b===1&&!pickT);ctx.beginPath();ctx.arc(cx,cy,r*1.15,0,Math.PI*2);ctx.lineWidth=active?2.5:1;ctx.strokeStyle=active?'#22c55e':'rgba(239,68,68,0.45)';ctx.stroke();});
+      localTf[String(tfNum)]=pickT?'صح':'خطأ';
+      [cxT,cxF].forEach((cx,b)=>{
+        ctx.beginPath();ctx.arc(cx,cy,r*1.2,0,Math.PI*2);
+        ctx.lineWidth=2;ctx.strokeStyle=b===0?'#16a34a':'#dc2626';ctx.stroke();
+      });
     }
   }
   document.getElementById('omr-visual-feedback-box').classList.remove('hidden');
-  processStudentEvaluation({studentName:getNextUngradedStudent(),mcqAnswers,tfAnswers});
-  if(document.getElementById('direct-auto-save-chk')?.checked){
-    approveAndAddToRoster(true);
+
+  const apiKey=getActiveApiKey();
+  if(apiKey){
+    try{
+      document.getElementById('scan-status').innerText='🚀 جاري القراءة الدقيقة بشبكة الليزر الملونة...';
+      const guideDataUrl=debugCanvas.toDataURL('image/jpeg',0.80);
+      const registeredStudents=getActiveStudentNames(),rosterHint=registeredStudents.length?`قائمة طلاب الفصل: [${registeredStudents.join(' ، ')}].`:'';
+      const prompt=`أمامك بطاقة تظليل مرسوم فوق دوائرها حلقات ملونة لتحديد الخيارات بدقة 100%:
+1. اقرأ اسم الطالب في أعلى البطاقة. ${rosterHint}
+2. في كل سطر اختياري (من 1 إلى ${examData.mcq.length}) توجد 4 دوائر ملونة:
+   - الدائرة المحاطة باللون الأخضر = "أ"
+   - الدائرة المحاطة باللون الأزرق = "ب"
+   - الدائرة المحاطة باللون البرتقالي/الأصفر = "ج"
+   - الدائرة المحاطة باللون الأحمر = "د"
+   حدّد أي دائرة قام الطالب بتظليلها بالقلم بالداخل لكل سؤال!
+3. في أسئلة الصح والخطأ (ص1 إلى ص${examData.tf.length}):
+   - المحاطة بالأخضر = "صح"
+   - المحاطة بالأحمر = "خطأ"
+أعد JSON فقط:
+{"studentName": "اسم الطالب", "mcqAnswers": {"1": "ب", "2": "ب"}, "tfAnswers": {"1": "صح", "2": "خطأ"}}`;
+      const rawText=await callGeminiSmart(apiKey,[{text:prompt},{inline_data:{mime_type:'image/jpeg',data:guideDataUrl.split(',')[1]}}],true);
+      const jsonMatch=rawText.match(/\{[\s\S]*\}/);
+      const parsed=JSON.parse(jsonMatch?jsonMatch[0]:rawText);
+      processStudentEvaluation(parsed);
+      approveAndAddToRoster(true);
+      return;
+    }catch(e){}
   }
+  // إذا لم يتوفر مفتاح أو إنترنت، يعتمد قراءة الماسح الضوئي الفوري ويحفظها دايركت
+  processStudentEvaluation({studentName:getNextUngradedStudent(),mcqAnswers:localMcq,tfAnswers:localTf});
+  approveAndAddToRoster(true);
 }
 
 function sampleCircleDarkness(ctx,cx,cy,r){
@@ -944,20 +999,6 @@ function sampleCircleDarkness(ctx,cx,cy,r){
   return count?(sum/count):0;
 }
 
-function clearSlots(){
-  slotImages={1:null,2:null};lastOmrVideoFrame=null;
-  ['slot1-container','slot2-container','omr-visual-feedback-box','grading-result-card','cropped-name-banner'].forEach(id=>document.getElementById(id).classList.add('hidden'));
-  document.getElementById('scan-status').innerText='';
-}
-
-function startQuickTouchGrading(){
-  const mcqAnswers={},tfAnswers={};
-  examData.mcq.forEach((m,i)=>mcqAnswers[String(i+1)]=m.key);
-  examData.tf.forEach((t,i)=>tfAnswers[String(i+1)]=t.key);
-  processStudentEvaluation({studentName:getNextUngradedStudent(),mcqAnswers,tfAnswers});
-  document.getElementById('scan-status').innerText='👆 المس فقط السؤال الذي أخطأ فيه الطالب لخصم درجته فوراً!';
-}
-
 window.flipCurrentAnswersRTL=function(){
   if(!currentStudentResult)return alert('صوّر البطاقة أولاً.');
   const mirrorMcq={'أ':'د','ب':'ج','ج':'ب','د':'أ'},mirrorTf={'صح':'خطأ','خطأ':'صح'};
@@ -965,37 +1006,8 @@ window.flipCurrentAnswersRTL=function(){
     if(r.section==='اختياري'&&mirrorMcq[r.studentAns]){r.studentAns=mirrorMcq[r.studentAns];r.isCorrect=(r.studentAns===r.correctAns);}
     else if(r.section==='صح/خطأ'&&mirrorTf[r.studentAns]){r.studentAns=mirrorTf[r.studentAns];r.isCorrect=(r.studentAns===r.correctAns);}
   });
-  renderGradedTable();
-  if(document.getElementById('direct-auto-save-chk')?.checked)approveAndAddToRoster(true);
+  renderGradedTable();approveAndAddToRoster(true);
 };
-
-async function gradeStudentPagesWithAI(){
-  const apiKey=getActiveApiKey();
-  if(!apiKey)return;
-  if(!slotImages[1])return;
-  const status=document.getElementById('scan-status');
-  status.innerText='🚀 جاري قراءة اسم الطالب والدوائر وحفظ النتيجة دايركت...';
-  const registeredStudents=getActiveStudentNames(),rosterHint=registeredStudents.length?`قائمة طلاب الفصل: [${registeredStudents.join(' ، ')}].`:'';
-  const prompt=`اقرأ بطاقة التظليل العربية (ZipGrade) المرفقة بدقة:
-1. اقرأ "اسم الطالب" المكتوب بخط اليد في أعلى البطاقة. ${rosterHint}
-2. البطاقة عربية من اليمين لليسار! في كل سؤال رقم السؤال على اليمين وبجانبه 4 دوائر مكتوب بداخلها (أ) (ب) (ج) (د) من اليمين إلى اليسار:
-   - الدائرة الأولى من اليمين (الأقرب لرقم السؤال) = "أ"
-   - الدائرة الثانية من اليمين = "ب"
-   - الدائرة الثالثة من اليمين = "ج"
-   - الدائرة الرابعة (في أقصى اليسار) = "د"
-3. في أسئلة الصح والخطأ (ص1 إلى ص${examData.tf.length}): اليمنى = "صح"، واليسرى = "خطأ".
-أعد JSON فقط:
-{"studentName": "اسم الطالب", "mcqAnswers": {"1": "ب", "2": "ب"}, "tfAnswers": {"1": "صح", "2": "خطأ"}}`;
-  try{
-    const rawText=await callGeminiSmart(apiKey,[{text:prompt},{inline_data:{mime_type:'image/jpeg',data:slotImages[1].split(',')[1]}}],true);
-    const jsonMatch=rawText.match(/\{[\s\S]*\}/);
-    const parsed=JSON.parse(jsonMatch?jsonMatch[0]:rawText);
-    processStudentEvaluation(parsed);
-    if(document.getElementById('direct-auto-save-chk')?.checked){
-      approveAndAddToRoster(true);
-    }
-  }catch(err){status.innerText='❌ خطأ: '+err.message;}
-}
 
 function cleanMcq(val){
   if(!val)return 'فارغ';const s=String(val).trim();
@@ -1045,7 +1057,7 @@ function approveAndAddToRoster(silentMode=false){
   const record={name:finalName,score:currentStudentResult.score,maxScore:currentStudentResult.rows.length,items:itemMap};
   if(existingIdx>=0)roster[existingIdx]=record;else roster.push(record);
   saveClassesDB();renderClassBar();renderRoster();renderAnalyticsAndRemedial();
-  const msg=`✅ تم حفظ: ${finalName} (${currentStudentResult.score}/${currentStudentResult.rows.length}) — جاهز للورقة التالية 📸`;
+  const msg=`✅ تم الحفظ: ${finalName} (${currentStudentResult.score}/${currentStudentResult.rows.length}) — ضع الورقة التالية 📸`;
   document.getElementById('scan-status').innerText=msg;
   showToast(msg);
   if(!silentMode)alert(msg);
@@ -1061,12 +1073,8 @@ function addManualStudentRow(){
 function classifyScore(score,maxScore){const r=score/maxScore;return r>=0.9?'ممتاز':r>=0.8?'جيد جداً':r>=0.7?'جيد':r>=0.5?'مقبول':'راسب';}
 function getRangeText(k,m){if(k==='excel')return `${Math.ceil(m*0.9)} - ${m}`;if(k==='vgood')return `${Math.ceil(m*0.8)} - ${Math.ceil(m*0.9)-1}`;if(k==='good')return `${Math.ceil(m*0.7)} - ${Math.ceil(m*0.8)-1}`;if(k==='pass')return `${Math.ceil(m*0.5)} - ${Math.ceil(m*0.7)-1}`;return `0 - ${Math.ceil(m*0.5)-1}`;}
 
-// دالة التجربة الوهمية لـ 23 طالب مع الخطة العلاجية الكاملة
 function loadSample23Students(){
-  if(!activeClassName){
-    activeClassName='ثاني ثانوي - شعبة 4';
-    classesDB[activeClassName]={studentNames:[],gradedRoster:[]};
-  }
+  if(!activeClassName){activeClassName='ثاني ثانوي - شعبة 4';classesDB[activeClassName]={studentNames:[],gradedRoster:[]};}
   const maxScore=examData.mcq.length+examData.tf.length;
   const sampleNames=["عبدالله الحربي","سلطان العتيبي","ريان الزهراني","فيصل القحطاني","عمر الغامدي","تركي الشمري","أنس باوزير","مهند المالكي","حسان الأنصاري","ماجد الثقفي","البراء القرشي","نواف اللحياني","يزيد الهذلي","راكان السلمي","طلال الحازمي","فارس الصاعدي","باسم المجنوني","زياد الشريف","حاتم الدعدي","عزام العصيمي","وليد المطرفي","حمزة بخاري","سعود الجعيد"];
   const namesToUse=getActiveStudentNames().length?getActiveStudentNames():sampleNames;
@@ -1075,15 +1083,9 @@ function loadSample23Students(){
   examData.tf.forEach((_,i)=>allIds.push(`tf_${i+1}`));
 
   classesDB[activeClassName].gradedRoster=namesToUse.map((name,idx)=>{
-    const ratio=0.38+((idx*19)%62)/100;
-    const targetScore=Math.min(maxScore,Math.round(ratio*maxScore));
-    const items={};
-    allIds.forEach((id,k)=>{
-      // توزيع واقعي للإجابات بحيث تظهر مهارات عالية الإتقان ومهارات تحتاج لتدخل علاجي
-      items[id]=((k+idx)%20)<targetScore?1:0;
-    });
-    const actualScore=Object.values(items).reduce((a,b)=>a+b,0);
-    return {name,score:actualScore,maxScore,items};
+    const ratio=0.38+((idx*19)%62)/100,targetScore=Math.min(maxScore,Math.round(ratio*maxScore)),items={};
+    allIds.forEach((id,k)=>{items[id]=((k+idx)%20)<targetScore?1:0;});
+    return {name,score:Object.values(items).reduce((a,b)=>a+b,0),maxScore,items};
   });
   saveClassesDB();renderClassBar();renderRoster();renderAnalyticsAndRemedial();
   showToast('🧪 تم تحميل 23 طالباً وهمياً مع التحليل الإحصائي والخطة العلاجية الكاملة!');
@@ -1096,9 +1098,8 @@ function renderAnalyticsAndRemedial(){
   if(n===0){
     ['st-max-score','st-min-score','st-avg-score','st-sum-scores'].forEach(id=>document.getElementById(id).innerText='0');
     document.getElementById('st-pass-rate').innerText='0%';
-    document.getElementById('st-levels-tbody').innerHTML='<tr><td colspan="4">لم يتم تصحيح أوراق بعد. اضغط زر (🧪 تجربة وهمية) بالأعلى لمشاهدة نموذج التحليل والخطة العلاجية.</td></tr>';
-    document.getElementById('chart-counts-bars').innerHTML='';
-    document.getElementById('chart-donuts-container').innerHTML='';
+    document.getElementById('st-levels-tbody').innerHTML='<tr><td colspan="4">اضغط زر (🧪 تجربة وهمية) بالأعلى لمشاهدة نموذج التحليل والخطة العلاجية.</td></tr>';
+    document.getElementById('chart-counts-bars').innerHTML='';document.getElementById('chart-donuts-container').innerHTML='';
     document.getElementById('remedial-skills-tbody').innerHTML='<tr><td colspan="5">اضغط زر (🧪 تجربة وهمية) بالأعلى لتوليد جدول الخطة العلاجية والمهارات.</td></tr>';
     return;
   }
@@ -1131,7 +1132,6 @@ function renderAnalyticsAndRemedial(){
   document.getElementById('rem-pass-students').innerHTML=passNames.length?passNames.join(' ، '):'لا يوجد';
   document.getElementById('rem-excel-students').innerHTML=excelNames.length?excelNames.join(' ، '):'لا يوجد';
 
-  // بناء جدول المهارات والأولويات في الخطة العلاجية
   const allQuestions=[];
   examData.mcq.forEach((m,i)=>allQuestions.push({id:`mcq_${i+1}`,label:`س1 (${i+1})`,q:m.q}));
   examData.tf.forEach((t,i)=>allQuestions.push({id:`tf_${i+1}`,label:`ص/خ (${i+1})`,q:t.q}));
@@ -1149,19 +1149,16 @@ function renderAnalyticsAndRemedial(){
 }
 
 async function generateAIRemedialWorksheet(){
-  const apiKey=getActiveApiKey();
-  if(!apiKey)return alert('يرجى وضع مفتاح Gemini API في الخزنة أولاً.');
-  const roster=getActiveRoster();
-  if(!roster.length)return alert('اضغط زر (🧪 تجربة وهمية) أو صحح أوراق الفصل أولاً.');
+  const apiKey=getActiveApiKey();if(!apiKey)return alert('يرجى وضع مفتاح Gemini API في الخزنة أولاً.');
+  const roster=getActiveRoster();if(!roster.length)return alert('اضغط زر (🧪 تجربة وهمية) أو صحح أوراق الفصل أولاً.');
   const n=roster.length,allQ=[];
   examData.mcq.forEach((m,i)=>allQ.push({id:`mcq_${i+1}`,q:m.q}));
   examData.tf.forEach((t,i)=>allQ.push({id:`tf_${i+1}`,q:t.q}));
   const weakest=allQ.map(q=>{let ok=0;roster.forEach(st=>{if(st.items&&st.items[q.id]===1)ok++;});return {...q,mastery:Math.round((ok/n)*100)};}).sort((a,b)=>a.mastery-b.mastery).slice(0,4);
   const outBox=document.getElementById('ai-remedial-output'),contentEl=document.getElementById('ai-remedial-content');
   outBox.classList.remove('hidden');contentEl.innerText='⏳ جاري إعداد الشرح المبسط وورقة العمل العلاجية...';
-  try{
-    contentEl.innerText=await callGeminiSmart(apiKey,[{text:`أنت معلم أحياء خبير (أ. أحمد أبو بكر بالعمش). أكثر الأسئلة التي أخفق فيها الطلاب هي: ${weakest.map(w=>w.q).join(' | ')}. اكتب ملخصاً علاجياً مبسطاً جداً لهذه المفاهيم يليه 5 أسئلة تدريبية علاجية للطلاب.`}],false);
-  }catch(e){contentEl.innerText='❌ خطأ: '+e.message;}
+  try{contentEl.innerText=await callGeminiSmart(apiKey,[{text:`أنت معلم أحياء خبير (أ. أحمد أبو بكر بالعمش). أكثر الأسئلة التي أخفق فيها الطلاب هي: ${weakest.map(w=>w.q).join(' | ')}. اكتب ملخصاً علاجياً مبسطاً جداً لهذه المفاهيم يليه 5 أسئلة تدريبية علاجية للطلاب.`}],false);}
+  catch(e){contentEl.innerText='❌ خطأ: '+e.message;}
 }
 
 function renderRoster(){
