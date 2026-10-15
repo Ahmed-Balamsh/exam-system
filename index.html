@@ -2,8 +2,23 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>منظومة المصحح الذكي (V33) - أ. أحمد أبو بكر بالعمش</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>المصحح الذكي (V34) - أ. أحمد أبو بكر بالعمش</title>
+
+<!-- ================= إعدادات تثبيت التطبيق على الآيفون (iOS) والأندرويد (PWA) ================= -->
+<meta name="theme-color" content="#0b0f19">
+<meta name="background-color" content="#0b0f19">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="المصحح الذكي">
+<meta name="application-name" content="المصحح الذكي">
+
+<!-- روابط الأيقونة والـ Manifest (يتم تغذيتها تلقائياً فور فتح الصفحة بصورة داكنة احترافية) -->
+<link id="dynamic-favicon" rel="icon" type="image/png">
+<link id="dynamic-apple-icon" rel="apple-touch-icon" sizes="180x180">
+<link id="dynamic-manifest" rel="manifest">
+
 <style>
 :root{
   --primary:#0f766e;--primary-dark:#115e59;--blue:#1e3a8a;--gold:#fbbf24;
@@ -22,6 +37,7 @@ header h1{margin:0;font-size:1.05rem;line-height:1.4;}
 header p{margin:4px 0 8px;font-size:0.75rem;opacity:0.92;line-height:1.3;}
 .creator-ribbon{display:inline-block;background:rgba(251,191,36,0.2);border:1.5px solid var(--gold);color:#fef08a;padding:4px 12px;border-radius:20px;font-size:0.76rem;font-weight:bold;}
 .theme-toggle-btn{background:#1e293b;color:#fde047;border:1.5px solid var(--gold);padding:4px 12px;border-radius:20px;cursor:pointer;font-weight:bold;font-size:0.75rem;}
+.app-install-btn{background:linear-gradient(135deg,#16a34a,#0d9488);color:#fff;border:1.5px solid #fde047;padding:4px 12px;border-radius:20px;cursor:pointer;font-weight:bold;font-size:0.75rem;box-shadow:0 2px 8px rgba(22,163,74,0.4);}
 .fixed-creator-footer{position:fixed;bottom:0;left:0;right:0;background:#090d16;color:#fff;text-align:center;padding:7px;font-size:0.74rem;font-weight:bold;border-top:2px solid var(--gold);z-index:50;}
 .fixed-creator-footer span{color:var(--gold);}
 
@@ -231,13 +247,58 @@ table.data-table th{background:rgba(148,163,184,0.15);}
 <div id="floating-toast" class="toast-saved hidden"></div>
 
 <header class="no-print">
-  <h1>🧬 منظومة المصحح الآلي وتحليل النتائج والمناهج السعودية (الإصدار V33)</h1>
-  <p>استيراد الأسماء من صورة أو PDF أو نظام نور + ميزة التراجع ومسح الصورة الخاطئة فوراً + دقة تصحيح 200%</p>
+  <h1>🧬 منظومة المصحح الآلي وتحليل النتائج والمناهج السعودية (الإصدار V34)</h1>
+  <p>دعم كامل للتثبيت كتطبيق جوال (أندرويد وآيفون) بأيقونة داكنة احترافية + دقة تصحيح 200%</p>
   <div style="display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-top:6px;">
     <div class="creator-ribbon">🌟 فكرة وإعداد وتطوير: أ. أحمد أبو بكر بالعمش 🌟</div>
     <button class="theme-toggle-btn" onclick="toggleThemeMode()" id="theme-toggle-btn">☀️ التبديل للثيم الأبيض</button>
+    <button class="app-install-btn" onclick="openPwaInstallModal()" id="pwa-header-btn">📲 تثبيت كتطبيق جوال (أيقونة داكنة)</button>
   </div>
 </header>
+
+<!-- نافذة تثبيت التطبيق ومعاينة الأيقونة الداكنة (الجديد في V34) -->
+<div class="container no-print">
+  <div id="pwa-install-modal" class="card hidden" style="border:2px solid var(--gold);background:linear-gradient(145deg,#0b0f19,#151c2c);color:#fff;text-align:center;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <h2 style="margin:0;border:none;color:var(--gold);">📲 تثبيت المنظومة كتطبيق رسمي (الأندرويد والآيفون)</h2>
+      <button class="btn btn-secondary btn-sm" onclick="document.getElementById('pwa-install-modal').classList.add('hidden')">✖ إغلاق</button>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:12px;">
+      <img id="app-icon-preview-img" alt="أيقونة التطبيق" style="width:96px;height:96px;border-radius:22px;border:2px solid var(--gold);box-shadow:0 6px 20px rgba(0,0,0,0.6);">
+      <div style="font-size:0.8rem;color:#fde08a;font-weight:bold;">✨ تم تصميم وتوليد هذه الأيقونة الداكنة خصيصاً لمنظومة أ. أحمد بالعمش ✨</div>
+    </div>
+
+    <!-- زر التثبيت المباشر إن كان المتصفح يدعمه حالياً -->
+    <div id="direct-install-wrap" class="hidden" style="margin-bottom:12px;">
+      <button class="btn btn-success" style="width:100%;max-width:360px;padding:12px;font-size:0.95rem;" onclick="triggerNativePwaInstall()">🚀 اضغط هنا لتثبيت التطبيق فوراً على جوالك</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;text-align:right;font-size:0.8rem;line-height:1.5;">
+      <!-- تعليمات الآيفون -->
+      <div style="background:rgba(255,255,255,0.05);border:1px solid #38bdf8;border-radius:10px;padding:10px;">
+        <strong style="color:#38bdf8;font-size:0.86rem;">🍏 أولاً: التثبيت على أجهزة الآيفون (iOS Safari):</strong>
+        <ol style="margin:6px 0 0;padding-right:18px;">
+          <li>افتح هذا الرابط في متصفح <strong>Safari</strong> على الآيفون.</li>
+          <li>اضغط على زر <strong>المشاركة (Share ⬆️)</strong> في أسفل الشاشة.</li>
+          <li>اختر <strong>"إضافة إلى الشاشة الرئيسية" (Add to Home Screen)</strong>.</li>
+          <li>ستظهر لك الأيقونة الداكنة الفخمة أعلاه تلقائياً، اضغط <strong>إضافة</strong> ليفتح كتطبيق مستقل بملء الشاشة!</li>
+        </ol>
+      </div>
+
+      <!-- تعليمات الأندرويد و GitHub Pages -->
+      <div style="background:rgba(255,255,255,0.05);border:1px solid #4ade80;border-radius:10px;padding:10px;">
+        <strong style="color:#4ade80;font-size:0.86rem;">🤖 ثانياً: تفعيل خيار "تثبيت" في أندرويد (GitHub Pages):</strong>
+        <p style="margin:4px 0;">لكي يتحول خيار <em>(لا يمكن تثبيت هذا التطبيق)</em> في متصفح Chrome إلى <strong>تثبيت كامل</strong> بدل الاختصار العادي، ارفع هذين الملفين الصغيرين في نفس مجلدك على GitHub بجانب ملف الصفحة:</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">
+          <button class="btn btn-blue btn-sm" onclick="downloadGeneratedManifest()">📥 1. تنزيل manifest.json</button>
+          <button class="btn btn-success btn-sm" onclick="downloadGeneratedServiceWorker()">📥 2. تنزيل sw.js</button>
+          <button class="btn btn-warning btn-sm" onclick="downloadDarkAppIconPNG()">🖼️ تنزيل صورة الأيقونة PNG</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- شريط الفصول السريع والمباشر -->
 <div class="class-bar no-print">
@@ -260,7 +321,7 @@ table.data-table th{background:rgba(148,163,184,0.15);}
 </div>
 
 <div class="container">
-  <!-- نافذة إدارة الفصول واستيراد أسماء الطلاب الذكية (صورة / PDF / إكسل نور / تنظيف نص) -->
+  <!-- نافذة إدارة الفصول واستيراد أسماء الطلاب الذكية -->
   <div id="classes-manager-modal" class="card no-print hidden" style="border:2px solid #38bdf8;">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
       <h2 style="margin:0;border:none;">👥 إدارة الفصول واستيراد أسماء الطلاب (من صورة / PDF / نظام نور)</h2>
@@ -274,22 +335,18 @@ table.data-table th{background:rgba(148,163,184,0.15);}
       <button class="btn btn-danger" onclick="deleteCurrentClass()">🗑️ حذف الفصل</button>
     </div>
 
-    <!-- شريط الاستيراد الذكي للأسماء (الجديد في V33) -->
     <div style="background:rgba(20,184,166,0.1);border:1.5px dashed #14b8a6;border-radius:8px;padding:10px;margin-bottom:10px;">
       <div style="font-size:0.82rem;font-weight:bold;color:#2dd4bf;margin-bottom:6px;">⚡ طرق الاستيراد السريع لأسماء طلاب الفصل (<span id="modal-cls-name" style="color:#fde047;">غير محدد</span>):</div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;">
-        <!-- 1. استخراج من صورة أو لقطة شاشة أو PDF بالذكاء الاصطناعي -->
         <label class="btn btn-blue" style="cursor:pointer;flex:1;min-width:200px;">
           📸 1. استخراج الأسماء من صورة / شاشة / PDF
           <input type="file" accept="image/*,application/pdf" style="display:none;" onchange="extractStudentsFromMediaAI(event)">
         </label>
-        <!-- 2. استيراد ملف إكسل / CSV من نظام نور -->
         <label class="btn btn-purple" style="cursor:pointer;flex:1;min-width:180px;">
           📊 2. رفع ملف كشف نظام نور (Excel / CSV)
           <input type="file" accept=".csv,.txt,.tsv,.xls,.xlsx" style="display:none;" onchange="importStudentsFromNoorCSV(event)">
         </label>
-        <!-- 3. تنظيف نص منسوخ عشوائياً من صفحة نور -->
-        <button type="button" class="btn btn-warning" style="flex:1;min-width:180px;" onclick="cleanNoorPastedText()" title="انسخ أي جدول من نظام نور والصقه بالأسفل ثم اضغط هنا ليحذف الأرقام والرموز ويبقي الأسماء فقط">
+        <button type="button" class="btn btn-warning" style="flex:1;min-width:180px;" onclick="cleanNoorPastedText()">
           🧹 3. فلتر تنظيف نص منسوخ من نور
         </button>
       </div>
@@ -298,7 +355,7 @@ table.data-table th{background:rgba(148,163,184,0.15);}
 
     <div>
       <label>📋 قائمة أسماء طلاب الفصل (كل طالب في سطر - يمكنك التعديل أو اللصق المباشر):</label>
-      <textarea id="class-student-list-textarea" rows="6" placeholder="الصق أسماء الطلاب هنا، أو استخدم أزرار الاستيراد الذكي بالأعلى (من صورة شاشة الجوال أو PDF أو نظام نور)..."></textarea>
+      <textarea id="class-student-list-textarea" rows="6" placeholder="الصق أسماء الطلاب هنا، أو استخدم أزرار الاستيراد الذكي بالأعلى..."></textarea>
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <button class="btn btn-success" style="flex:2;padding:10px;font-size:0.9rem;" onclick="saveClassStudentList()">💾 حفظ واعتماد قائمة الطلاب لهذا الفصل</button>
         <button class="btn btn-danger" style="padding:10px;" onclick="if(confirm('مسح جميع الأسماء في الصندوق؟')){document.getElementById('class-student-list-textarea').value='';saveClassStudentList();}">🗑️ تفريغ الأسماء</button>
@@ -343,7 +400,6 @@ table.data-table th{background:rgba(148,163,184,0.15);}
         </div>
       </div>
 
-      <!-- شريط التبديل السريع بين الاختبارات المحفوظة في البنك -->
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
         <span style="font-size:0.8rem;font-weight:bold;color:#38bdf8;">📑 الاختبار الفعّال حالياً (<span id="bank-count-badge">1</span>):</span>
         <select id="exam-bank-select" onchange="loadSelectedExam(this.value)" style="flex:1;min-width:200px;margin:0;font-weight:bold;border:2px solid #38bdf8;"></select>
@@ -514,13 +570,13 @@ table.data-table th{background:rgba(148,163,184,0.15);}
     </div>
   </div>
 
-  <!-- التبويب 2: التصحيح السريع المباشر (مع أزرار مسح الصورة والتراجع عن الرصد) -->
+  <!-- التبويب 2: التصحيح السريع المباشر -->
   <div id="tab-scanner" class="hidden">
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
         <h2 style="margin:0;border:none;">📷 التصحيح السريع المباشر للفصل (<span id="scan-cls-label" style="color:#38bdf8;">غير محدد</span>)</h2>
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
-          <button type="button" class="btn btn-danger btn-sm" onclick="undoLastRosterEntry()" title="حذف آخر طالب تم رصده في الكشف">↩️ التراجع عن آخر طالب رُصد</button>
+          <button type="button" class="btn btn-danger btn-sm" onclick="undoLastRosterEntry()">↩️ التراجع عن آخر طالب رُصد</button>
           <button type="button" class="btn btn-warning btn-sm" onclick="flipCurrentAnswersRTL()">🔄 عكس الاتجاه (A↔D)</button>
           <button class="btn btn-purple btn-sm" onclick="archiveCurrentClassSession()">📦 حفظ وأرشفة الفصل</button>
         </div>
@@ -555,7 +611,6 @@ table.data-table th{background:rgba(148,163,184,0.15);}
         </div>
       </div>
 
-      <!-- شاشة الكاميرا الحية -->
       <div id="live-camera-container" class="hidden">
         <div class="live-viewfinder-wrap">
           <video id="cam-video" autoplay playsinline></video>
@@ -574,7 +629,6 @@ table.data-table th{background:rgba(148,163,184,0.15);}
         </div>
       </div>
 
-      <!-- لوحة اللمس الصاروخي -->
       <div id="speed-touch-pad-box" class="card hidden" style="border:2px solid #fbbf24;background:rgba(251,191,36,0.05);">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
           <h3 style="margin:0;color:#fde047;font-size:0.9rem;">⚡ المس فقط رقم السؤال الذي أخطأ فيه الطالب:</h3>
@@ -586,7 +640,6 @@ table.data-table th{background:rgba(148,163,184,0.15);}
         </div>
       </div>
 
-      <!-- معاينة فحص التظليل الهندسي مع زر مسح الصورة والتراجع -->
       <div id="omr-visual-feedback-box" class="card hidden" style="border:2px solid #22c55e;margin-top:10px;text-align:center;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
           <h3 style="margin:0;font-size:0.86rem;color:#4ade80;">🔍 معاينة البطاقة الملتقطة (الدوائر الخضراء = الإجابة المرصودة):</h3>
@@ -606,12 +659,11 @@ table.data-table th{background:rgba(148,163,184,0.15);}
       <div id="scan-status" style="margin-top:10px;font-weight:bold;text-align:center;color:#2dd4bf;font-size:0.9rem;"></div>
     </div>
 
-    <!-- بطاقة نتيجة الطالب الحالي مع زر التراجع والمسح الفوري -->
     <div class="card hidden" id="grading-result-card" style="border:2px solid #14b8a6;">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
         <h2 style="margin:0;border:none;">📊 بطاقة الطالب الحالي</h2>
         <div style="display:flex;gap:6px;flex-wrap:wrap;">
-          <button class="btn btn-danger" onclick="discardCurrentScanAndRevert()" title="يمسح هذه الصورة ويحذف درجة هذه الورقة من الكشف">🗑️ مسح الصورة والتراجع عن هذه الورقة</button>
+          <button class="btn btn-danger" onclick="discardCurrentScanAndRevert()">🗑️ مسح الصورة والتراجع عن هذه الورقة</button>
           <label class="btn btn-blue" style="cursor:pointer;">📸 تصوير التالي (AI)<input type="file" accept="image/*" capture="environment" style="display:none;" onchange="handlePureAIGrading(event)"></label>
           <label class="btn btn-success" style="cursor:pointer;">📐 تصوير التالي (OMR)<input type="file" accept="image/*" capture="environment" style="display:none;" onchange="handleDirectOMRImage(event)"></label>
         </div>
@@ -743,9 +795,205 @@ table.data-table th{background:rgba(148,163,184,0.15);}
   </div>
 </div>
 
-<div class="fixed-creator-footer no-print">🛡️ منظومة المصحح والمحلل الذكي للاختبارات (V33) | <span>بصمة المشروع وتطوير: أ. أحمد أبو بكر بالعمش</span></div>
+<div class="fixed-creator-footer no-print">🛡️ منظومة المصحح والمحلل الذكي للاختبارات (V34) | <span>بصمة المشروع وتطوير: أ. أحمد أبو بكر بالعمش</span></div>
 
 <script>
+// ================= 0. مولّد أيقونة التطبيق الداكنة ونظام التثبيت (PWA للأندرويد والآيفون) =================
+let deferredInstallPrompt = null;
+let generatedIcon512DataUrl = '';
+let generatedIcon192DataUrl = '';
+
+// دالة ترسم أيقونة تطبيق احترافية بخلفية داكنة (#0b0f19) خاصة بمنظومة التصحيح
+function buildDarkAppIconDataUrl(size=512){
+  const c=document.createElement('canvas');
+  c.width=size;c.height=size;
+  const ctx=c.getContext('2d');
+  const s=size/512;
+
+  // 1. خلفية داكنة متدرجة فخمة (Dark Theme)
+  const bgGrad=ctx.createLinearGradient(0,0,size,size);
+  bgGrad.addColorStop(0,'#060911');
+  bgGrad.addColorStop(0.55,'#0f172a');
+  bgGrad.addColorStop(1,'#0d3b38');
+  ctx.fillStyle=bgGrad;
+  ctx.beginPath();
+  ctx.roundRect ? ctx.roundRect(0,0,size,size,90*s) : ctx.rect(0,0,size,size);
+  ctx.fill();
+
+  // 2. إطار ذهبي متوهج حول الأيقونة
+  ctx.strokeStyle='#fbbf24';
+  ctx.lineWidth=12*s;
+  ctx.strokeRect(22*s,22*s,468*s,468*s);
+
+  // 3. المربعات السوداء/الخضراء الأربعة لرادار المصحح في الزوايا
+  ctx.fillStyle='#22c55e';
+  const cSize=36*s;
+  [[46,46],[430,46],[46,430],[430,430]].forEach(([x,y])=>{
+    ctx.fillRect(x*s,y*s,cSize,cSize);
+  });
+
+  // 4. رسم شبكة دوائر التظليل الذكية (OMR Grid) في الوسط
+  const rows=3, cols=4;
+  const startX=115*s, startY=115*s, stepX=90*s, stepY=72*s;
+  for(let r=0;r<rows;r++){
+    for(let col=0;col<cols;col++){
+      const cx=startX+col*stepX, cy=startY+r*stepY;
+      const isShaded=(r===0&&col===1)||(r===1&&col===2)||(r===2&&col===0);
+      ctx.beginPath();
+      ctx.arc(cx,cy,24*s,0,Math.PI*2);
+      if(isShaded){
+        ctx.fillStyle='#22c55e';
+        ctx.fill();
+        ctx.strokeStyle='#bbf7d0';
+        ctx.lineWidth=4*s;
+        ctx.stroke();
+      }else{
+        ctx.fillStyle='rgba(255,255,255,0.08)';
+        ctx.fill();
+        ctx.strokeStyle='#64748b';
+        ctx.lineWidth=3*s;
+        ctx.stroke();
+      }
+    }
+  }
+
+  // 5. دائرة علامة الصح الذهبية/الخضراء الكبرى في الأسفل
+  ctx.beginPath();
+  ctx.arc(256*s,375*s,58*s,0,Math.PI*2);
+  ctx.fillStyle='#16a34a';
+  ctx.fill();
+  ctx.strokeStyle='#fde047';
+  ctx.lineWidth=6*s;
+  ctx.stroke();
+
+  // رسم علامة صح (✓) داخل الدائرة
+  ctx.beginPath();
+  ctx.moveTo(226*s,375*s);
+  ctx.lineTo(248*s,398*s);
+  ctx.lineTo(292*s,350*s);
+  ctx.strokeStyle='#ffffff';
+  ctx.lineWidth=14*s;
+  ctx.lineCap='round';
+  ctx.lineJoin='round';
+  ctx.stroke();
+
+  return c.toDataURL('image/png');
+}
+
+function initPwaAndDarkIcons(){
+  generatedIcon512DataUrl = buildDarkAppIconDataUrl(512);
+  generatedIcon192DataUrl = buildDarkAppIconDataUrl(192);
+  const icon180 = buildDarkAppIconDataUrl(180);
+
+  // تعيين الأيقونة للمتصفح ولأجهزة الآيفون (Apple Touch Icon) وللمعاينة
+  document.getElementById('dynamic-favicon').href = generatedIcon192DataUrl;
+  document.getElementById('dynamic-apple-icon').href = icon180;
+  const prevImg = document.getElementById('app-icon-preview-img');
+  if(prevImg) prevImg.src = generatedIcon512DataUrl;
+
+  // إنشاء كائن الـ Manifest برمجياً وربطه بالصفحة
+  const manifestObj = {
+    name: "منظومة المصحح الذكي - أ. أحمد بالعمش",
+    short_name: "المصحح الذكي",
+    description: "منظومة المصحح الآلي وتحليل النتائج والمناهج السعودية",
+    lang: "ar",
+    dir: "rtl",
+    start_url: window.location.href.split('?')[0],
+    scope: "./",
+    display: "standalone",
+    orientation: "portrait",
+    background_color: "#0b0f19",
+    theme_color: "#0b0f19",
+    icons: [
+      { src: generatedIcon192DataUrl, sizes: "192x192", type: "image/png", purpose: "any maskable" },
+      { src: generatedIcon512DataUrl, sizes: "512x512", type: "image/png", purpose: "any maskable" }
+    ]
+  };
+
+  // إذا كان هناك ملف manifest.json مرفوع بجانب الصفحة في GitHub يستخدمه، وإلا يستخدم المولّد تلقائياً
+  fetch('./manifest.json',{method:'HEAD'}).then(res=>{
+    if(res.ok){
+      document.getElementById('dynamic-manifest').href='./manifest.json';
+    }else{
+      const blob=new Blob([JSON.stringify(manifestObj)],{type:'application/manifest+json'});
+      document.getElementById('dynamic-manifest').href=URL.createObjectURL(blob);
+    }
+  }).catch(()=>{
+    const blob=new Blob([JSON.stringify(manifestObj)],{type:'application/manifest+json'});
+    document.getElementById('dynamic-manifest').href=URL.createObjectURL(blob);
+  });
+
+  // تسجيل الـ Service Worker لتفعيل زر "تثبيت" في متصفح Chrome على أندرويد
+  if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){
+    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  }
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  document.getElementById('direct-install-wrap').classList.remove('hidden');
+});
+
+function openPwaInstallModal(){
+  document.getElementById('pwa-install-modal').classList.toggle('hidden');
+}
+
+async function triggerNativePwaInstall(){
+  if(!deferredInstallPrompt) return alert('اتبع خطوات التثبيت الموضحة بالأسفل حسب نوع جوالك.');
+  deferredInstallPrompt.prompt();
+  const { outcome } = await deferredInstallPrompt.userChoice;
+  if(outcome==='accepted') showToast('🎉 جاري تثبيت تطبيق المصحح الذكي على جوالك!');
+  deferredInstallPrompt = null;
+}
+
+// دوال تنزيل ملفات GitHub Pages الجاهزة بضغطة زر لتفعيل التثبيت الكامل على أندرويد
+function downloadGeneratedManifest(){
+  const manifestObj = {
+    name: "منظومة المصحح الذكي - أ. أحمد بالعمش",
+    short_name: "المصحح الذكي",
+    description: "منظومة المصحح الآلي وتحليل النتائج والمناهج السعودية",
+    lang: "ar",
+    dir: "rtl",
+    start_url: "./index.html",
+    scope: "./",
+    display: "standalone",
+    orientation: "portrait",
+    background_color: "#0b0f19",
+    theme_color: "#0b0f19",
+    icons: [
+      { src: generatedIcon192DataUrl, sizes: "192x192", type: "image/png", purpose: "any maskable" },
+      { src: generatedIcon512DataUrl, sizes: "512x512", type: "image/png", purpose: "any maskable" }
+    ]
+  };
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(manifestObj,null,2)],{type:'application/json'}));
+  a.download='manifest.json';
+  a.click();
+  showToast('📥 تم تنزيل manifest.json (ارفعه في مستودع GitHub بجانب صفحتك)');
+}
+
+function downloadGeneratedServiceWorker(){
+  const swCode = `const CACHE_NAME = 'balamash-omr-v34';
+self.addEventListener('install', e => { self.skipWaiting(); });
+self.addEventListener('activate', e => { e.waitUntil(self.clients.claim()); });
+self.addEventListener('fetch', e => {
+  e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+});`;
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([swCode],{type:'application/javascript'}));
+  a.download='sw.js';
+  a.click();
+  showToast('📥 تم تنزيل sw.js (ارفعه في مستودع GitHub بجانب صفحتك)');
+}
+
+function downloadDarkAppIconPNG(){
+  const a=document.createElement('a');
+  a.href=generatedIcon512DataUrl;
+  a.download='icon-512.png';
+  a.click();
+}
+
 // ================= 1. دوال توحيد وتطبيع مفاتيح الإجابة =================
 function normMcqKey(val){
   if(!val)return 'A';
@@ -926,7 +1174,7 @@ function toggleAnswerKeyMode(forceState){
 function printStudentExam(){if(isAnswerKeyPreview)toggleAnswerKeyMode(false);printElement('printable-exam');}
 function printSolvedAnswerKey(){const prev=isAnswerKeyPreview;if(!prev)toggleAnswerKeyMode(true);printElement('printable-exam');setTimeout(()=>{if(!prev)toggleAnswerKeyMode(false);},900);}
 
-// ================= 4. بنك الاختبارات الافتراضي وإدارة الفصول واستيراد الأسماء (الجديد في V33) =================
+// ================= 4. بنك الاختبارات الافتراضي وإدارة الفصول واستيراد الأسماء =================
 const defaultBiologyExam1={
   title:"الأحياء 2 - الفترة الأولى (شوكيات الجلد والفقاريات)",
   mcq:[
@@ -1003,7 +1251,7 @@ if(activeClassName&&!classesDB[activeClassName])activeClassName=Object.keys(clas
 
 let archivedSessions=JSON.parse(localStorage.getItem('ahya_archive_v16')||'[]');
 let camStream=null,currentStudentResult=null,lastCroppedCardCanvas=null;
-let lastSavedStudentNameInSession=''; // يتتبع اسم الورقة الحالية لحذفها فوراً إذا ضغط المعلم على "مسح الصورة والتراجع"
+let lastSavedStudentNameInSession='';
 let autoSnapTimer=null,isGradingBusy=false,cooldownUntil=0;
 let manualShiftX=0,manualShiftY=0;
 
@@ -1012,7 +1260,7 @@ function getActiveRoster(){return ensureClassObject().gradedRoster;}
 function getActiveStudentNames(){return ensureClassObject().studentNames||[];}
 function saveClassesDB(){localStorage.setItem('ahya_classes_db_v16',JSON.stringify(classesDB));localStorage.setItem('ahya_active_cls_v16',activeClassName);}
 
-// ================= إدارة الفصول واستيراد الأسماء الذكي (صورة / PDF / نور) =================
+// ================= إدارة الفصول واستيراد الأسماء الذكي =================
 function renderClassBar(){
   const sel=document.getElementById('active-class-select'),keys=Object.keys(classesDB);
   if(keys.length===0){
@@ -1098,7 +1346,6 @@ function saveClassStudentList(){
   showToast(`💾 تم حفظ قائمة طلاب الفصل "${activeClassName}" (${classesDB[activeClassName].studentNames.length} طالب)!`);
 }
 
-// 1. دالة استخراج أسماء الطلاب من صورة أو لقطة شاشة أو ملف PDF بالذكاء الاصطناعي
 async function extractStudentsFromMediaAI(ev){
   const file=ev.target.files[0];if(!file)return;
   const apiKey=getActiveApiKey();
@@ -1144,7 +1391,6 @@ async function extractStudentsFromMediaAI(ev){
   reader.readAsDataURL(file);
 }
 
-// 2. دالة استيراد الأسماء من ملف Excel / CSV الخاص بنظام نور
 function importStudentsFromNoorCSV(ev){
   const file=ev.target.files[0];if(!file)return;
   const st=document.getElementById('student-import-status');
@@ -1154,10 +1400,8 @@ function importStudentsFromNoorCSV(ev){
     const lines=text.split(/\r?\n/);
     const extracted=[];
     lines.forEach(line=>{
-      // تقسيم السطر حسب الفاصلة أو علامة الجدولة (Tab)
       const cells=line.split(/[,;\t]/).map(c=>c.replace(/["']/g,'').trim());
       cells.forEach(cell=>{
-        // تنظيف الخلية من الأرقام والرموز وفحص ما إذا كانت اسماً عربياً يتكون من كلمتين أو أكثر
         const cleanArabic=cell.replace(/[0-9٠-٩\-_\/\\().,:;A-Za-z]/g,' ').replace(/\s+/g,' ').trim();
         const words=cleanArabic.split(' ').filter(w=>w.length>=2);
         const headerWords=['اسم','الطالب','الطلاب','المملكة','وزارة','التعليم','المدرسة','الصف','الفصل','الدرجة','ملاحظات','السجل','الهوية','تاريخ','الميلاد','الجنسية','سعودي'];
@@ -1183,7 +1427,6 @@ function importStudentsFromNoorCSV(ev){
   reader.readAsText(file,'UTF-8');
 }
 
-// 3. فلتر تنظيف النص المنسوخ عشوائياً من صفحة نظام نور
 function cleanNoorPastedText(){
   const box=document.getElementById('class-student-list-textarea');
   const raw=box.value;
@@ -1192,7 +1435,6 @@ function cleanNoorPastedText(){
   const cleaned=[];
   const ignoreWords=['اسم الطالب','رقم الهوية','السجل المدني','تاريخ الميلاد','حفظ','نظام نور','الإدارة','المدرسة','الصف','الفصل','ممتاز','جيد','مقبول'];
   lines.forEach(line=>{
-    // إزالة جميع الأرقام (الهويات والتواريخ والأرقام التسلسلية) والرموز الإنجليزية
     let arabicOnly=line.replace(/[0-9٠-٩A-Za-z\-_\/\\().,:;|\t]+/g,' ').replace(/\s+/g,' ').trim();
     const words=arabicOnly.split(' ').filter(w=>w.length>=2);
     if(words.length>=2 && words.length<=6){
@@ -1854,7 +2096,6 @@ Return ONLY valid JSON:
       tfAnswers[String(j)] = normTfKey(rawVal);
     }
 
-    // إذا كان قد حُفظت الورقة مؤقتاً باسم افتراضي قبل رد الذكاء الاصطناعي، نحذف الاسم المؤقت أولاً لكي لا يتكرر الطالب
     if(lastSavedStudentNameInSession){
       const roster=getActiveRoster();
       const oldIdx=roster.findIndex(s=>s.name===lastSavedStudentNameInSession);
@@ -1878,7 +2119,7 @@ window.flipCurrentAnswersRTL=function(){
   renderGradedTable();approveAndAddToRoster(true);
 };
 
-// ================= 11. حساب الدرجة والرصد + ميزة مسح الصورة والتراجع (الجديد في V33) =================
+// ================= 11. حساب الدرجة والرصد + ميزة مسح الصورة والتراجع =================
 function processStudentEvaluation(parsed){
   const rows=[];
   examData.mcq.forEach((item,idx)=>{
@@ -1953,7 +2194,6 @@ function approveAndAddToRoster(silentMode=false){
   if(!silentMode)alert(msg);
 }
 
-// دالة مسح الصورة الحالية والتراجع عن رصد الورقة الحالية فوراً
 function discardCurrentScanAndRevert(){
   const nameToRemove = document.getElementById('graded-student-name').value.trim() || lastSavedStudentNameInSession;
   if(nameToRemove && activeClassName && classesDB[activeClassName]){
@@ -1979,7 +2219,6 @@ function discardCurrentScanAndRevert(){
   showToast(msg);
 }
 
-// دالة التراجع السريع عن آخر طالب تم رصده في الكشف
 function undoLastRosterEntry(){
   const roster=getActiveRoster();
   if(!roster.length)return alert('لا توجد أوراق مرصودة في هذا الفصل للتراجع عنها.');
@@ -2201,6 +2440,7 @@ function generateNoorAutoFiller(){
 window.addEventListener('DOMContentLoaded',()=>{
   const savedTheme=localStorage.getItem('balamash_theme_v12')||'dark';
   document.body.classList.toggle('dark-theme',savedTheme==='dark');
+  initPwaAndDarkIcons();
   updateVaultBadge();
   updateSaudiSubjectsList();
   loadSchoolProfile();
